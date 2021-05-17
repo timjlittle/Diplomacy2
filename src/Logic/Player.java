@@ -53,6 +53,29 @@ public class Player {
         supplyCenters.add(region);
     }
     
+    /**
+     * 
+     * @return The list of units requiring retreat orders.
+     */
+    public ArrayList<Unit> getRetreatUnits () {
+        ArrayList<Unit> retreatList = new ArrayList<>();
+        
+        for (Unit u : units) {
+            //reset the order
+            if (u.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED) {
+                u.getCurrentOrder().setCommand(Order.OrderType.RETREAT);
+                u.getCurrentOrder().setOrigin(u.getPosition());
+                u.getCurrentOrder().setState(Order.ORDER_STATE.UNSEEN);
+                //default to the first on the list of possible retreats
+                u.getCurrentOrder().setDest(u.getPossibleRetreats().get(0));
+                
+                retreatList.add(u);
+            }
+        }
+        
+        return retreatList;
+    }
+    
     @Override
     public String toString () {
         return playerName;

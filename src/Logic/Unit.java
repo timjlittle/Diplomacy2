@@ -7,6 +7,7 @@ package Logic;
 
 import Data.*;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +27,7 @@ public class Unit {
     private Order currentOrder = null;
     private int errNo;
     private String errMsg;
+    private Border victorOrigin = null;
     
     
     public Unit(int unitId, UnitType unitType, Border position, int ownerId, boolean disbanded) {
@@ -46,6 +48,21 @@ public class Unit {
         
     }
 
+    public void delete () throws DataAccessException {
+        currentOrder.delete();
+        
+        DataAccessor db = new DataAccessor ();
+        
+        if (!db.deleteRecord(unitId, "UnitId", "Unit") ) {
+            DataAccessException ex = new DataAccessException (db.getErrorMsg(), db.getErrNo(), "Erro deleting unit " + unitId);
+            
+            throw ex;            
+        }
+        
+        
+        
+    }
+    
     public int getUnitId() {
         return unitId;
     }
@@ -66,8 +83,20 @@ public class Unit {
         return disbanded;
     }
 
+    public Border getVictorOrigin() {
+        return victorOrigin;
+    }
+
+    public void setVictorOrigin(Border VictorOrigin) {
+        this.victorOrigin = VictorOrigin;
+    }
+
+    
     public void setPosition(Border position) {
+        this.position.setOccupyingUnit(null);
+
         this.position = position;
+        position.setOccupyingUnit(this);
     }
 
     public void setDisbanded(boolean disbanded) {
@@ -119,10 +148,17 @@ public class Unit {
         fields.addField("Occupies", position.getBorderId() );
         fields.addField("PlayerId", ownerId);
         
+        if (victorOrigin == null) {
+            fields.addField("victorOrigin", -1);
+        } else {
+            fields.addField("victorOrigin", victorOrigin.getBorderId());
+        }
+        
+        
         
         //If the key is -1 then we need to insert and get the keyfield
         if (unitId == -1) {
-            unitId = db.insertRecord("UnitId", fields, true);
+            unitId = db.insertRecord("Unit", fields, true);
             
             if (unitId >= 0) {
                 success = true;
@@ -182,6 +218,31 @@ public class Unit {
         return errMsg;
     }
     
-    
+    /**
+     * Finds a list of the possible regions a unit can retreat to.
+     * If non are found the list is initialised but empty
+     * 
+     * @return list of the possible borders the unit could retreat to.
+     */
+    public LinkedList<Border> getPossibleRetreats () {
+        LinkedList<Border> ret = new LinkedList<>();
+        
+        LinkedList<Border> possibles = position.getNeighbours();
+        
+        for (Border b : possibles) {
+            if (!b.getRegion().isOccupied() &&
+                    b.getRegion().getRegionCode() != currentOrder.getRegionBeatenFrom() ) {
+                
+                //Make sure that the unit can retreat
+                if (b.getType() == Border.BorderType.COAST ||
+                    (b.getType() == Border.BorderType.LAND && unitType == Unit.UnitType.ARMY) ||
+                     b.getType() == Border.BorderType.SEA && unitType == UnitType.FLEET)
+                    
+                    ret.add(b);
+            }
+        }
+        
+        return ret;
+    }
     
 }

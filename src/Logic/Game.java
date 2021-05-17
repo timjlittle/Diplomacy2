@@ -29,10 +29,13 @@ public class Game {
     private Map <Integer, Order> allOrders = new HashMap<>();
     private Props props;
     private LinkedList <Border> coastsList = new LinkedList<>();
+    private String resolveLog;
     
     
     public Game () throws DataAccessException {
-              
+
+        resolveLog = "";
+        
         try {
             props = new Props ();
 
@@ -212,6 +215,7 @@ public class Game {
         requestedFields.addField("UnitType", "");
         requestedFields.addField("PlayerId", 0);
         requestedFields.addField("Occupies", 0);
+        requestedFields.addField("VictorOrigin", 0);
         
         returnedFields = db.readAllRecords ("Unit",requestedFields, null);
         
@@ -222,9 +226,18 @@ public class Game {
                 int playerId = record.getIntVal("PlayerId");
                 int occupies = record.getIntVal("Occupies");
                 
+                int victorBorderId = record.getIntVal("VictorOrigin");
+                
                 Border pos = allBorders.get(occupies);
                 
                 Unit u = new Unit (unitId, Unit.mapStringoUnitCode(unitType), pos, playerId, false);
+                
+                if (victorBorderId > 0) {
+                    Border victorBorder = allBorders.get(victorBorderId);
+                    
+                    u.setVictorOrigin(victorBorder);
+                }
+                
                 allUnits.put(unitId, u);
                 
                 Player p = allPlayers.get(playerId);
@@ -443,6 +456,13 @@ public class Game {
         boolean cut = false;
         boolean pending = false;
         
+        resolveLog = getTitle () + "\n";
+        for (int x = 0; x < getTitle().length(); x++){
+            resolveLog += "=";
+        }
+        resolveLog += "\n\n";
+        
+        
         //Check for cuts and count supports.
         for (Map.Entry m : allOrders.entrySet()) {
             Order order = (Order)m.getValue();
@@ -459,14 +479,21 @@ public class Game {
                     supported.incrementSupportCount();
                 }
             }
+
+            if (cut) {
+                resolveLog += order.toString() + " cut\n";
+            }
+
             
             if (cut && order.getCommand() == Order.OrderType.CONVOY){
                 Order convoyed = findAuxOrder (order.getDestinationId(), order.getOriginId());
 
                 if (convoyed != null) {
                     convoyed.setState(Order.ORDER_STATE.FAILED);
+                    resolveLog += convoyed.toString() + " failed due to cut convoy\n";
                 }
             }
+            
             
             order.setState(Order.ORDER_STATE.SEEN);
         }
@@ -605,24 +632,159 @@ public class Game {
     }
     
     /**
+     * Calculates the next game phase. May Update both phase and turn
+     * 
+     * @throws DataAccessException
+     * @throws IOException 
+     */
+    public void nextPhase () throws DataAccessException, IOException {
+        if (countAllRetreats() == 0){
+            //No retreeats so go straight to the next turn
+            props.nextTurn();
+            if (props.getTurn() % 3 == 0) {
+                //winter so build
+                props.setPhase(Props.Phase.BUILD);
+            } else {
+                //Go straight to build
+                props.setPhase(Props.Phase.ORDER);
+            }
+        } else {
+            props.setPhase(Props.Phase.RETREAT);
+        }
+                    
+    }
+    
+    /**
      * Returns the number of units requiring retreats
      * Looks for failed HOLD orders. 
      * This works because move orders that fail get changed to HOLD orders and get checked again.
      * 
      * 
-     * @param player
-     * @return 
+     * @return The number of units requiring retreat orders
+     * @throws Data.DataAccessException
      */
     
-    public int countAllRetreats () {
+    public int countAllRetreats () throws DataAccessException {
         int retreatCount = 0;
         
-        for (Map.Entry map : allOrders.entrySet()) {
+        for (Map.Entry map : allUnits.entrySet()) {
+            Unit unit = (Unit)map.getValue();
             
+            if (unit.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED) {
+                LinkedList<Border> retreats = unit.getPossibleRetreats();
+                
+                if (retreats.isEmpty()) {
+                    unit.delete();
+                } else {
+                    retreatCount++;
+                }
+            }
             
         }
         
         return retreatCount;
+    }
+    
+    /**
+     * Sets all unit's orders to be HOLD
+     * 
+     * @throws DataAccessException 
+     */
+    public void setStartOfOrderPhase () throws DataAccessException {
+        //Reset all units current orders to be holds for the current turn
+        for (Map.Entry map : allUnits.entrySet()) {
+            Unit unit = (Unit)map.getValue();
+            
+            unit.setVictorOrigin(null);
+            
+            Order order = unit.getCurrentOrder();
+            
+            order.setCommand(Order.OrderType.HOLD);
+            order.setState(Order.ORDER_STATE.UNSEEN);
+            order.setTurn (props.getTurn());
+            order.setBeingConvoyed(false);
+            order.setCut(false);
+            order.setOrigin(unit.getPosition());
+            order.setDest(unit.getPosition());
+            
+            
+            if (!order.save()) {
+                DataAccessException ex = new DataAccessException (order.getErrMsg(), order.getErrNo(), "Error saving order id " + order.getOrderId());
+                
+                throw ex;
+            }
+        }
+    }
+    
+    public void restartGame () throws DataAccessException {
+        DataAccessor db = new DataAccessor();
+        Record fieldList = new Record();
+        
+        try {
+            props.setTurn(1);
+            props.setPhase(Props.Phase.ORDER);
+        } catch (IOException ex) {
+            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            DataAccessException e = new DataAccessException (ex.getMessage(), -1, "IO error resetting properties");
+            throw e;                
+    }
+        
+        //Delete all existing units and orders
+        for (Map.Entry map : allUnits.entrySet()) {
+            Unit unit = (Unit)map.getValue();
+            Order order = unit.getCurrentOrder();
+            
+            order.delete();
+            unit.delete();
+        }
+        
+        for (Map.Entry map : allPlayers.entrySet()) {
+            Player p = (Player)map.getValue();
+            
+            p.getUnits().clear();            
+        }
+
+        allUnits.clear();
+        allOrders.clear();
+        
+        //Read the start positions
+        fieldList.addField("PlayerId", 0);
+        fieldList.addField("RegionCode", "");
+        fieldList.addField("StartPiece", "");
+        fieldList.addField("StartBorder", 0);
+        
+        ArrayList<Record> results = db.readAllRecords("HomeRegions", fieldList, null);
+        
+        //For each start position create a unit and a hold order
+        for (Record fields : results) {
+            int playerId = fields.getIntVal("PlayerId");
+            int borderId = fields.getIntVal("StartBorder");
+            String typeString = fields.getStringVal("StartPiece");
+            
+            Border pos = allBorders.get(borderId);
+            Player player = allPlayers.get(playerId);
+            
+            Unit newUnit = new Unit (Unit.mapStringoUnitCode(typeString), pos, playerId, false);
+            
+            if (!newUnit.save()) {
+                DataAccessException ex = new DataAccessException (newUnit.getErrMsg(), newUnit.getErrNo(), "Error creating new unit");
+                throw ex;
+            }
+            
+            player.addUnit(newUnit);
+            allUnits.put(newUnit.getUnitId(), newUnit);
+            
+            Order newOrder = new Order (-1, Order.OrderType.HOLD, pos, pos, false, newUnit, 1);
+            
+            if (!newOrder.save()) {
+                DataAccessException ex = new DataAccessException (newUnit.getErrMsg(), newUnit.getErrNo(), "Error creating new order");
+                throw ex;                
+            }
+            
+            newUnit.setCurrentOrder(newOrder);
+            allOrders.put(newOrder.getOrderId(), newOrder);
+        }
+        
     }
     
 }

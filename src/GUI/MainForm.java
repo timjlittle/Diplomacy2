@@ -8,6 +8,8 @@ package GUI;
 import Data.*;
 import Logic.*;
 import java.awt.Dialog;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,6 +51,7 @@ public class MainForm extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         settingsMenuItem = new javax.swing.JMenuItem();
+        newGameMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,6 +110,14 @@ public class MainForm extends javax.swing.JFrame {
         });
         jMenu1.add(settingsMenuItem);
 
+        newGameMenuItem.setText("New Game");
+        newGameMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newGameMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(newGameMenuItem);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -159,15 +170,6 @@ public class MainForm extends javax.swing.JFrame {
             switch (game.getGamePhase()) {
                 case ORDER:
                     game.resolveAllOrders();
-                    
-                    //Remove failed 
-                    
-                    //If there are pending retreats deal with them
-                    
-                    //Otherwise move to the next turn
-
-                    drawTree ();
-                    treeModel.reload();
                     break;
                     
                 case RETREAT:
@@ -181,12 +183,18 @@ public class MainForm extends javax.swing.JFrame {
                     
             }
             
+            game.nextPhase();
             
+            if (game.getGamePhase() == Props.Phase.ORDER) {
+                game.setStartOfOrderPhase ();
+            }
+            
+            this.setTitle(game.getTitle());
             drawTree ();
             treeModel.reload();
             
             
-        } catch (DataAccessException ex) {
+        } catch (DataAccessException | IOException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -206,21 +214,35 @@ public class MainForm extends javax.swing.JFrame {
         
         for (Map.Entry m : game.getAllPlayers().entrySet()){
             Player p = (Player)m.getValue();
-
+            DefaultMutableTreeNode playerNode;
+            
             if (p.getPlayerId()>0){
-                DefaultMutableTreeNode playerNode = new DefaultMutableTreeNode(p);
+                ArrayList<Unit> units;
+                
+                switch (game.getGamePhase()) {
+                    case RETREAT:
+                        units = p.getRetreatUnits();
+                        playerNode = new DefaultMutableTreeNode(p.toString() + " (" + units.size() + ")");
+                        break;
+                    
+                
+                    default:
+                        playerNode = new DefaultMutableTreeNode(p);
+                        units = p.getUnits();
+                        break;
+                }
+                
+                DefaultMutableTreeNode unitsNode = new DefaultMutableTreeNode(UNIT_NODE_TITLE);
+                
 
                 rootNode.add(playerNode);
-
-                DefaultMutableTreeNode unitsNode = new DefaultMutableTreeNode(UNIT_NODE_TITLE);
-
-                for (Unit u : p.getUnits()){
+                p.getUnits();
+                
+                for (Unit u : units){
                     DefaultMutableTreeNode unitNode = new DefaultMutableTreeNode(u);
-                    
-                    
-                    
                     unitsNode.add(unitNode);
                 }
+
                 playerNode.add(unitsNode);
 
                 DefaultMutableTreeNode centersNode = new DefaultMutableTreeNode("Supply Centers");
@@ -280,6 +302,21 @@ public class MainForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_unitsTreeValueChanged
 
+    private void newGameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameMenuItemActionPerformed
+        if (JOptionPane.showConfirmDialog(this, "Are you sure?", "Restart Game", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+            try {
+                game.restartGame ();
+            } catch (DataAccessException ex) {
+                Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            drawTree();
+            mapPanel1.repaint();
+            this.setTitle(game.getTitle());
+        }
+    }//GEN-LAST:event_newGameMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -323,6 +360,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private GUI.MapPanel mapPanel1;
+    private javax.swing.JMenuItem newGameMenuItem;
     private javax.swing.JMenuItem settingsMenuItem;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTree unitsTree;

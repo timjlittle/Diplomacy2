@@ -5,6 +5,7 @@
  */
 package Logic;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -21,6 +22,7 @@ public class Border implements Comparable<Border> {
     private LinkedList <Border> neighbours = new LinkedList<>();
     int mapX;
     int mapY;
+    private Unit occupyingUnit = null;
     
     public enum BorderType {LAND, SEA, COAST};
 
@@ -114,6 +116,18 @@ public class Border implements Comparable<Border> {
 
     public int getMapY() {
         return mapY;
+    }
+
+    public Unit getOccupyingUnit() {
+        return occupyingUnit;
+    }
+
+    public void setOccupyingUnit(Unit occupyingUnit) {
+        this.occupyingUnit = occupyingUnit;
+    }
+    
+    public boolean isOccupied () {
+        return occupyingUnit == null;
     }
 
     @Override

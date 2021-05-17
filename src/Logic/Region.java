@@ -100,6 +100,18 @@ public class Region {
         
     }
   
+    public boolean isOccupied () {
+        boolean occupied = false;
+        
+        for (Border b : borders) {
+            if (b.isOccupied()) {
+                occupied = true;
+                break;
+            }
+        }
+        
+        return occupied;
+    }
     
     @Override
     public String toString () {

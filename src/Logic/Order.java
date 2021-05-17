@@ -35,6 +35,7 @@ public class Order implements Comparable<Order> {
     private boolean cut = false;
     private int errNo;
     private String errMsg;
+    private String RegionBeatenFrom = "";
     
     /**
      * Creates a new Order object by reading the details of an existing Order from disk
@@ -162,6 +163,18 @@ public class Order implements Comparable<Order> {
         return success;
     }
 
+    public void delete () throws DataAccessException {
+        DataAccessor db = new DataAccessor ();
+        
+        if (!db.deleteRecord(orderId, "OrderId", "Command")) {
+            DataAccessException ex = new DataAccessException (db.getErrorMsg(), db.getErrNo(), "Error deleting order " + orderId);
+            
+            throw ex;
+        }
+        
+        
+    }
+    
     public int getOrderId() {
         return orderId;
     }
@@ -192,6 +205,10 @@ public class Order implements Comparable<Order> {
 
     public int getTurn() {
         return turn;
+    }
+    
+    public void setTurn (int turn) {
+        this.turn = turn;
     }
 
     public void setState(ORDER_STATE state) {
@@ -450,6 +467,17 @@ public class Order implements Comparable<Order> {
         }
         
         return borderName;
+    }
+
+    public void setRegionBeatenFrom(String RegionBeatenFrom) {
+        this.RegionBeatenFrom = RegionBeatenFrom;
+    }
+    
+    
+    
+    public String getRegionBeatenFrom() {
+        
+        return RegionBeatenFrom;
     }
       
     
