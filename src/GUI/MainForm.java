@@ -10,6 +10,7 @@ import Logic.*;
 import java.awt.Dialog;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -174,19 +175,28 @@ public class MainForm extends javax.swing.JFrame {
                     
                 case RETREAT:
                     //Resolve retreats
-                    
+                    LinkedList <Unit> retreatList = game.getRetreatList();
+                    if (!retreatList.isEmpty()) {
+                        
+                    }
                     
                     break;
                     
                 case BUILD:
+                    
                     break;
                     
             }
             
+            //Move to the next phase and do any initiallising required
             game.nextPhase();
             
             if (game.getGamePhase() == Props.Phase.ORDER) {
                 game.setStartOfOrderPhase ();
+            }
+
+            if (game.getGamePhase() == Props.Phase.BUILD) {
+                game.changeSupplyPointOwnership();
             }
             
             this.setTitle(game.getTitle());
@@ -225,18 +235,25 @@ public class MainForm extends javax.swing.JFrame {
                         playerNode = new DefaultMutableTreeNode(p.toString() + " (" + units.size() + ")");
                         break;
                     
-                
+                    case BUILD:
+                        int buildCount = p.getBuildCount();
+                        playerNode = new DefaultMutableTreeNode(p.toString() + " (" + buildCount + ")");
+                        if (buildCount < 0) {
+                            units = p.getUnits();
+                        } else {
+                            units = new ArrayList<>();
+                        }
+                        break;
+                        
                     default:
                         playerNode = new DefaultMutableTreeNode(p);
                         units = p.getUnits();
                         break;
                 }
                 
-                DefaultMutableTreeNode unitsNode = new DefaultMutableTreeNode(UNIT_NODE_TITLE);
-                
-
                 rootNode.add(playerNode);
-                p.getUnits();
+                
+                DefaultMutableTreeNode unitsNode = new DefaultMutableTreeNode(UNIT_NODE_TITLE);
                 
                 for (Unit u : units){
                     DefaultMutableTreeNode unitNode = new DefaultMutableTreeNode(u);

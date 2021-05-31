@@ -420,15 +420,21 @@ public class Game {
         Unit unit = allUnits.get(unitId);
         
         for (Order o : findOrdersTargettingRegion(order.getDest().getRegion().getRegionCode())){
-            if (o.getCommand() == Order.OrderType.MOVE || o.getCommand() == Order.OrderType.CONVOY) {
-                order.setState(Order.ORDER_STATE.SEEN);
-                if (o.getState() != Order.ORDER_STATE.UNSEEN) {
-                    if (!checkForCuts (o)) {
-                        order.setCut(true);
-                        cut = true;        
+            
+            //Ignore the original order and any orders supporting/convoying this order
+            if (o.getOrderId() != order.getOrderId() && 
+                    (!o.getDest().equals(order.getDest()) || !o.getOrigin().equals(order.getOrigin()) ))
+            {
+                if (o.getCommand() == Order.OrderType.MOVE || o.getCommand() == Order.OrderType.CONVOY) {
+                    order.setState(Order.ORDER_STATE.SEEN);
+                    if (o.getState() != Order.ORDER_STATE.UNSEEN) {
+                        if (!checkForCuts (o)) {
+                            order.setCut(true);
+                            cut = true;        
+                        }
                     }
                 }
-            }
+            }            
         }
         
         return cut;
@@ -632,58 +638,63 @@ public class Game {
     }
     
     /**
+     * Calculates which units need a retreat order
+     * 
+     * @return LinkedList containing the units where their current order failed.
+     */
+    public LinkedList <Unit> getRetreatList () throws DataAccessException {
+        LinkedList <Unit> retreatList = new LinkedList <>();
+        
+        for (Map.Entry m: allUnits.entrySet()) {
+            Unit u = (Unit)m.getValue();
+            
+            if (u.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED) {
+                LinkedList<Border> retreats = u.getPossibleRetreats();
+                
+                if (retreats.isEmpty()) {
+                    u.delete();
+                } else {
+                    retreatList.add(u);
+                }
+            }
+        }
+        
+        
+        return retreatList;
+    }
+    
+    /**
      * Calculates the next game phase. May Update both phase and turn
      * 
      * @throws DataAccessException
      * @throws IOException 
      */
     public void nextPhase () throws DataAccessException, IOException {
-        if (countAllRetreats() == 0){
-            //No retreeats so go straight to the next turn
-            props.nextTurn();
-            if (props.getTurn() % 3 == 0) {
-                //winter so build
-                props.setPhase(Props.Phase.BUILD);
-            } else {
-                //Go straight to build
-                props.setPhase(Props.Phase.ORDER);
+        if (getRetreatList().isEmpty()){
+            if (props.getPhase() != Props.Phase.BUILD || !isBuildNeeded()) {
+            
+                //No retreeats so go straight to the next turn
+                props.nextTurn();
+                if (props.getTurn() % 3 == 0) {
+                    //winter so build
+                    if (isBuildNeeded()){
+                        props.setPhase(Props.Phase.BUILD);
+                    } else {
+                        //Skip build phase and go straight to 
+                        props.nextTurn();
+                        props.setPhase(Props.Phase.ORDER);
+                    }
+                } else {
+                    //Go straight to build
+                    props.setPhase(Props.Phase.ORDER);
+                }
             }
         } else {
             props.setPhase(Props.Phase.RETREAT);
         }
                     
     }
-    
-    /**
-     * Returns the number of units requiring retreats
-     * Looks for failed HOLD orders. 
-     * This works because move orders that fail get changed to HOLD orders and get checked again.
-     * 
-     * 
-     * @return The number of units requiring retreat orders
-     * @throws Data.DataAccessException
-     */
-    
-    public int countAllRetreats () throws DataAccessException {
-        int retreatCount = 0;
-        
-        for (Map.Entry map : allUnits.entrySet()) {
-            Unit unit = (Unit)map.getValue();
-            
-            if (unit.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED) {
-                LinkedList<Border> retreats = unit.getPossibleRetreats();
-                
-                if (retreats.isEmpty()) {
-                    unit.delete();
-                } else {
-                    retreatCount++;
-                }
-            }
-            
-        }
-        
-        return retreatCount;
-    }
+
     
     /**
      * Sets all unit's orders to be HOLD
@@ -785,6 +796,59 @@ public class Game {
             allOrders.put(newOrder.getOrderId(), newOrder);
         }
         
+    }
+    
+    /**
+     * Looks at each unit in turn. If they are in a supply center the ownership 
+     * of the supply center is changed to the owner of the unit.
+     */
+    public void changeSupplyPointOwnership () throws DataAccessException {
+        for (Map.Entry m : allUnits.entrySet()) {
+            Unit u = (Unit)m.getValue();
+            
+            Region r = u.getPosition().getRegion();
+            
+            if (r.isSupplyCenter()){
+                
+                int currOwner = r.getOwnerId();
+                int newOwner = u.getOwnerId();
+                
+                if (currOwner != newOwner) {
+                    Player p1 = allPlayers.get(currOwner);
+                    Player p2 = allPlayers.get(newOwner);
+                    
+                    p1.removeSupplyCenter(r);
+                    p2.addSupplyCenter(r);
+                    
+                    try {
+                            r.setOwnerId(newOwner);
+                        } catch (DataAccessException e) {
+                            Logger.getLogger(Region.class.getName()).log(Level.SEVERE, null, e);
+                            Data.DataAccessException ex = new Data.DataAccessException ("Error updating supply center owner " + u.toString(), e.getErrNo(),e.getMessage());
+
+                            throw (ex);            
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * 
+     * @return True if any players need to build or disband
+     */
+    public boolean isBuildNeeded () {
+        boolean buildNeeded = false;
+        
+        for (Map.Entry m : allPlayers.entrySet()){
+            Player p = (Player)m.getValue();
+            
+            if (p.getBuildCount() != 0) {
+                buildNeeded = true;
+            }
+        }
+        
+        return buildNeeded;
     }
     
 }

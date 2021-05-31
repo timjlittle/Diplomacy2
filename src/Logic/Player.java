@@ -76,8 +76,29 @@ public class Player {
         return retreatList;
     }
     
+    public void removeSupplyCenter (Region region) {
+        if (supplyCenters.contains(region)) {
+            supplyCenters.remove(region);
+        }
+    }
+    
     @Override
     public String toString () {
         return playerName;
     }
+    
+    /**
+     * Calculates the difference between the number of units 
+     * and the number of supply centers this player owns
+     * 
+     * @return Number of builds/disbands needed. Could be negative
+     */
+    public int getBuildCount () {
+       int diff;
+       
+       diff = supplyCenters.size() - units.size();
+       
+       return diff;
+    }
+    
 }

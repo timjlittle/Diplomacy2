@@ -75,6 +75,10 @@ public class Unit {
         return position;
     }
 
+    /**
+     * 
+     * @return The playerId of the country which owns this unit
+     */
     public int getOwnerId() {
         return ownerId;
     }

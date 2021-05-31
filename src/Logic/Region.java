@@ -67,8 +67,9 @@ public class Region {
         return ownerId;
     }
 
-    public void setOwnerId(int ownerId) {
+    public void setOwnerId(int ownerId) throws DataAccessException {
         this.ownerId = ownerId;
+        save();
     }
 
     public ArrayList<Border> getBorders() {
@@ -81,22 +82,7 @@ public class Region {
 
     public void setStandoff() throws DataAccessException {
         
-        try {
-            Props props = new Props ();
-            this.standoff = props.getTurn();
-
-            //Save this to disk
-            DataAccessor db = new DataAccessor ();
-            Record fields = new Record ();
-            Record where = new Record();
-            
-            
-        } catch (IOException e) {
-            Logger.getLogger(Region.class.getName()).log(Level.SEVERE, null, e);
-            Data.DataAccessException ex = new Data.DataAccessException ("File error updating region " + regionCode, -1,e.getMessage());
-            
-            throw (ex);            
-        }
+        save ();
         
     }
   
@@ -116,6 +102,32 @@ public class Region {
     @Override
     public String toString () {
         return regionName;
+    }
+    
+    private void save () throws DataAccessException {
+        try {
+            Props props = new Props ();
+            this.standoff = props.getTurn();
+
+            //Save this to disk
+            DataAccessor db = new DataAccessor ();
+            Record fields = new Record ();
+            Record where = new Record();
+
+            //Only Owner turn can change
+            fields.addField("Owner", ownerId);
+            
+            where.addField("RegionName", regionName);
+            
+            db.updateRecord("Region", fields, where);
+            
+            
+        } catch (IOException e) {
+            Logger.getLogger(Region.class.getName()).log(Level.SEVERE, null, e);
+            Data.DataAccessException ex = new Data.DataAccessException ("File error updating region " + regionCode, -1,e.getMessage());
+            
+            throw (ex);            
+        }
     }
     
 }
