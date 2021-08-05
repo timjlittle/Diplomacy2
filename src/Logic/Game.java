@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
@@ -103,8 +104,9 @@ public class Game {
         requestedFields.addField("RegionCode", "");
         requestedFields.addField("RegionName", "");
         requestedFields.addField("SupplyCenter", false);
-        requestedFields.addField("Owner", -1);
+        requestedFields.addField("CurOwner", -1);
         requestedFields.addField("BounceTurn", -1);
+        requestedFields.addField("OriOwner", -1);
         
         returnedFields = db.readAllRecords("Region", requestedFields, null);
         
@@ -113,14 +115,15 @@ public class Game {
                 String regionCode = record.getStringVal("RegionCode");
                 String regionName = record.getStringVal("RegionName");
                 boolean supplyCenter = record.getBoolVal("SupplyCenter");
-                int ownerId = record.getIntVal("Owner");
+                int ownerId = record.getIntVal("CurOwner");
                 int standoffTurn = record.getIntVal("BounceTurn");
+                int oriOwner  = record.getIntVal("OriOwner");
                 
                 if (standoffTurn != props.getTurn()){
                     standoffTurn = -1;
                 }
                 
-                Region r = new Region (regionName, regionCode, supplyCenter, standoffTurn);
+                Region r = new Region (regionName, regionCode, supplyCenter, standoffTurn, oriOwner);
                 
                 allRegions.put(regionCode, r);
                 
@@ -170,6 +173,7 @@ public class Game {
                 
                 Border b = new Border (borderId, owner, Border.mapStringToType(type), borderName, x, y );
                 allBorders.put(borderId, b);
+                owner.addBorder(b);
                 
                 if (b.getType() == Border.BorderType.COAST) {
                     coastsList.add(b);
@@ -231,6 +235,8 @@ public class Game {
                 Border pos = allBorders.get(occupies);
                 
                 Unit u = new Unit (unitId, Unit.mapStringoUnitCode(unitType), pos, playerId, false);
+                pos.setOccupyingUnit(u);
+                
                 
                 if (victorBorderId > 0) {
                     Border victorBorder = allBorders.get(victorBorderId);
@@ -409,6 +415,7 @@ public class Game {
     }
     
     /**
+     * Checks that a particular cut or convoy order has been cut.
      * 
      * @param order
      * @return 
@@ -419,22 +426,22 @@ public class Game {
         int unitId = order.getUnitId();
         Unit unit = allUnits.get(unitId);
         
-        for (Order o : findOrdersTargettingRegion(order.getDest().getRegion().getRegionCode())){
-            
-            //Ignore the original order and any orders supporting/convoying this order
-            if (o.getOrderId() != order.getOrderId() && 
-                    (!o.getDest().equals(order.getDest()) || !o.getOrigin().equals(order.getOrigin()) ))
-            {
-                if (o.getCommand() == Order.OrderType.MOVE || o.getCommand() == Order.OrderType.CONVOY) {
-                    order.setState(Order.ORDER_STATE.SEEN);
-                    if (o.getState() != Order.ORDER_STATE.UNSEEN) {
-                        if (!checkForCuts (o)) {
-                            order.setCut(true);
-                            cut = true;        
-                        }
+        //Ignore orders that can't be cut
+        if (order.getCommand() == Order.OrderType.CONVOY || order.getCommand() == Order.OrderType.SUPPORT) {
+        
+            //for (Order o : findOrdersTargettingRegion(order.getDest().getRegion().getRegionCode())){
+            for (Order o : findOrdersTargettingRegion(unit.getPosition().getRegion().getRegionCode() )){
+
+                //Ignore the original order and any orders supporting/convoying this order
+                if (o.getOrderId() != order.getOrderId() && o.getState() != Order.ORDER_STATE.FAILED ) {
+                    //check that the cutting order hasn't been cut.
+                    if (!checkForCuts (o)){
+                        cut = true;
+                        order.setState(Order.ORDER_STATE.FAILED);
                     }
-                }
-            }            
+                    
+                }            
+            }
         }
         
         return cut;
@@ -457,6 +464,7 @@ public class Game {
     
     /**
      * 
+     * @throws Data.DataAccessException
      */
     public void resolveAllOrders () throws DataAccessException {
         boolean cut = false;
@@ -479,7 +487,7 @@ public class Game {
             }
 
             if (!cut && order.getCommand() == Order.OrderType.SUPPORT ){
-                Order supported = findAuxOrder (order.getDestinationId(), order.getOriginId());
+                Order supported = findAuxOrder (order.getOriginId(), order.getDestinationId());
 
                 if (supported != null) {
                     supported.incrementSupportCount();
@@ -523,13 +531,80 @@ public class Game {
                     if (conflicts.isEmpty()){
                         //If the target is unwanted because of an unresolved order set to pending
                         String regionCode = order.getDest().getRegion().getRegionCode();
+                        
+                        //Get the order for the unit currently in the destination
                         Order o = getOrderForRegion(regionCode);
                         boolean waiting = false;
                         
                         if (o != null) {
                             if ( o.getCommand() == Order.OrderType.MOVE && o.getState() != Order.ORDER_STATE.SUCCEEDED ) {
-                                pending = true;
-                                waiting = true;
+                                //If the order is a move into this unit's territory resolve to find a winner or mark as standoff
+                                
+                                //spot straight swap
+                                if ( (o.getDest() == order.getOrigin()) && (order.getDest() == o.getOrigin())){
+
+                                    if (o.getSupportCount() > order.getSupportCount()) {
+                                        o.setState(Order.ORDER_STATE.SUCCEEDED);
+                                        Unit unit = (Unit)allUnits.get(o.getUnitId());
+                                        unit.setPosition(o.getDest());
+                                        
+                                        order.setState(Order.ORDER_STATE.FAILED);
+                                         
+                                        if (!o.save()) {
+                                            DataAccessException ex = new DataAccessException ("resolveOrders: Error saving order", o.getErrNo(), o.getErrMsg());
+
+                                            throw ex;                                
+                                        }
+
+                                        if (!unit.save()) {
+                                            DataAccessException ex = new DataAccessException ("resolveOrders: Error saving unit", order.getErrNo(), order.getErrMsg());
+
+                                            throw ex;                                                                
+                                        }
+                                        
+                                    }
+                                    
+                                    if (o.getSupportCount() < order.getSupportCount()) {
+                                        order.setState(Order.ORDER_STATE.SUCCEEDED);
+                                        Unit unit = (Unit)allUnits.get(order.getUnitId());
+                                        unit.setPosition(order.getDest());
+                                         
+                                        o.setState(Order.ORDER_STATE.FAILED);
+                                        
+                                        if (!order.save()) {
+                                            DataAccessException ex = new DataAccessException ("resolveOrders: Error saving order", order.getErrNo(), order.getErrMsg());
+
+                                            throw ex;                                
+                                        }
+
+                                        if (!unit.save()) {
+                                            DataAccessException ex = new DataAccessException ("resolveOrders: Error saving unit", order.getErrNo(), order.getErrMsg());
+
+                                            throw ex;                                                                
+                                        }
+                                        
+                                    }
+
+                                    //If it is a standoff change both to HOLD orders
+                                    if (o.getSupportCount() == order.getSupportCount()) {
+                                        
+                                        order.setCommand(Order.OrderType.HOLD);
+                                        order.setDest(order.getOrigin());
+                                        order.resetSupportCount();
+                                        order.save();
+                                        
+                                        o.setCommand(Order.OrderType.HOLD);
+                                        o.setDest(o.getOrigin());
+                                        o.resetSupportCount();
+                                        o.save();
+                                    }
+                                    
+                                    
+                                            
+                                } else {
+                                    pending = true;
+                                    waiting = true;
+                                }
                             }
                         }
 
@@ -542,13 +617,13 @@ public class Game {
                             
                             unit.setPosition(order.getDest());
                             if (!order.save()) {
-                                DataAccessException ex = new DataAccessException ("loadBorders: Error saving order", order.getErrNo(), order.getErrMsg());
+                                DataAccessException ex = new DataAccessException ("resolveOrders: Error saving order", order.getErrNo(), order.getErrMsg());
 
                                 throw ex;                                
                             }
                             
                             if (!unit.save()) {
-                                DataAccessException ex = new DataAccessException ("loadBorders: Error saving unit", order.getErrNo(), order.getErrMsg());
+                                DataAccessException ex = new DataAccessException ("resolveOrders: Error saving unit", order.getErrNo(), order.getErrMsg());
 
                                 throw ex;                                                                
                             }
@@ -579,6 +654,7 @@ public class Game {
                                     o.save();
                                 } else {
                                     o.setCommand(Order.OrderType.HOLD);
+                                    o.setDest(o.getOrigin());
                                     o.resetSupportCount();
                                     o.save();
                                     pending = true;
@@ -594,7 +670,9 @@ public class Game {
                                order.save();
                            } else {
                                order.setCommand(Order.OrderType.HOLD);
+                               order.setDest(order.getOrigin());
                                order.resetSupportCount();
+                               order.save();
                                pending = true;
                            }
                            
@@ -604,9 +682,11 @@ public class Game {
                                order.setState(Order.ORDER_STATE.FAILED);
                            } else {
                                order.setCommand(Order.OrderType.HOLD);
+                               order.setDest(order.getOrigin());
                                order.resetSupportCount();
                                pending = true;
                            }
+                           order.save();
 
                            boolean standoff = true;
                            for (Order o : conflicts) {
@@ -615,9 +695,11 @@ public class Game {
                                     standoff = false;
                                 } else {
                                     order.setCommand(Order.OrderType.HOLD);
+                                    order.setDest(order.getOrigin());
                                     order.resetSupportCount();
                                     pending = true;
-                                }                               
+                                }
+                                order.save();
                            }
                            
                            if (standoff) {
@@ -648,7 +730,8 @@ public class Game {
         for (Map.Entry m: allUnits.entrySet()) {
             Unit u = (Unit)m.getValue();
             
-            if (u.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED) {
+            if ((u.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED) ||
+                    ((u.getCurrentOrder().getCommand() == Order.OrderType.RETREAT) && (u.getCurrentOrder().getState() == Order.ORDER_STATE.SUCCEEDED))){
                 LinkedList<Border> retreats = u.getPossibleRetreats();
                 
                 if (retreats.isEmpty()) {
@@ -755,6 +838,14 @@ public class Game {
             p.getUnits().clear();            
         }
 
+        //Reset the supply centers to their original owners.
+        for (Map.Entry map : allRegions.entrySet()){
+            Region sc = (Region)map.getValue();
+            if (sc.isSupplyCenter()) {
+                sc.resetOwner();
+            }
+        }
+        
         allUnits.clear();
         allOrders.clear();
         
@@ -849,6 +940,12 @@ public class Game {
         }
         
         return buildNeeded;
+    }
+    
+    private void resetOccupyingUnits () {
+        //Start by setting all the occupying units to null
+        
+        //Then 
     }
     
 }

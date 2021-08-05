@@ -36,6 +36,9 @@ public class Unit {
         this.position = position;
         this.ownerId = ownerId;
         this.disbanded = disbanded;
+        
+        
+        
     }
     
     public Unit(UnitType unitType, Border position, int ownerId, boolean disbanded) {
@@ -45,7 +48,7 @@ public class Unit {
         this.ownerId = ownerId;
         this.disbanded = disbanded;
         
-        
+
     }
 
     public void delete () throws DataAccessException {

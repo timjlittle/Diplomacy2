@@ -214,6 +214,8 @@ public class Order implements Comparable<Order> {
 
     public void setState(ORDER_STATE state) {
         this.state = state;
+        
+        save();
     }
 
     public Border getDest() {
@@ -342,7 +344,7 @@ public class Order implements Comparable<Order> {
                 break;
                 
             case RETREAT:
-                ret = new String []{"move"};
+                ret = new String []{"retreat"};
                 break;
                 
             case BUILD:

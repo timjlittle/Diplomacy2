@@ -177,7 +177,14 @@ public class MainForm extends javax.swing.JFrame {
                     //Resolve retreats
                     LinkedList <Unit> retreatList = game.getRetreatList();
                     if (!retreatList.isEmpty()) {
-                        
+                        for (Unit u : retreatList) {
+                            Order o = u.getCurrentOrder();
+                            u.setPosition(o.getDest());
+                            u.save();
+                            
+                            o.setCommand(Order.OrderType.HOLD);
+                            o.setState(Order.ORDER_STATE.SUCCEEDED);
+                        }
                     }
                     
                     break;
@@ -202,6 +209,8 @@ public class MainForm extends javax.swing.JFrame {
             this.setTitle(game.getTitle());
             drawTree ();
             treeModel.reload();
+            titleLabel.setText(game.getTitle());
+            mapPanel1.repaint();
             
             
         } catch (DataAccessException | IOException ex) {
@@ -221,6 +230,7 @@ public class MainForm extends javax.swing.JFrame {
     private void drawTree () {
         
         rootNode.removeAllChildren();
+        int buildCount = 0;
         
         for (Map.Entry m : game.getAllPlayers().entrySet()){
             Player p = (Player)m.getValue();
@@ -236,8 +246,9 @@ public class MainForm extends javax.swing.JFrame {
                         break;
                     
                     case BUILD:
-                        int buildCount = p.getBuildCount();
+                        buildCount = p.getBuildCount();
                         playerNode = new DefaultMutableTreeNode(p.toString() + " (" + buildCount + ")");
+                        //If the user needs to disband a piece show the list
                         if (buildCount < 0) {
                             units = p.getUnits();
                         } else {
@@ -265,7 +276,11 @@ public class MainForm extends javax.swing.JFrame {
                 DefaultMutableTreeNode centersNode = new DefaultMutableTreeNode("Supply Centers");
 
                 for (Region r : p.getSupplyCenters()){
-                    centersNode.add(new DefaultMutableTreeNode(r));
+                    //Add the supply center if it isn't a build phase, otherwise only add it if 
+                    //it is unocuppied, owned by the player and the buildcount is positive
+                    if (game.getGamePhase() != Props.Phase.BUILD || 
+                                (buildCount >0 && !r.isOccupied() && r.getOwnerId() == p.getPlayerId()))
+                        centersNode.add(new DefaultMutableTreeNode(r));
                 }
                 playerNode.add(centersNode);
             }
@@ -331,6 +346,7 @@ public class MainForm extends javax.swing.JFrame {
             drawTree();
             mapPanel1.repaint();
             this.setTitle(game.getTitle());
+            titleLabel.setText(game.getTitle());
         }
     }//GEN-LAST:event_newGameMenuItemActionPerformed
 

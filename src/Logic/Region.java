@@ -22,6 +22,7 @@ public class Region {
     private final String regionName;
     private final String regionCode;
     private final boolean supplyCenter;
+    private int oriOwner;
     private int ownerId;
     private int standoff = -1;
 
@@ -33,12 +34,13 @@ public class Region {
      * @param supplyCenter whether or not this is a supply center
      * @param standoffTurn -1 if not the current turn
      */
-    public Region(String regionName, String regionCode, boolean supplyCenter, int standoffTurn) {
+    public Region(String regionName, String regionCode, boolean supplyCenter, int standoffTurn, int oriOwner) {
         this.regionName = regionName;
         this.regionCode = regionCode;
         this.supplyCenter = supplyCenter;
         this.ownerId = 0;
         this.standoff = standoffTurn;
+        this.oriOwner = oriOwner;
     }
     
     /**
@@ -81,8 +83,19 @@ public class Region {
     }
 
     public void setStandoff() throws DataAccessException {
+        try {
+            Props props = new Props ();
+            this.standoff = props.getTurn();
         
-        save ();
+            save ();
+            
+        } catch (IOException e) {
+            Logger.getLogger(Region.class.getName()).log(Level.SEVERE, null, e);
+            Data.DataAccessException ex = new Data.DataAccessException ("File error updating region " + regionCode, -1,e.getMessage());
+            
+            throw (ex);            
+        }
+        
         
     }
   
@@ -105,29 +118,30 @@ public class Region {
     }
     
     private void save () throws DataAccessException {
-        try {
-            Props props = new Props ();
-            this.standoff = props.getTurn();
+        
+        //Save this to disk
+        DataAccessor db = new DataAccessor ();
+        Record fields = new Record ();
+        Record where = new Record();
 
-            //Save this to disk
-            DataAccessor db = new DataAccessor ();
-            Record fields = new Record ();
-            Record where = new Record();
+        //Only Owner and standoff turn turn can change
+        fields.addField("CurOwner", ownerId);
+        fields.addField("BounceTurn", standoff);
 
-            //Only Owner turn can change
-            fields.addField("Owner", ownerId);
+        where.addField("RegionName", regionName);
+
+        if (!db.updateRecord("Region", fields, where)){
+            Data.DataAccessException ex = new Data.DataAccessException ("Database error " + regionCode, db.getErrNo(),db.getErrorMsg());
+            Logger.getLogger(Region.class.getName()).log(Level.SEVERE, null, ex);
             
-            where.addField("RegionName", regionName);
-            
-            db.updateRecord("Region", fields, where);
-            
-            
-        } catch (IOException e) {
-            Logger.getLogger(Region.class.getName()).log(Level.SEVERE, null, e);
-            Data.DataAccessException ex = new Data.DataAccessException ("File error updating region " + regionCode, -1,e.getMessage());
-            
-            throw (ex);            
-        }
+            throw (ex);   
+        }    
+    }
+    
+    public void resetOwner () throws DataAccessException {
+        ownerId = oriOwner;
+        
+        save();
     }
     
 }

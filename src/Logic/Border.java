@@ -124,10 +124,11 @@ public class Border implements Comparable<Border> {
 
     public void setOccupyingUnit(Unit occupyingUnit) {
         this.occupyingUnit = occupyingUnit;
+        
     }
     
     public boolean isOccupied () {
-        return occupyingUnit == null;
+        return occupyingUnit != null;
     }
 
     @Override

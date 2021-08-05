@@ -205,6 +205,7 @@ public class OrderForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -435,6 +436,17 @@ public class OrderForm extends javax.swing.JFrame {
                 
                 
                 break;
+                
+            case RETREAT:
+                convoyedCheckBox.setEnabled(false);
+                fromCombo.setEnabled(false);
+                toCombo.setEnabled(true);
+                orderOptionsCombo.setEnabled(false);
+                       
+                populateBorderModel (toModel, currentUnit.getPossibleRetreats(), currentUnit.getUnitType(), currentOrder.getOriginId());
+                
+                break;
+                
                 
             default:
                 convoyedCheckBox.setEnabled(false);

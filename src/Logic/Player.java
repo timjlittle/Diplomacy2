@@ -71,6 +71,11 @@ public class Player {
                 
                 retreatList.add(u);
             }
+            
+            if (u.getCurrentOrder().getCommand() == Order.OrderType.RETREAT && 
+                    u.getCurrentOrder().getState() == Order.ORDER_STATE.UNSEEN){
+                retreatList.add(u);
+            }
         }
         
         return retreatList;

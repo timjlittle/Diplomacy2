@@ -22,9 +22,11 @@ public class Props {
     private Properties props = new Properties();
     public static final String PROPS_FILE_LOC = "config.properties";
     private String databaseDetails = "game.db";
+    private String logFileLoc = "gamelog.txt";
     private static final String DB_DETAILS_KEY = "DB_DETAILS_KEY";
     private static final String TURN_KEY = "TURN_KEY";
     private static final String PHASE_KEY = "PHASE_KEY";
+    private static final String LOG_FILE_KEY = "LOG_FILE_LOC_KEY";
     private int turn;
     public enum Phase {ORDER, RETREAT, BUILD};
     private Phase phase;
@@ -43,6 +45,17 @@ public class Props {
         }
     }
 
+    public String getLogFileLoc () {
+        return (String) props.getProperty(LOG_FILE_KEY, logFileLoc);
+    }
+    
+    public void setFileLoc (String logFileLocation) throws FileNotFoundException, IOException {
+        props.put(LOG_FILE_KEY, logFileLocation);
+        
+        FileOutputStream output = new FileOutputStream(PROPS_FILE_LOC);
+        props.store(output, null);
+    }
+    
     public String getDatabaseDetails() {
         return (String) props.getProperty(DB_DETAILS_KEY, databaseDetails);
     }
