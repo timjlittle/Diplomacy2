@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author Tim Little
  */
 public class Order implements Comparable<Order> {
-    public enum OrderType {HOLD, MOVE, SUPPORT, CONVOY, RETREAT, DISBAND};
+    public enum OrderType {HOLD, MOVE, SUPPORT, CONVOY, RETREAT, DISBAND, BUILD};
     public enum ORDER_STATE {UNSEEN, PENDING, SUCCEEDED, FAILED, SEEN};
     private int orderId = -1;
     private OrderType command;
@@ -97,16 +97,17 @@ public class Order implements Comparable<Order> {
      * @param beingConveyed whether or not the unitId is being convoyed
      * @param unit The unitId that owns this order
      * @param turn The game turn
+     * @param state Current state (failed, succeeded etc.)
      * 
      * 
      */
-    public Order(int OrderId, OrderType command, Border destination, Border origin, boolean beingConveyed, Unit unit, int turn)  {
+    public Order(int OrderId, OrderType command, Border destination, Border origin, boolean beingConveyed, Unit unit, int turn, int state)  {
         this.orderId = OrderId;
         this.command = command;
         this.dest = destination;
         this.origin = origin;
         this.beingConvoyed = beingConveyed;
-        this.state = ORDER_STATE.UNSEEN; 
+        this.state = mapIntToState(state) ; 
         this.unit = unit;
         this.turn = turn;
         
@@ -192,6 +193,10 @@ public class Order implements Comparable<Order> {
         return originId;
     }
 
+    public Border getUnitPos () {
+        return unit.getPosition();
+    }
+    
     public boolean isBeingConvoyed() {
         return beingConvoyed;
     }
@@ -286,11 +291,22 @@ public class Order implements Comparable<Order> {
         this.errMsg = errMsg;
     }
     
+    public Region getDestRegion () {
+        return this.dest.getRegion();
+    }
     
     
     @Override
     public int compareTo(Order otherOrder) {
-        return supportCount - otherOrder.getSupportCount();
+        Region otherDest = otherOrder.getDestRegion();
+        
+        int diff = this.dest.getRegion().getRegionName().compareTo(otherOrder.getDestRegion().getRegionName());
+        
+        if (diff == 0) {
+            diff = otherOrder.getSupportCount() - supportCount;
+        }
+        
+        return diff;
     }
     
     /**
@@ -507,6 +523,12 @@ public class Order implements Comparable<Order> {
         }
         
         return ret;
+    }
+    
+    public void convertToHold () {
+        this.setCommand(Order.OrderType.HOLD);
+        this.setOrigin(unit.getPosition());
+        this.setDest(unit.getPosition());
     }
     
 }

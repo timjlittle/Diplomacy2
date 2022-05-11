@@ -5,7 +5,6 @@
  */
 package Logic;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -139,5 +138,11 @@ public class Border implements Comparable<Border> {
     @Override
     public int compareTo(Border otherBorder) {
         return borderName.compareTo(otherBorder.getBorderName());
+    }
+
+    public boolean isNeighbour (Border neighbour) {
+        boolean ret = neighbours.contains(neighbour) ;
+        
+        return ret;
     }    
 }

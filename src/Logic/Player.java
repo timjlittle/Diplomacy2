@@ -18,6 +18,7 @@ public class Player {
     
     private ArrayList <Unit> units = new ArrayList<>();
     private ArrayList <Region> supplyCenters = new ArrayList <>();
+    private ArrayList <String> homeRegionCodes = new ArrayList <>();
 
     public Player(String playerName, int playerId, String colour) {
         this.playerName = playerName;
@@ -51,6 +52,22 @@ public class Player {
     
     public void addSupplyCenter (Region region) {
         supplyCenters.add(region);
+    }
+    
+    public void addHomeRegionCode (String regionCode) {
+        homeRegionCodes.add(regionCode);
+    }
+    
+    public boolean isHomeRegion (String regionCode) {
+        boolean found = false;
+        int counter = 0;
+        
+        while (!found && counter < homeRegionCodes.size()){
+            found = regionCode.compareTo(homeRegionCodes.get(counter)) == 0;
+            counter++;
+        }
+                
+        return found;
     }
     
     /**

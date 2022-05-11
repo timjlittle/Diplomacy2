@@ -170,24 +170,25 @@ public class MainForm extends javax.swing.JFrame {
         try {
             switch (game.getGamePhase()) {
                 case ORDER:
+                    case RETREAT:
                     game.resolveAllOrders();
                     break;
-                    
-                case RETREAT:
-                    //Resolve retreats
-                    LinkedList <Unit> retreatList = game.getRetreatList();
-                    if (!retreatList.isEmpty()) {
-                        for (Unit u : retreatList) {
-                            Order o = u.getCurrentOrder();
-                            u.setPosition(o.getDest());
-                            u.save();
-                            
-                            o.setCommand(Order.OrderType.HOLD);
-                            o.setState(Order.ORDER_STATE.SUCCEEDED);
-                        }
-                    }
-                    
-                    break;
+//                    
+//                case RETREAT:
+//                    //Resolve retreats
+//                    LinkedList <Unit> retreatList = game.getRetreatList();
+//                    if (!retreatList.isEmpty()) {
+//                        for (Unit u : retreatList) {
+//                            Order o = u.getCurrentOrder();
+//                            u.setPosition(o.getDest());
+//                            u.save();
+//                            
+//                            o.setCommand(Order.OrderType.HOLD);
+//                            o.setState(Order.ORDER_STATE.SUCCEEDED);
+//                        }
+//                    }
+//                    
+//                    break;
                     
                 case BUILD:
                     
@@ -231,6 +232,7 @@ public class MainForm extends javax.swing.JFrame {
         
         rootNode.removeAllChildren();
         int buildCount = 0;
+        int scCount;
         
         for (Map.Entry m : game.getAllPlayers().entrySet()){
             Player p = (Player)m.getValue();
@@ -247,7 +249,8 @@ public class MainForm extends javax.swing.JFrame {
                     
                     case BUILD:
                         buildCount = p.getBuildCount();
-                        playerNode = new DefaultMutableTreeNode(p.toString() + " (" + buildCount + ")");
+                        //playerNode = new DefaultMutableTreeNode(p.toString() + " (" + buildCount + ")");
+                        playerNode = new DefaultMutableTreeNode(p);
                         //If the user needs to disband a piece show the list
                         if (buildCount < 0) {
                             units = p.getUnits();
@@ -264,25 +267,33 @@ public class MainForm extends javax.swing.JFrame {
                 
                 rootNode.add(playerNode);
                 
-                DefaultMutableTreeNode unitsNode = new DefaultMutableTreeNode(UNIT_NODE_TITLE);
-                
-                for (Unit u : units){
-                    DefaultMutableTreeNode unitNode = new DefaultMutableTreeNode(u);
-                    unitsNode.add(unitNode);
-                }
+                if (!units.isEmpty()){
+                    DefaultMutableTreeNode unitsNode = new DefaultMutableTreeNode(UNIT_NODE_TITLE);
 
-                playerNode.add(unitsNode);
+                    for (Unit u : units){
+                        DefaultMutableTreeNode unitNode = new DefaultMutableTreeNode(u);
+                        unitsNode.add(unitNode);
+                    }
+
+                    playerNode.add(unitsNode);
+                }
 
                 DefaultMutableTreeNode centersNode = new DefaultMutableTreeNode("Supply Centers");
 
+                scCount = 0;
                 for (Region r : p.getSupplyCenters()){
                     //Add the supply center if it isn't a build phase, otherwise only add it if 
                     //it is unocuppied, owned by the player and the buildcount is positive
                     if (game.getGamePhase() != Props.Phase.BUILD || 
-                                (buildCount >0 && !r.isOccupied() && r.getOwnerId() == p.getPlayerId()))
+                                (buildCount >0 && !r.isOccupied() && r.getOwnerId() == p.getPlayerId() && p.isHomeRegion(r.getRegionCode()))){
                         centersNode.add(new DefaultMutableTreeNode(r));
+                        scCount++;
+                    }
+                        
                 }
-                playerNode.add(centersNode);
+                if (scCount > 0){
+                    playerNode.add(centersNode);
+                }
             }
 
         }
@@ -314,18 +325,28 @@ public class MainForm extends javax.swing.JFrame {
         
             DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) unitsTree.getLastSelectedPathComponent();
             DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode)selectedNode.getParent();
+            
+            if (game.getGamePhase() != Props.Phase.BUILD){
 
-            if (parentNode.getUserObject().toString().compareTo(UNIT_NODE_TITLE) == 0) {
-                Unit u = (Unit)selectedNode.getUserObject();
+                if (parentNode.getUserObject().toString().compareTo(UNIT_NODE_TITLE) == 0) {
+                    Unit u = (Unit)selectedNode.getUserObject();
 
-                Order o = u.getCurrentOrder();
+                    Order o = u.getCurrentOrder();
 
-                //JOptionPane.showMessageDialog(this, o.toString(), "Order", JOptionPane.INFORMATION_MESSAGE);
-                
-                OrderForm orderForm = new OrderForm();
-                orderForm.setDetails(u, game );
-                orderForm.setModalExclusionType(Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
-                orderForm.setVisible(true);
+                    //JOptionPane.showMessageDialog(this, o.toString(), "Order", JOptionPane.INFORMATION_MESSAGE);
+
+                    OrderForm orderForm = new OrderForm();
+                    orderForm.setDetails(u, game );
+                    orderForm.setModalExclusionType(Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
+                    orderForm.setVisible(true);
+                }
+            } else {
+                if (selectedNode.getUserObject().getClass() == Player.class) {
+                    Player curPlayer = (Player)selectedNode.getUserObject();
+                    BuildForm builds = new BuildForm ();
+                    builds.initialiseForm(game, curPlayer);
+                    builds.setVisible(true);
+                }
             }
         }
     }//GEN-LAST:event_unitsTreeMouseClicked

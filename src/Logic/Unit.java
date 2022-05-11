@@ -204,7 +204,7 @@ public class Unit {
                 //Default to a hold order
                 Props props = new Props ();
                 
-                currentOrder = new Order (-1, Order.OrderType.HOLD, this.getPosition(), this.getPosition(), false, this, props.getTurn());
+                currentOrder = new Order (-1, Order.OrderType.HOLD, this.getPosition(), this.getPosition(), false, this, props.getTurn(), 0);
                 currentOrder.save();
                         } catch (IOException ex) {
                 Logger.getLogger(Unit.class.getName()).log(Level.SEVERE, null, ex);

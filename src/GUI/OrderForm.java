@@ -361,7 +361,13 @@ public class OrderForm extends javax.swing.JFrame {
     }
     
     private void setFields (Order.OrderType newType) {
-        LinkedList<Border> neighbours = currentUnit.getPosition().getNeighbours();
+        LinkedList<Border> neighbours;
+        
+        if (currentUnit.getUnitType() == Unit.UnitType.ARMY) {
+            neighbours = currentUnit.getPosition().getRegion().getNeighbours();
+        } else {
+            neighbours = currentUnit.getPosition().getNeighbours();
+        }
         int selected;
         DefaultComboBoxModel toModel = (DefaultComboBoxModel) toCombo.getModel();
         DefaultComboBoxModel fromModel = (DefaultComboBoxModel) fromCombo.getModel();
@@ -381,6 +387,10 @@ public class OrderForm extends javax.swing.JFrame {
                 
                 fromCombo.removeAllItems();
                 toCombo.removeAllItems();
+                
+                toModel.addElement(currentUnit.getPosition());
+                toCombo.setSelectedIndex(0);
+                
                 fromModel.addElement(currentUnit.getPosition());
                 fromCombo.setSelectedIndex(0);
                 break;
@@ -439,6 +449,9 @@ public class OrderForm extends javax.swing.JFrame {
                 
             case RETREAT:
                 convoyedCheckBox.setEnabled(false);
+                fromCombo.removeAllItems();
+                fromModel.addElement(currentUnit.getPosition());
+                fromCombo.setSelectedIndex(0);
                 fromCombo.setEnabled(false);
                 toCombo.setEnabled(true);
                 orderOptionsCombo.setEnabled(false);
@@ -490,6 +503,8 @@ public class OrderForm extends javax.swing.JFrame {
             }
         });
     }
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton closeButton;

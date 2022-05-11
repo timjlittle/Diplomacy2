@@ -8,6 +8,8 @@ package Logic;
 import Data.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -142,6 +144,25 @@ public class Region {
         ownerId = oriOwner;
         
         save();
+    }
+    
+    public LinkedList<Border> getNeighbours() {
+        LinkedList<Border> ret = new LinkedList<>();
+        
+        for (Iterator<Border> it = borders.iterator(); it.hasNext();) {
+            Border b = it.next();
+            
+            for (Iterator<Border> it2 = b.getNeighbours().iterator(); it2.hasNext();) {
+                Border n = it2.next();
+                
+                if (!ret.contains(n)) {
+                    ret.add(n);
+                }
+            }
+       
+        }
+        
+        return ret;
     }
     
 }

@@ -46,16 +46,22 @@ public class Props {
     }
 
     public String getLogFileLoc () {
-        return (String) props.getProperty(LOG_FILE_KEY, logFileLoc);
+        String tempLoc = (String) props.getProperty(DB_DETAILS_KEY, logFileLoc);
+        int finalSlashLoc = tempLoc.lastIndexOf("\\");
+        
+        tempLoc = tempLoc + logFileLoc;
+        
+        return tempLoc;
     }
     
+    /*
     public void setFileLoc (String logFileLocation) throws FileNotFoundException, IOException {
         props.put(LOG_FILE_KEY, logFileLocation);
         
         FileOutputStream output = new FileOutputStream(PROPS_FILE_LOC);
         props.store(output, null);
     }
-    
+    */
     public String getDatabaseDetails() {
         return (String) props.getProperty(DB_DETAILS_KEY, databaseDetails);
     }
