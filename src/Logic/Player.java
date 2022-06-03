@@ -5,7 +5,11 @@
  */
 package Logic;
 
+import Data.Props;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class representing a country / player (e.g. Russia or Turkey)
@@ -106,7 +110,21 @@ public class Player {
     
     @Override
     public String toString () {
-        return playerName;
+        Props props;
+        String ret = playerName;
+        
+        try {
+            props = new Props();
+            
+            if (props.getPhase() == Props.Phase.BUILD) {
+                ret += " (" + getBuildCount() + ")";
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ret;
     }
     
     /**

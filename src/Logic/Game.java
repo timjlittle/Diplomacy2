@@ -312,6 +312,7 @@ public class Game {
         requestedFields.addField("State", 0);
 
         whereFields.addField("Round", props.getTurn());
+        whereFields.addField("State", 0);
 
         returnedFields = db.readAllRecords("Command", requestedFields, whereFields);
 

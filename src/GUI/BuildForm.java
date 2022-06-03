@@ -5,19 +5,28 @@
  */
 package GUI;
 
+import Data.DataAccessException;
+import Data.GameLogger;
 import Logic.*;
+import static java.lang.Math.abs;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author timjl
  */
-public class BuildForm extends javax.swing.JFrame {
+public class BuildForm extends javax.swing.JDialog {
 
     Game gameDetails;
     Player player;
     int maxBuilds;
+    private enum Mode {BUILD, DISBAND, EVEN};
+    private Mode mode = Mode.EVEN;
     
     DefaultListModel availableModel = new DefaultListModel();
     DefaultListModel ordersModel = new DefaultListModel();
@@ -44,12 +53,11 @@ public class BuildForm extends javax.swing.JFrame {
         availableListBox = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        unitTypeComboBox = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        selectButton = new javax.swing.JButton();
+        deselctButton = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
+        commitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -70,18 +78,36 @@ public class BuildForm extends javax.swing.JFrame {
 
         jLabel2.setText("Existing Buld Orders");
 
-        unitTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectButton.setText(">>");
+        selectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectButtonActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Type");
-
-        jButton1.setText(">>");
-
-        jButton2.setText("<<");
+        deselctButton.setText("<<");
+        deselctButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deselctButtonActionPerformed(evt);
+            }
+        });
 
         titleLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         titleLabel.setText("Build instructions for");
 
-        jButton3.setText("Close");
+        closeButton.setText("Close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
+
+        commitBtn.setText("Commit");
+        commitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commitBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,27 +123,24 @@ public class BuildForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton3))
+                                .addComponent(commitBtn)
+                                .addGap(27, 27, 27)
+                                .addComponent(closeButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                                .addComponent(selectButton)
+                                                .addGap(18, 18, 18))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addGap(26, 26, 26)
-                                                .addComponent(jButton1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(unitTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(deselctButton)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -141,18 +164,14 @@ public class BuildForm extends javax.swing.JFrame {
                             .addComponent(jScrollPane1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jButton1)
+                        .addComponent(selectButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deselctButton)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(unitTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addContainerGap())
+                    .addComponent(closeButton)
+                    .addComponent(commitBtn))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,6 +180,121 @@ public class BuildForm extends javax.swing.JFrame {
     private void availableListBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_availableListBoxMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_availableListBoxMouseClicked
+
+    private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
+        
+        if (availableListBox.getSelectedIndex() > -1 && ordersModel.getSize() < abs(maxBuilds) ) {
+            Object o = availableModel.get(availableListBox.getSelectedIndex());
+
+            availableModel.remove(availableListBox.getSelectedIndex());
+            
+            if (mode == Mode.BUILD) {
+                Region r = (Region)o;
+                Border border;
+                Unit.UnitType unitType = Unit.UnitType.ARMY;
+                
+                ArrayList borders = r.getBorders();
+                
+                if (borders.size() > 1){
+                    Object options [] = new Object [borders.size()];
+                    for (int x = 0; x < borders.size(); x++) {
+                        options[x] = borders.get(x);
+                    }
+                    
+                    border = (Border)JOptionPane.showInputDialog(null, "Multiple Coasts", "Please select coast", JOptionPane.QUESTION_MESSAGE, null, options, options[0] );
+                } else {
+                    border = (Border)borders.get(0);
+                }
+                              
+                if (border.getType() == Border.BorderType.COAST) {
+                    String options[] = {"Army", "Fleet"};
+                    String choice = (String)JOptionPane.showInputDialog(this, "Choose unit type", "Army or Fleet", JOptionPane.QUESTION_MESSAGE, null, options, options[0] );
+                    
+                    if (choice.equals("Fleet")) {
+                        unitType = Unit.UnitType.FLEET;
+                    }
+                } 
+                
+                Unit unit = new Unit (unitType, border, player.getPlayerId(), false);
+                ordersModel.addElement (unit);
+                
+            } else {
+                
+                ordersModel.addElement(o);
+            }
+            
+            commitBtn.setEnabled(true);
+            closeButton.setText ("Abandon");
+        }
+    }//GEN-LAST:event_selectButtonActionPerformed
+
+    /**
+     * 
+     * @param evt 
+     */
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        boolean discard = true;
+        
+        if (ordersModel.size() > 0){
+            if (JOptionPane.showConfirmDialog(this, "Are you sure?", "Abandon orders?", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE) != JOptionPane.OK_OPTION){
+                discard = false;
+            }
+        }
+        
+        if (discard) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void deselctButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deselctButtonActionPerformed
+        
+        if (ordersListBox.getSelectedIndex() >= 0){
+            Unit unit = (Unit)ordersModel.get(ordersListBox.getSelectedIndex());
+            
+            if (mode == Mode.BUILD) {
+                
+                Region r = unit.getPosition().getRegion();
+                
+                availableModel.addElement(r);
+                
+                
+            } else {
+                availableModel.addElement(unit);
+            }
+            
+            ordersModel.remove(ordersListBox.getSelectedIndex());
+            
+            if (ordersModel.size() == 0){
+                commitBtn.setEnabled(false);
+                closeButton.setText ("Close");
+            }
+        }
+    }//GEN-LAST:event_deselctButtonActionPerformed
+
+    private void commitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commitBtnActionPerformed
+        while (ordersModel.size() > 0){
+            Unit unit = (Unit)ordersModel.get(0);
+            GameLogger g = new GameLogger();
+            
+            if (mode == Mode.BUILD) {
+                unit.save();
+                
+                g.logMessage(unit + " created.");
+                
+            } else {
+                try {
+                    unit.delete();
+                    g.logMessage(unit + " deleted.");
+                } catch (DataAccessException ex) {
+                    Logger.getLogger(BuildForm.class.getName()).log(Level.SEVERE, null, ex);
+                    g.logMessage("Error: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Error deleting " + unit + ": " + ex.getMessage());
+                }
+            }
+            
+            ordersModel.remove(0);
+        }
+    }//GEN-LAST:event_commitBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,39 +337,65 @@ public class BuildForm extends javax.swing.JFrame {
         
         maxBuilds = player.getBuildCount();
         
-        DefaultComboBoxModel typeModel = (DefaultComboBoxModel)unitTypeComboBox.getModel();
-        typeModel.removeAllElements();
+        commitBtn.setEnabled(false);
         
-        typeModel.addElement(Unit.mapStringoUnitCode("A"));
-        typeModel.addElement(Unit.mapStringoUnitCode("F"));
-        
-        availableModel.removeAllElements();
-        
-        int counter = 0;
-        for (Region r : player.getSupplyCenters()){
-            if (!r.isOccupied() && r.getOwnerId() == player.getPlayerId() && player.isHomeRegion(r.getRegionCode())){
-                availableModel.add(counter, r);
-                counter++;
-            }
+        if (maxBuilds == 0){
+            
+            JOptionPane.showMessageDialog(this,
+                    "No need to build or remove",
+                    "Attention!",
+                    JOptionPane.WARNING_MESSAGE);
+            
+            this.dispose();
         }
         
-        
+        availableModel.removeAllElements();
         ordersModel.removeAllElements();
+        
+        if (maxBuilds > 0){
+            mode = Mode.BUILD;
+            titleLabel.setText ("Build order for " + player);
+                    
+
+            int counter = 0;
+            for (Region r : player.getSupplyCenters()){
+                if (!r.isOccupied() && r.getOwnerId() == player.getPlayerId() && player.isHomeRegion(r.getRegionCode())){
+                    availableModel.add(counter, r);
+                    counter++;
+                }
+            }
+            
+        }
+        
+        if (maxBuilds < 0){
+            mode = Mode.DISBAND;
+                        
+            jLabel1.setText("Available units");
+            
+            jLabel2.setText ("Selected to be disbanded");
+            titleLabel.setText("Disband " + (maxBuilds * -1) + " pieces");
+            
+            int counter = 0;
+            for (Unit u : player.getUnits()){
+                availableModel.add(counter, u);
+                counter++;
+            }
+            
+        }
         
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> availableListBox;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton closeButton;
+    private javax.swing.JButton commitBtn;
+    private javax.swing.JButton deselctButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> ordersListBox;
+    private javax.swing.JButton selectButton;
     private javax.swing.JLabel titleLabel;
-    private javax.swing.JComboBox<String> unitTypeComboBox;
     // End of variables declaration//GEN-END:variables
 }

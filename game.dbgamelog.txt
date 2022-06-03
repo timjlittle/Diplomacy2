@@ -1,2 +1,157 @@
 2022/05/11 15:41:14: Game restarted
 2022/05/11 15:41:15: Game reset completed
+2022/05/15 14:42:28: 
+2022/05/15 14:42:28: Resolving all orders for Spring 1901 create orders phase
+2022/05/15 14:42:28: ========================================================
+2022/05/15 14:42:28: Current Orders:
+2022/05/15 14:42:28: Counting support
+2022/05/15 14:42:28: Finised checking supports for cuts
+2022/05/15 14:42:28: Counting supports
+2022/05/15 14:42:28: Finished counting support, setting support orders to HOLD
+2022/05/15 14:42:28: A Berlin Move to Silesia
+2022/05/15 14:42:28: F Brest Move to Mid-Atlantic Ocean
+2022/05/15 14:42:28: A Budapest Move to Vienna
+2022/05/15 14:42:28: A Constantinople Move to Bulgaria EC
+2022/05/15 14:42:28: F Edinburgh Move to Norwegian Sea
+2022/05/15 14:42:28: F Kiel Move to Denmark
+2022/05/15 14:42:28: A Liverpool Move to Yorkshire
+2022/05/15 14:42:28: F London Move to North Sea
+2022/05/15 14:42:28: A Marseilles Move to Spain SC
+2022/05/15 14:42:28: A Moscow Move to Ukraine
+2022/05/15 14:42:28: A Munich Move to Ruhr
+2022/05/15 14:42:28: F Naples Move to Tyrrhenian Sea
+2022/05/15 14:42:29: A Paris Move to Picardy
+2022/05/15 14:42:29: A Rome Move to Tuscany
+2022/05/15 14:42:29: F Sevastopol Move to Rumania
+2022/05/15 14:42:29: A Smyrna Move to Armenia
+2022/05/15 14:42:29: F St Petersburg SC Move to Gulf of Bothnia
+2022/05/15 14:42:29: F Trieste Move to Adriatic Sea
+2022/05/15 14:42:29: A Venice Move to Trieste
+2022/05/15 14:42:29: A Vienna Move to Tyrolia
+2022/05/15 14:42:29: A Warsaw Move to Galicia
+2022/05/15 14:42:29: F Ankara Move to Black Sea
+2022/05/15 14:42:29: F Trieste Move to Adriatic Sea succeeded
+2022/05/15 14:42:29: A Smyrna Move to Armenia succeeded
+2022/05/15 14:42:29: F Ankara Move to Black Sea succeeded
+2022/05/15 14:42:29: A Constantinople Move to Bulgaria EC succeeded
+2022/05/15 14:42:29: F Kiel Move to Denmark succeeded
+2022/05/15 14:42:29: A Warsaw Move to Galicia succeeded
+2022/05/15 14:42:29: F St Petersburg SC Move to Gulf of Bothnia succeeded
+2022/05/15 14:42:29: F Brest Move to Mid-Atlantic Ocean succeeded
+2022/05/15 14:42:29: F London Move to North Sea succeeded
+2022/05/15 14:42:29: F Edinburgh Move to Norwegian Sea succeeded
+2022/05/15 14:42:29: A Paris Move to Picardy succeeded
+2022/05/15 14:42:29: A Munich Move to Ruhr succeeded
+2022/05/15 14:42:29: F Sevastopol Move to Rumania succeeded
+2022/05/15 14:42:29: A Berlin Move to Silesia succeeded
+2022/05/15 14:42:29: A Marseilles Move to Spain SC succeeded
+2022/05/15 14:42:29: A Venice Move to Trieste succeeded
+2022/05/15 14:42:29: A Rome Move to Tuscany succeeded
+2022/05/15 14:42:29: A Vienna Move to Tyrolia succeeded
+2022/05/15 14:42:29: F Naples Move to Tyrrhenian Sea succeeded
+2022/05/15 14:42:29: A Moscow Move to Ukraine succeeded
+2022/05/15 14:42:29: A Budapest Move to Vienna succeeded
+2022/05/15 14:42:29: A Liverpool Move to Yorkshire succeeded
+2022/05/15 14:42:29: Order resolution completed
+2022/05/15 14:42:29: 
+2022/05/15 14:51:11: 
+2022/05/15 14:51:11: Resolving all orders for Fall 1901 create orders phase
+2022/05/15 14:51:11: ======================================================
+2022/05/15 14:51:11: Current Orders:
+2022/05/15 14:51:11: Counting support
+2022/05/15 14:51:11: Finised checking supports for cuts
+2022/05/15 14:51:11: Counting supports
+2022/05/15 14:51:11: Vienna to Trieste support added
+2022/05/15 14:51:11: Armenia to Sevastopol support added
+2022/05/15 14:51:11: Finished counting support, setting support orders to HOLD
+2022/05/15 14:51:11: A Silesia Move to Munich
+2022/05/15 14:51:11: F Mid-Atlantic Ocean Move to Portugal
+2022/05/15 14:51:11: A Vienna Move to Trieste
+2022/05/15 14:51:11: A Bulgaria EC Hold
+2022/05/15 14:51:11: F Norwegian Sea Move to Barents Sea
+2022/05/15 14:51:12: F Denmark Hold
+2022/05/15 14:51:12: A Yorkshire Hold
+2022/05/15 14:51:12: F North Sea Hold
+2022/05/15 14:51:12: A Spain SC Hold
+2022/05/15 14:51:12: A Ukraine Hold
+2022/05/15 14:51:12: A Ruhr Move to Holland
+2022/05/15 14:51:12: F Tyrrhenian Sea Move to Gulf of Lyon
+2022/05/15 14:51:12: A Picardy Move to Belgium
+2022/05/15 14:51:12: A Tuscany Move to Piedmont
+2022/05/15 14:51:12: F Rumania Hold
+2022/05/15 14:51:12: A Armenia Move to Sevastopol
+2022/05/15 14:51:12: F Gulf of Bothnia Move to Sweden
+2022/05/15 14:51:12: F Adriatic Sea Hold
+2022/05/15 14:51:12: A Trieste Hold
+2022/05/15 14:51:12: A Tyrolia Move to Munich
+2022/05/15 14:51:12: A Galicia Move to Budapest
+2022/05/15 14:51:12: F Black Sea Hold
+2022/05/15 14:51:12: F Adriatic Sea Hold succeeded
+2022/05/15 14:51:12: F Norwegian Sea Move to Barents Sea succeeded
+2022/05/15 14:51:12: A Picardy Move to Belgium succeeded
+2022/05/15 14:51:12: F Black Sea Hold succeeded
+2022/05/15 14:51:12: A Galicia Move to Budapest succeeded
+2022/05/15 14:51:12: A Bulgaria EC Hold succeeded
+2022/05/15 14:51:12: F Denmark Hold succeeded
+2022/05/15 14:51:12: F Tyrrhenian Sea Move to Gulf of Lyon succeeded
+2022/05/15 14:51:12: A Ruhr Move to Holland succeeded
+2022/05/15 14:51:12: A Silesia Move to Munich: Support = 0
+2022/05/15 14:51:12: A Tyrolia Move to Munich: Support = 0
+2022/05/15 14:51:12: A Tyrolia Move to Munich failed, changed to HOLD
+2022/05/15 14:51:12: A Silesia Move to Munich failed, changed to HOLD
+2022/05/15 14:51:12: A Tyrolia Hold succeeded
+2022/05/15 14:51:12: A Silesia Hold succeeded
+2022/05/15 14:51:12: F North Sea Hold succeeded
+2022/05/15 14:51:12: A Tuscany Move to Piedmont succeeded
+2022/05/15 14:51:12: F Mid-Atlantic Ocean Move to Portugal succeeded
+2022/05/15 14:51:12: F Rumania Hold succeeded
+2022/05/15 14:51:12: A Armenia Move to Sevastopol succeeded
+2022/05/15 14:51:12: A Spain SC Hold succeeded
+2022/05/15 14:51:12: F Gulf of Bothnia Move to Sweden succeeded
+2022/05/15 14:51:12: A Vienna Move to Trieste: Support = 1
+2022/05/15 14:51:12: A Trieste Hold: Support = 0
+2022/05/15 14:51:12: A Vienna Move to Trieste succeeded
+2022/05/15 14:51:12: A Trieste Hold failed
+2022/05/15 14:51:12: A Ukraine Hold succeeded
+2022/05/15 14:51:12: A Yorkshire Hold succeeded
+2022/05/15 14:51:12: Order resolution completed
+2022/05/15 14:51:12: 
+2022/05/15 14:59:00: 
+2022/05/15 14:59:00: Resolving all orders for Fall 1901 retreat phase
+2022/05/15 14:59:00: ================================================
+2022/05/15 14:59:00: Current Orders:
+2022/05/15 14:59:00: Counting support
+2022/05/15 14:59:00: Finised checking supports for cuts
+2022/05/15 14:59:00: Counting supports
+2022/05/15 14:59:00: Finished counting support, setting support orders to HOLD
+2022/05/15 14:59:00: A Trieste Retreat to Vienna
+2022/05/15 14:59:00: A Trieste Retreat to Vienna succeeded
+2022/05/15 14:59:00: Order resolution completed
+2022/05/15 14:59:00: 
+2022/05/15 14:59:00: Checking for changes of ownership ...
+2022/05/15 14:59:00: Portugal changed from Nuetral to France
+2022/05/15 14:59:00: Bulgaria changed from Nuetral to Turkey
+2022/05/15 14:59:00: Denmark changed from Nuetral to Germany
+2022/05/15 14:59:00: Spain changed from Nuetral to France
+2022/05/15 14:59:00: Holland changed from Nuetral to Germany
+2022/05/15 14:59:00: Belgium changed from Nuetral to France
+2022/05/15 14:59:00: Rumania changed from Nuetral to Russia
+2022/05/15 14:59:00: Sevastopol changed from Russia to Turkey
+2022/05/15 14:59:00: Sweden changed from Nuetral to Russia
+2022/05/15 14:59:00: Vienna changed from Austria to Italy
+2022/05/15 14:59:00: Budapest changed from Austria to Russia
+2022/05/15 14:59:00: Cownership checking finished.
+2022/05/15 14:59:00: Checking for changes of ownership ...
+2022/05/15 14:59:00: Cownership checking finished.
+2022/06/03 11:22:53: A Trieste deleted.
+2022/06/03 11:22:53: A Tyrolia deleted.
+2022/06/03 11:23:43: F Brest created.
+2022/06/03 11:23:43: A Marseilles created.
+2022/06/03 11:23:43: A Paris created.
+2022/06/03 11:25:16: F Kiel created.
+2022/06/03 11:25:16: A Munich created.
+2022/06/03 11:25:33: A Venice created.
+2022/06/03 11:27:20: F St Petersburg NC created.
+2022/06/03 11:27:20: A Warsaw created.
+2022/06/03 11:27:55: F Constantinople created.
+2022/06/03 11:27:55: A Smyrna created.
