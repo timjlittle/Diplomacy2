@@ -10,7 +10,6 @@ import Logic.*;
 import java.awt.Dialog;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -191,7 +190,11 @@ public class MainForm extends javax.swing.JFrame {
 //                    break;
                     
                 case BUILD:
-                    
+                    /*
+                    BuildForm builder=new BuildForm ();
+                    builder.setModal(true);
+                    builder.setVisible(true);
+                    */
                     break;
                     
             }
@@ -248,15 +251,21 @@ public class MainForm extends javax.swing.JFrame {
                         break;
                     
                     case BUILD:
+                        String title = " - No change";
                         buildCount = p.getBuildCount();
-                        //playerNode = new DefaultMutableTreeNode(p.toString() + " (" + buildCount + ")");
-                        playerNode = new DefaultMutableTreeNode(p);
-                        //If the user needs to disband a piece show the list
+                        
                         if (buildCount < 0) {
-                            units = p.getUnits();
+                            //units = p.getUnits();
+                            title = " disband " + (buildCount * -1) + " units.";
                         } else {
-                            units = new ArrayList<>();
+                            if (buildCount > 0) {
+                                title = " build " + buildCount + " units.";
+                            }
+                            
                         }
+                        units = new ArrayList<>();
+                        playerNode = new DefaultMutableTreeNode(p);
+                        
                         break;
                         
                     default:
@@ -278,21 +287,23 @@ public class MainForm extends javax.swing.JFrame {
                     playerNode.add(unitsNode);
                 }
 
-                DefaultMutableTreeNode centersNode = new DefaultMutableTreeNode("Supply Centers");
+                if (game.getGamePhase() != Props.Phase.BUILD) {
+                    DefaultMutableTreeNode centersNode = new DefaultMutableTreeNode("Supply Centers");
 
-                scCount = 0;
-                for (Region r : p.getSupplyCenters()){
-                    //Add the supply center if it isn't a build phase, otherwise only add it if 
-                    //it is unocuppied, owned by the player and the buildcount is positive
-                    if (game.getGamePhase() != Props.Phase.BUILD || 
-                                (buildCount >0 && !r.isOccupied() && r.getOwnerId() == p.getPlayerId() && p.isHomeRegion(r.getRegionCode()))){
-                        centersNode.add(new DefaultMutableTreeNode(r));
-                        scCount++;
+                    scCount = 0;
+                    for (Region r : p.getSupplyCenters()){
+                        //Add the supply center if it isn't a build phase, otherwise only add it if 
+                        //it is unocuppied, owned by the player and the buildcount is positive
+                        if (game.getGamePhase() != Props.Phase.BUILD || 
+                                    (buildCount >0 && !r.isOccupied() && r.getOwnerId() == p.getPlayerId() && p.isHomeRegion(r.getRegionCode()))){
+                            centersNode.add(new DefaultMutableTreeNode(r));
+                            scCount++;
+                        }
+
                     }
-                        
-                }
-                if (scCount > 0){
-                    playerNode.add(centersNode);
+                    if (scCount > 0){
+                        playerNode.add(centersNode);
+                    }
                 }
             }
 
@@ -319,6 +330,10 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * 
+     * @param evt 
+     */
     private void unitsTreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unitsTreeMouseClicked
         
         if (evt.getClickCount() == 2) {
@@ -328,6 +343,7 @@ public class MainForm extends javax.swing.JFrame {
             
             if (game.getGamePhase() != Props.Phase.BUILD){
 
+                
                 if (parentNode.getUserObject().toString().compareTo(UNIT_NODE_TITLE) == 0) {
                     Unit u = (Unit)selectedNode.getUserObject();
 
@@ -340,13 +356,28 @@ public class MainForm extends javax.swing.JFrame {
                     orderForm.setModalExclusionType(Dialog.ModalExclusionType.TOOLKIT_EXCLUDE);
                     orderForm.setVisible(true);
                 }
+                
             } else {
-                if (selectedNode.getUserObject().getClass() == Player.class) {
+                
+                
                     Player curPlayer = (Player)selectedNode.getUserObject();
-                    BuildForm builds = new BuildForm ();
-                    builds.initialiseForm(game, curPlayer);
-                    builds.setVisible(true);
-                }
+                    if (curPlayer.getBuildCount() != 0) {
+                        BuildForm builds = new BuildForm ();
+                        builds.setModal(true);
+                        builds.initialiseForm(game, curPlayer);
+                        builds.setVisible(true);
+                        drawTree ();
+                        treeModel.reload();
+                        mapPanel1.repaint();
+                        
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                                        "No need to build or remove",
+                                                        "Build Complete",
+                                                        JOptionPane.WARNING_MESSAGE);
+                    }
+                
+                
             }
         }
     }//GEN-LAST:event_unitsTreeMouseClicked
