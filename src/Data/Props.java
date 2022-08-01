@@ -19,6 +19,9 @@ import java.util.Properties;
  * @author timjl
  */
 public class Props {
+    
+    private String versionString = "Pre-release 0.1";
+    
     private Properties props = new Properties();
     public static final String PROPS_FILE_LOC = "config.properties";
     private String databaseDetails = "game.db";
@@ -53,7 +56,11 @@ public class Props {
         
         return tempLoc;
     }
-    
+  
+public String getVersionString() {
+        return versionString;
+    }
+
     /*
     public void setFileLoc (String logFileLocation) throws FileNotFoundException, IOException {
         props.put(LOG_FILE_KEY, logFileLocation);

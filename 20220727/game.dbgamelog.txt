@@ -1,0 +1,68 @@
+2022/07/24 15:59:13: Game restarted
+2022/07/24 15:59:13: Units and orders deleted
+2022/07/24 15:59:20: Game reset completed
+2022/07/24 16:07:33: 
+2022/07/24 16:07:33: Resolving all orders for Spring 1901 create orders phase
+2022/07/24 16:07:33: ========================================================
+2022/07/24 16:07:33: Current Orders:
+2022/07/24 16:07:33: Counting support
+2022/07/24 16:07:33: Finised checking supports for cuts
+2022/07/24 16:07:33: Counting supports
+2022/07/24 16:07:33: Finished counting support, setting support orders to HOLD
+2022/07/24 16:07:33: F Ankara Move to Black Sea
+2022/07/24 16:07:33: A Berlin Move to Kiel
+2022/07/24 16:07:33: F Brest Move to Mid-Atlantic Ocean
+2022/07/24 16:07:33: A Budapest Move to Serbia
+2022/07/24 16:07:33: A Constantinople Move to Bulgaria EC
+2022/07/24 16:07:33: F Edinburgh Move to Norwegian Sea
+2022/07/24 16:07:33: F Kiel Move to Denmark
+2022/07/24 16:07:33: A Liverpool Move to Yorkshire
+2022/07/24 16:07:33: F London Move to North Sea
+2022/07/24 16:07:33: A Marseilles Move to Spain SC
+2022/07/24 16:07:33: A Moscow Move to Ukraine
+2022/07/24 16:07:33: A Munich Move to Ruhr
+2022/07/24 16:07:33: F Naples Move to Ionian Sea
+2022/07/24 16:07:33: A Paris Move to Burgundy
+2022/07/24 16:07:33: A Rome Move to Tuscany
+2022/07/24 16:07:33: F Sevastopol Move to Rumania
+2022/07/24 16:07:33: A Smyrna Move to Armenia
+2022/07/24 16:07:33: F St Petersburg SC Move to Gulf of Bothnia
+2022/07/24 16:07:33: F Trieste Move to Albania
+2022/07/24 16:07:33: A Venice Move to Trieste
+2022/07/24 16:07:33: A Vienna Move to Bohemia
+2022/07/24 16:07:33: A Warsaw Move to Silesia
+2022/07/24 16:07:33: F Trieste Move to Albania succeeded
+2022/07/24 16:07:34: Occuped = true but order = null; A Smyrna Move to Armenia
+2022/07/24 16:07:34: A Smyrna Move to Armenia succeeded
+2022/07/24 16:07:34: F Ankara Move to Black Sea succeeded
+2022/07/24 16:07:34: A Vienna Move to Bohemia succeeded
+2022/07/24 16:07:34: Occuped = true but order = null; A Constantinople Move to Bulgaria EC
+2022/07/24 16:07:34: A Constantinople Move to Bulgaria EC succeeded
+2022/07/24 16:07:35: A Paris Move to Burgundy succeeded
+2022/07/24 16:07:35: Occuped = true but order = null; F Kiel Move to Denmark
+2022/07/24 16:07:35: F Kiel Move to Denmark succeeded
+2022/07/24 16:07:35: F St Petersburg SC Move to Gulf of Bothnia succeeded
+2022/07/24 16:07:35: Occuped = true but order = null; F Naples Move to Ionian Sea
+2022/07/24 16:07:35: F Naples Move to Ionian Sea succeeded
+2022/07/24 16:07:36: A Berlin Move to Kiel succeeded
+2022/07/24 16:07:36: F Brest Move to Mid-Atlantic Ocean succeeded
+2022/07/24 16:07:36: Occuped = true but order = null; F London Move to North Sea
+2022/07/24 16:07:36: F London Move to North Sea succeeded
+2022/07/24 16:07:37: Occuped = true but order = null; F Edinburgh Move to Norwegian Sea
+2022/07/24 16:07:37: F Edinburgh Move to Norwegian Sea succeeded
+2022/07/24 16:07:37: Occuped = true but order = null; A Munich Move to Ruhr
+2022/07/24 16:07:37: A Munich Move to Ruhr succeeded
+2022/07/24 16:07:37: Occuped = true but order = null; F Sevastopol Move to Rumania
+2022/07/24 16:07:37: F Sevastopol Move to Rumania succeeded
+2022/07/24 16:07:38: Occuped = true but order = null; A Budapest Move to Serbia
+2022/07/24 16:07:38: A Budapest Move to Serbia succeeded
+2022/07/24 16:07:38: A Warsaw Move to Silesia succeeded
+2022/07/24 16:07:38: Occuped = true but order = null; A Marseilles Move to Spain SC
+2022/07/24 16:07:38: A Marseilles Move to Spain SC succeeded
+2022/07/24 16:07:38: A Venice Move to Trieste succeeded
+2022/07/24 16:07:39: A Rome Move to Tuscany succeeded
+2022/07/24 16:07:39: Occuped = true but order = null; A Moscow Move to Ukraine
+2022/07/24 16:07:39: A Moscow Move to Ukraine succeeded
+2022/07/24 16:07:39: A Liverpool Move to Yorkshire succeeded
+2022/07/24 16:07:39: Order resolution completed
+2022/07/24 16:07:39: 

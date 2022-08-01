@@ -44,6 +44,11 @@ public class Game {
 
         resolveLog = "";
 
+        loadGame();
+
+    }
+
+    private void loadGame() throws DataAccessException {
         try {
             props = new Props();
 
@@ -69,7 +74,6 @@ public class Game {
 
             throw de;
         }
-
     }
 
     /**
@@ -95,18 +99,18 @@ public class Game {
                 String colour = record.getStringVal("Colour");
 
                 Player p = new Player(playerName, playerId, colour);
-                
+
                 Record homeRegionFields = new Record();
-                Record selectedCountry = new Record ();
-                ArrayList <Record> homeRegions;
-                
-                homeRegionFields.addField ("RegionCode", "");
-                selectedCountry.addField ("PlayerId", playerId);
-                
-                homeRegions = db.readAllRecords ("HomeRegions", homeRegionFields, selectedCountry);
-                
+                Record selectedCountry = new Record();
+                ArrayList<Record> homeRegions;
+
+                homeRegionFields.addField("RegionCode", "");
+                selectedCountry.addField("PlayerId", playerId);
+
+                homeRegions = db.readAllRecords("HomeRegions", homeRegionFields, selectedCountry);
+
                 for (Record regRec : homeRegions) {
-                    String reg = regRec.getStringVal ("RegionCode");
+                    String reg = regRec.getStringVal("RegionCode");
                     p.addHomeRegionCode(reg);
                 }
 
@@ -265,12 +269,17 @@ public class Game {
                 String unitType = record.getStringVal("UnitType");
                 int playerId = record.getIntVal("PlayerId");
                 int occupies = record.getIntVal("Occupies");
+                Border beatenBy = null;
 
                 int victorBorderId = record.getIntVal("VictorOrigin");
 
+                if (victorBorderId != -1) {
+                    beatenBy = allBorders.get(victorBorderId);
+                }
+
                 Border pos = allBorders.get(occupies);
 
-                Unit u = new Unit(unitId, Unit.mapStringoUnitCode(unitType), pos, playerId, false);
+                Unit u = new Unit(unitId, Unit.mapStringoUnitCode(unitType), pos, playerId, false, beatenBy);
                 pos.setOccupyingUnit(u);
 
                 if (victorBorderId > 0) {
@@ -332,13 +341,15 @@ public class Game {
 
                 if (originId > 0) {
                     origin = allBorders.get(originId);
+
                 }
 
                 if (destinationId > 0) {
                     dest = allBorders.get(destinationId);
                 }
 
-                Order o = new Order(orderId, Order.mapCommandTypeFromString(type), dest, origin, beingConvoyed, unit, props.getTurn(),state);
+                Order o = new Order(orderId, Order.mapCommandTypeFromString(type), dest, origin, beingConvoyed, unit, props.getTurn(), state);
+
                 unit.setCurrentOrder(o);
                 allOrders.put(orderId, o);
             }
@@ -457,7 +468,9 @@ public class Game {
         for (Map.Entry m : allOrders.entrySet()) {
             Order o = (Order) m.getValue();
 
-            if (o.getDest().getRegion().getRegionCode().compareTo(targetCode) == 0 && o.getState() != Order.ORDER_STATE.FAILED) {
+            String regCode = o.getDest().getRegion().getRegionCode();
+
+            if (regCode.compareTo(targetCode) == 0 && o.getState() != Order.ORDER_STATE.FAILED) {
                 ret.add(o);
             }
         }
@@ -524,7 +537,6 @@ public class Game {
         LinkedList<Order> supportList = new LinkedList<>();
         GameLogger g = new GameLogger();
 
-        
         g.logMessage("Counting support");
 
         //Collect all the uncut support orders and all the move orders
@@ -541,7 +553,7 @@ public class Game {
 
                     order.setDest(unit.getPosition());
                     order.setOrigin(unit.getPosition());
-                    
+
                 }
             }
 
@@ -724,203 +736,216 @@ public class Game {
         LinkedList<Order> unresolved = new LinkedList<>();
         Order curOrder;
         GameLogger g = new GameLogger();
-        
-        g.logMessage("");
-        String logStr = "Resolving all orders for " + getTitle();
-        g.logMessage(logStr);
-        int len = logStr.length();
-        logStr = "";
-        for (int counter = 0; counter < len; counter++) {
-            logStr += "=";
-        }
-        g.logMessage(logStr);
-        
-        
-        //Make sure every unit has an order
-        createMissingOrders();
 
-        g.logMessage("Current Orders:");
-        
-        
-        //Identify cut support and convoys orders and set them to HOLD orders.
-        checkConvoys();
-
-        //Count non failed support orders for all Move and Hold orders.
-        //Change remaining support orders to holds
-        calculateSupport();
-
-        //Copy all orders to unresolved orders list.
-        for (Map.Entry m : allOrders.entrySet()) {
-            Order o = (Order) m.getValue();
-            
-            if (o.getState() != Order.ORDER_STATE.FAILED && o.getState() != Order.ORDER_STATE.SUCCEEDED){
-                unresolved.add(o);
-                g.logMessage(o.toString());
+        try {
+            g.logMessage("");
+            String logStr = "Resolving all orders for " + getTitle();
+            g.logMessage(logStr);
+            int len = logStr.length();
+            logStr = "";
+            for (int counter = 0; counter < len; counter++) {
+                logStr += "=";
             }
-        }
-        
+            g.logMessage(logStr);
 
-        //Sort unresolved list by destination then support count
-        unresolved.sort(null);
+            //Make sure every unit has an order
+            createMissingOrders();
 
-        Iterator mainIterator = unresolved.iterator();
+            g.logMessage("Current Orders:");
 
-        //While the unresolved list isn’t empty:
-        while (!unresolved.isEmpty()) {
-            
-            boolean skip = false;
+            //Identify cut support and convoys orders and set them to HOLD orders.
+            checkConvoys();
 
-            //    Get the next Order.
-            if (mainIterator != null && mainIterator.hasNext()) {
-                curOrder = (Order) mainIterator.next();
-            } else {
-                mainIterator = unresolved.iterator();
-                curOrder = (Order) mainIterator.next();
-            }
+            //Count non failed support orders for all Move and Hold orders.
+            //Change remaining support orders to holds
+            calculateSupport();
 
-            Region dest = curOrder.getDestRegion();
-            if(curOrder.getCommand() != Order.OrderType.HOLD) {
-            //    If there is a unit occupying the destination and that unit has a MOVE order
-            
-                if (dest.isOccupied()) {
-                    Order destOrder = getOrderForRegion(dest.getRegionCode());
-                    if (destOrder != null){ //Should never be null but sometime seems to happen
-                        //        Leave the order as pending
-                        if (destOrder.getCommand() == Order.OrderType.MOVE && destOrder.getDest().getBorderId() != curOrder.getUnitPos().getBorderId()) {
-                            skip = true;
-                            g.logMessage (curOrder.toString() + " pending ...");
-                        }
-                    } else {
-                        g.logMessage("Occuped = true but order = null; " + curOrder.toString());
+            //Copy all orders to unresolved orders list.
+            for (Map.Entry m : allOrders.entrySet()) {
+                Order o = (Order) m.getValue();
+
+                if (o.getState() != Order.ORDER_STATE.FAILED && o.getState() != Order.ORDER_STATE.SUCCEEDED) {
+                    Unit u = o.getOrigin().getOccupyingUnit();
+                    //Unresolved so reset the victor identifier
+                    if (u != null) {
+                        u.setVictorOrigin(null);
+                        u.save();
                     }
-
+                    unresolved.add(o);
+                    g.logMessage(o.toString());
                 }
             }
-            
-            if (!skip) {
-                //find orders targeting the destination
-                LinkedList <Order> sharedDestOrders = findOrdersTargettingRegion (dest.getRegionCode());
-                
-                 //    If there is only this one
-                if (sharedDestOrders.size() == 1){
-                     //       mark the order as successful and update the unit’s position etc.
-                     int curUnitId = curOrder.getUnitId();
-                     Unit curUnit = allUnits.get(curUnitId);
-                     g.logMessage (curOrder.toString() + " succeeded");
-                     curUnit.setPosition(curOrder.getDest());
-                     curUnit.save();
-                     curOrder.setState(Order.ORDER_STATE.SUCCEEDED);
-                     curOrder.save();
-                    //       Remove order from unresolved list
-                    unresolved.remove(curOrder);
-                    mainIterator = unresolved.iterator();
-                    
-                } else {
 
-                    sharedDestOrders.sort(null);
-                    
-                    Iterator destIterator = sharedDestOrders.iterator();
-                    Order top = (Order)destIterator.next();
-                    Order next = (Order)destIterator.next();
-                    g.logMessage(top.toString() + ": Support = " + top.getSupportCount());
-                    g.logMessage(next.toString() + ": Support = " + next.getSupportCount());
-                    
-                    if (top.getSupportCount() > next.getSupportCount()){
-                        //            Mark highest as successful and update unit details
-                        //            Mark highest as successful and update unit details
-                        Unit winner = (Unit) allUnits.get( top.getUnitId());
-                        top.setState(Order.ORDER_STATE.SUCCEEDED);
-                        top.save();
-                        
-                        //            Remove highest from unresolved list
-                        unresolved.remove(top);
-                        g.logMessage(top.toString() + " succeeded");
+            //Sort unresolved list by destination then support count
+            unresolved.sort(null);
+
+            Iterator mainIterator = unresolved.iterator();
+
+            //While the unresolved list isn’t empty:
+            while (!unresolved.isEmpty()) {
+
+                boolean skip = false;
+
+                //    Get the next Order.
+                if (mainIterator != null && mainIterator.hasNext()) {
+                    curOrder = (Order) mainIterator.next();
+                } else {
+                    mainIterator = unresolved.iterator();
+                    curOrder = (Order) mainIterator.next();
+                }
+
+                Region dest = curOrder.getDestRegion();
+                if (curOrder.getCommand() != Order.OrderType.HOLD) {
+                    //    If there is a unit occupying the destination and that unit has a MOVE order
+
+                    if (dest.isOccupied()) {
+                        Order destOrder = getOrderForRegion(dest.getRegionCode());
+                        if (destOrder != null) { //Should never be null but sometime seems to happen
+                            //        Leave the order as pending
+                            if (destOrder.getCommand() == Order.OrderType.MOVE && destOrder.getDest().getBorderId() != curOrder.getUnitPos().getBorderId()) {
+                                skip = true;
+                                g.logMessage(curOrder.toString() + " pending ...");
+                            }
+                        } else {
+                            g.logMessage("Occuped = true but order = null; " + curOrder.toString());
+                        }
+
+                    }
+                }
+
+                if (!skip) {
+                    //find orders targeting the destination
+                    LinkedList<Order> sharedDestOrders = findOrdersTargettingRegion(dest.getRegionCode());
+
+                    //    If there is only this one
+                    if (sharedDestOrders.size() == 1) {
+                        //       mark the order as successful and update the unit’s position etc.
+                        int curUnitId = curOrder.getUnitId();
+                        Unit curUnit = allUnits.get(curUnitId);
+                        g.logMessage(curOrder.toString() + " succeeded");
+                        curUnit.setPosition(curOrder.getDest());
+                        curUnit.save();
+                        curOrder.setState(Order.ORDER_STATE.SUCCEEDED);
+                        curOrder.save();
+                        //       Remove order from unresolved list
+                        unresolved.remove(curOrder);
                         mainIterator = unresolved.iterator();
-                        winner.setPosition(top.getDest());
-                        winner.save();
-                        
-                        
-                        do {
-                            if (next.getCommand() == Order.OrderType.MOVE) {
-                                g.logMessage(next.toString() + " failed, changed to HOLD");
-                                next.setCommand(Order.OrderType.HOLD);
-                                next.setDest(next.getUnitPos());
-                                next.save();
-                            } else {
+
+                    } else {
+
+                        sharedDestOrders.sort(null);
+
+                        Iterator destIterator = sharedDestOrders.iterator();
+                        Order top = (Order) destIterator.next();
+                        Order next = (Order) destIterator.next();
+                        g.logMessage(top.toString() + ": Support = " + top.getSupportCount());
+                        g.logMessage(next.toString() + ": Support = " + next.getSupportCount());
+
+                        if (top.getSupportCount() > next.getSupportCount()) {
+                            //            Mark highest as successful and update unit details
+                            //            Mark highest as successful and update unit details
+                            Unit winner = (Unit) allUnits.get(top.getUnitId());
+                            top.setState(Order.ORDER_STATE.SUCCEEDED);
+                            top.save();
+
+                            //            Remove highest from unresolved list
+                            unresolved.remove(top);
+                            g.logMessage(top.toString() + " succeeded");
+                            mainIterator = unresolved.iterator();
+                            winner.setPosition(top.getDest());
+                            winner.save();
+
+                            do {
+                                if (next.getCommand() == Order.OrderType.MOVE) {
+                                    g.logMessage(next.toString() + " failed, changed to HOLD");
+                                    next.setCommand(Order.OrderType.HOLD);
+                                    next.setDest(next.getUnitPos());
+                                    next.save();
+                                } else {
+                                    //Mark as failed and make sure it can't retreat to the space left empty by the winner.
+                                    next.setState(Order.ORDER_STATE.FAILED);
+                                    Unit losingUnit = next.getOrigin().getOccupyingUnit();
+                                    losingUnit.setVictorOrigin(top.getOrigin());
+                                    losingUnit.save();
+                                    next.setRegionBeatenFrom(top.getOrigin().getRegion().getRegionCode());
+                                    unresolved.remove(next);
+                                    mainIterator = unresolved.iterator();
+                                    g.logMessage(next.toString() + " failed, needs to retreat");
+                                    next.save();
+                                }
+
+                                if (destIterator.hasNext()) {
+                                    next = (Order) destIterator.next();
+                                }
+                            } while (destIterator.hasNext());
+
+                        } else {
+                            //More than one has the same amount of support
+                            LinkedList<Order> standoffs = new LinkedList<>();
+
+                            next.getDestRegion().setStandoff();
+
+                            standoffs.add(next);
+                            standoffs.add(top);
+
+                            do {
+                                if (destIterator.hasNext()) {
+                                    next = (Order) destIterator.next();
+
+                                    if (next.getSupportCount() == top.getSupportCount()) {
+                                        standoffs.add(next);
+                                    }
+                                }
+                            } while (next.getSupportCount() == top.getSupportCount() && destIterator.hasNext());
+
+                            Iterator matchesIterator = standoffs.iterator();
+
+                            while (matchesIterator.hasNext()) {
+                                Order match = (Order) matchesIterator.next();
+
+                                if (match.getCommand() == Order.OrderType.HOLD) {
+                                    match.setState(Order.ORDER_STATE.SUCCEEDED);
+                                    unresolved.remove(match);
+                                    match.save();
+                                    g.logMessage(match.toString() + " succeeded");
+                                    mainIterator = unresolved.iterator();
+                                } else {
+                                    g.logMessage(match.toString() + " failed, changed to HOLD");
+                                    match.setCommand(Order.OrderType.HOLD);
+                                    match.setDest(match.getUnitPos());
+                                    match.save();
+                                }
+
+                            }
+
+                            if (next.getSupportCount() != top.getSupportCount()) {
+                                g.logMessage(next.toString() + " failed");
                                 next.setState(Order.ORDER_STATE.FAILED);
+                                next.save();
                                 unresolved.remove(next);
                                 mainIterator = unresolved.iterator();
+                            }
+
+                            while (destIterator.hasNext()) {
+                                next = (Order) destIterator.next();
                                 g.logMessage(next.toString() + " failed");
+                                next.setState(Order.ORDER_STATE.FAILED);
                                 next.save();
-                            }
-                            
-                            if (destIterator.hasNext()){
-                                next = (Order)destIterator.next();
-                            }
-                        } while (destIterator.hasNext());
-
-
-                    } else {
-                        //More than one has the same amount of support
-                        LinkedList <Order> standoffs = new LinkedList <>();
-                        
-                        standoffs.add(next);
-                        standoffs.add(top);
-                        
-                        do {
-                            if (destIterator.hasNext()) {
-                                next = (Order)destIterator.next();
-                                
-                                if (next.getSupportCount() == top.getSupportCount()) {
-                                    standoffs.add(next);
-                                }
-                            }
-                        } while (next.getSupportCount() == top.getSupportCount() && destIterator.hasNext());
-                        
-                        Iterator matchesIterator = standoffs.iterator();
-                        
-                        while (matchesIterator.hasNext()) {
-                            Order match = (Order)matchesIterator.next();
-                            
-                            if (match.getCommand() == Order.OrderType.HOLD) {
-                                match.setState(Order.ORDER_STATE.SUCCEEDED);
-                                unresolved.remove(match);
-                                match.save();
-                                g.logMessage(match.toString() + " succeeded");
+                                unresolved.remove(next);
                                 mainIterator = unresolved.iterator();
-                            } else {
-                                g.logMessage(match.toString() + " failed, changed to HOLD");
-                                match.setCommand(Order.OrderType.HOLD);
-                                match.setDest(match.getUnitPos());
-                                match.save();
                             }
-                            
+
                         }
-                        
-                        if (next.getSupportCount() != top.getSupportCount()){
-                            g.logMessage(next.toString() + " failed");
-                            next.setState(Order.ORDER_STATE.FAILED);
-                            next.save();
-                            unresolved.remove(next);
-                            mainIterator = unresolved.iterator();
-                        }
-                        
-                        while (destIterator.hasNext()) {             
-                            next = (Order)destIterator.next();
-                            g.logMessage(next.toString() + " failed");
-                            next.setState(Order.ORDER_STATE.FAILED);
-                            next.save();
-                            unresolved.remove(next);
-                            mainIterator = unresolved.iterator();
-                        }
-                        
                     }
+                    //End while
                 }
-            //End while
             }
+        } catch (Exception e) {
+            g.logMessage("Error: " + e.getMessage());
+            throw e;
         }
-        
-        g.logMessage ("Order resolution completed");
+
+        g.logMessage("Order resolution completed");
         g.logMessage("");
 
     }
@@ -932,20 +957,39 @@ public class Game {
      */
     public LinkedList<Unit> getRetreatList() throws DataAccessException {
         LinkedList<Unit> retreatList = new LinkedList<>();
+        LinkedList<Unit> disbandList = new LinkedList<>();
+        GameLogger gameLog = new GameLogger();
 
         for (Map.Entry m : allUnits.entrySet()) {
-            Unit u = (Unit) m.getValue();
+            Unit currentUnit = (Unit) m.getValue();
 
-            if ((u.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED)
-                    || ((u.getCurrentOrder().getCommand() == Order.OrderType.RETREAT) && (u.getCurrentOrder().getState() != Order.ORDER_STATE.SUCCEEDED))) {
-                LinkedList<Border> retreats = u.getPossibleRetreats();
+            if ((currentUnit.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED)
+                    || ((currentUnit.getCurrentOrder().getCommand() == Order.OrderType.RETREAT) && (currentUnit.getCurrentOrder().getState() != Order.ORDER_STATE.SUCCEEDED))) {
+                LinkedList<Border> retreats = currentUnit.getPossibleRetreats();
 
                 if (retreats.isEmpty()) {
-                    u.delete();
+                    //If it has nowhere to go it will need to be disbanded
+                    disbandList.add(currentUnit);
+                    
                 } else {
-                    retreatList.add(u);
+                    //Otherwise add it to the retreat list
+                    retreatList.add(currentUnit);
                 }
             }
+        }
+        
+        gameLog.logMessage (retreatList.size() + " units need to retreat");
+        
+        Iterator disbandIterator = disbandList.iterator();
+        while (disbandIterator.hasNext()){
+            Unit disband = (Unit)disbandIterator.next();
+            
+            gameLog.logMessage(disband.toString() + " DISBANDED (no retreats available)");
+            
+            allOrders.remove(disband.getCurrentOrder().getOrderId());
+
+            disband.delete();
+            allUnits.remove(disband.getUnitId());
         }
 
         return retreatList;
@@ -958,6 +1002,8 @@ public class Game {
      * @throws IOException
      */
     public void nextPhase() throws DataAccessException, IOException {
+
+        //loadGame ();
         if (getRetreatList().isEmpty()) {
             if (props.getPhase() != Props.Phase.BUILD || !isBuildNeeded()) {
 
@@ -1034,14 +1080,17 @@ public class Game {
         }
 
         //Delete all existing units and orders
-        for (Map.Entry map : allUnits.entrySet()) {
-            Unit unit = (Unit) map.getValue();
-            Order order = unit.getCurrentOrder();
-
-            order.delete();
-            unit.delete();
-            //logfile.logMessage("Units and orders deleted");
-        }
+        //       for (Map.Entry map : allUnits.entrySet()) {
+        //           Unit unit = (Unit) map.getValue();
+        //           Order order = unit.getCurrentOrder();
+//
+//            order.delete();
+//            unit.delete();
+//            logfile.logMessage("Units and orders deleted");
+//        }
+        db.clearTable("Command");
+        db.clearTable("unit");
+        logfile.logMessage("Units and orders deleted");
 
         for (Map.Entry map : allPlayers.entrySet()) {
             Player p = (Player) map.getValue();
@@ -1110,9 +1159,9 @@ public class Game {
      */
     public void changeSupplyPointOwnership() throws DataAccessException {
         GameLogger logfile = new GameLogger();
-        
+
         logfile.logMessage("Checking for changes of ownership ...");
-        
+
         for (Map.Entry m : allUnits.entrySet()) {
             Unit u = (Unit) m.getValue();
 
@@ -1124,12 +1173,12 @@ public class Game {
                 int newOwner = u.getOwnerId();
 
                 if (currOwner != newOwner) {
-                                        
+
                     Player p1 = allPlayers.get(currOwner);
                     Player p2 = allPlayers.get(newOwner);
 
-                    logfile.logMessage(r.getRegionName() + " changed from " + p1.getPlayerName() + " to " + p2.getPlayerName() );
-                    
+                    logfile.logMessage(r.getRegionName() + " changed from " + p1.getPlayerName() + " to " + p2.getPlayerName());
+
                     p1.removeSupplyCenter(r);
                     p2.addSupplyCenter(r);
 
@@ -1163,6 +1212,21 @@ public class Game {
         }
 
         return buildNeeded;
+    }
+
+    public Player getWinner() {
+        Player ret = null;
+
+        for (Map.Entry m : allPlayers.entrySet()) {
+
+            Player p = (Player) m.getValue();
+
+            if (p.getSupplyCenters().size() >= 34) {
+                ret = p;
+            }
+        }
+
+        return ret;
     }
 
 }

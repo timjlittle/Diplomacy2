@@ -56,6 +56,7 @@ public class Order implements Comparable<Order> {
         fields.addField("UnitId", -1);
         fields.addField("BeingConvoyed", false);
         fields.addField("State", 0);
+        fields.addField("BeatenBy", "");
         
         ret = db.readIndividualRecord(orderId, "Command", "OrderId", fields);
         
@@ -72,6 +73,7 @@ public class Order implements Comparable<Order> {
             beingConvoyed = fields.getBoolVal("BeingConvoyed");
             intVal = fields.getIntVal("State");
             state = mapIntToState(intVal);
+            RegionBeatenFrom = fields.getStringVal("BeatenBy");
             
             destinationName = getBorderName(destinationId);
             originName = getBorderName (originId);

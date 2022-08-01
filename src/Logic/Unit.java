@@ -30,13 +30,13 @@ public class Unit {
     private Border victorOrigin = null;
     
     
-    public Unit(int unitId, UnitType unitType, Border position, int ownerId, boolean disbanded) {
+    public Unit(int unitId, UnitType unitType, Border position, int ownerId, boolean disbanded, Border defeatedBy) {
         this.unitId = unitId;
         this.unitType = unitType;
         this.position = position;
         this.ownerId = ownerId;
         this.disbanded = disbanded;
-        
+        this.victorOrigin = defeatedBy;
         
         
     }
@@ -233,23 +233,34 @@ public class Unit {
      */
     public LinkedList<Border> getPossibleRetreats () {
         LinkedList<Border> ret = new LinkedList<>();
-        
-        LinkedList<Border> possibles = position.getNeighbours();
-        
-        for (Border b : possibles) {
-            if (!b.getRegion().isOccupied() &&
-                    b.getRegion().getRegionCode() != currentOrder.getRegionBeatenFrom() ) {
-                
-                //Make sure that the unit can retreat
-                if (b.getType() == Border.BorderType.COAST ||
-                    (b.getType() == Border.BorderType.LAND && unitType == Unit.UnitType.ARMY) ||
-                     b.getType() == Border.BorderType.SEA && unitType == UnitType.FLEET)
+        try {
+            
+            
+            LinkedList<Border> possibles = position.getNeighbours();
+            
+            Props props = new Props ();
+            
+            for (Border b : possibles) {
+                if (!b.getRegion().isOccupied() &&
+                        b.getRegion().getRegionCode() != currentOrder.getRegionBeatenFrom() &&
+                        b.getRegion().getStandoff() != props.getTurn()) {
                     
-                    ret.add(b);
+                    //Make sure that the unit can retreat
+                    if (b.getType() == Border.BorderType.COAST ||
+                            (b.getType() == Border.BorderType.LAND && unitType == Unit.UnitType.ARMY) ||
+                            b.getType() == Border.BorderType.SEA && unitType == UnitType.FLEET)
+                        
+                        ret.add(b);
+                }
             }
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Unit.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return ret;
     }
+    
     
 }

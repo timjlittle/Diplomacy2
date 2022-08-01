@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -50,9 +51,16 @@ public class MainForm extends javax.swing.JFrame {
         infoLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        settingsMenuItem = new javax.swing.JMenuItem();
         newGameMenuItem = new javax.swing.JMenuItem();
+        exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        showtOrderMenu = new javax.swing.JMenuItem();
+        currentOrdersMenuItem = new javax.swing.JMenuItem();
+        showLogMenuItem = new javax.swing.JMenuItem();
+        settingsMenuItem = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        helpMenuItem = new javax.swing.JMenuItem();
+        aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Diplomacy");
@@ -63,7 +71,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         titleLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        titleLabel.setText("Spring 1901 Create order phase");
+        titleLabel.setText("Loading, please wait ...");
 
         actButton.setText("Act");
         actButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,14 +110,6 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        settingsMenuItem.setText("Settings");
-        settingsMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsMenuItemActionPerformed(evt);
-            }
-        });
-        jMenu1.add(settingsMenuItem);
-
         newGameMenuItem.setText("New Game");
         newGameMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,10 +118,66 @@ public class MainForm extends javax.swing.JFrame {
         });
         jMenu1.add(newGameMenuItem);
 
+        exitMenuItem.setText("Exit");
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(exitMenuItem);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
+
+        showtOrderMenu.setText("Show Current State");
+        showtOrderMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showtOrderMenuActionPerformed(evt);
+            }
+        });
+        jMenu2.add(showtOrderMenu);
+
+        currentOrdersMenuItem.setText("Show Current Orders");
+        currentOrdersMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                currentOrdersMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(currentOrdersMenuItem);
+
+        showLogMenuItem.setText("Show log");
+        showLogMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showLogMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(showLogMenuItem);
+
+        settingsMenuItem.setText("Settings");
+        settingsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(settingsMenuItem);
+
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Help");
+
+        helpMenuItem.setText("Using this program");
+        jMenu3.add(helpMenuItem);
+
+        aboutMenuItem.setText("About");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(aboutMenuItem);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -166,6 +222,9 @@ public class MainForm extends javax.swing.JFrame {
     private void actButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actButtonActionPerformed
         boolean okToMoveOn = false;
         
+        titleLabel.setText("Please wait, calculating ...");
+        
+        
         try {
             switch (game.getGamePhase()) {
                 case ORDER:
@@ -208,13 +267,21 @@ public class MainForm extends javax.swing.JFrame {
 
             if (game.getGamePhase() == Props.Phase.BUILD) {
                 game.changeSupplyPointOwnership();
+                
+                Player winner = game.getWinner();
+                
+                if (winner != null) {
+                    JOptionPane.showMessageDialog(this, "Game over, " + winner.getPlayerName() + " won");
+                    
+                    this.dispose();
+                }
             }
             
             this.setTitle(game.getTitle());
             drawTree ();
             treeModel.reload();
-            titleLabel.setText(game.getTitle());
             mapPanel1.repaint();
+            titleLabel.setText(game.getTitle());
             
             
         } catch (DataAccessException | IOException ex) {
@@ -339,7 +406,10 @@ public class MainForm extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) {
         
             DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) unitsTree.getLastSelectedPathComponent();
-            DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode)selectedNode.getParent();
+            DefaultMutableTreeNode parentNode = null;
+            if (selectedNode != null){
+                parentNode = (DefaultMutableTreeNode)selectedNode.getParent();
+            }
             
             if (game.getGamePhase() != Props.Phase.BUILD){
 
@@ -402,6 +472,34 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_newGameMenuItemActionPerformed
 
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        GameInfoForm aboutBoxDialog = new GameInfoForm();
+        aboutBoxDialog.showData(GameInfoForm.INFO_SOURCE.ABOUT, game);
+        aboutBoxDialog.setVisible(true);
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
+
+    private void showLogMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLogMenuItemActionPerformed
+        GameInfoForm logDialog = new GameInfoForm();
+        logDialog.showData(GameInfoForm.INFO_SOURCE.LOG, game);
+        logDialog.setVisible(true);
+    }//GEN-LAST:event_showLogMenuItemActionPerformed
+
+    private void currentOrdersMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentOrdersMenuItemActionPerformed
+        GameInfoForm logDialog = new GameInfoForm();
+        logDialog.showData(GameInfoForm.INFO_SOURCE.ORDERS, game);
+        logDialog.setVisible(true);
+    }//GEN-LAST:event_currentOrdersMenuItemActionPerformed
+
+    private void showtOrderMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showtOrderMenuActionPerformed
+        GameInfoForm logDialog = new GameInfoForm();
+        logDialog.showData(GameInfoForm.INFO_SOURCE.STATE, game);
+        logDialog.setVisible(true);
+    }//GEN-LAST:event_showtOrderMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -438,15 +536,22 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JButton actButton;
+    private javax.swing.JMenuItem currentOrdersMenuItem;
+    private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JMenuItem helpMenuItem;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private GUI.MapPanel mapPanel1;
     private javax.swing.JMenuItem newGameMenuItem;
     private javax.swing.JMenuItem settingsMenuItem;
+    private javax.swing.JMenuItem showLogMenuItem;
+    private javax.swing.JMenuItem showtOrderMenu;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTree unitsTree;
     // End of variables declaration//GEN-END:variables

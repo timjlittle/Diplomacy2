@@ -26,7 +26,7 @@ public class Region {
     private final boolean supplyCenter;
     private int oriOwner;
     private int ownerId;
-    private int standoff = -1;
+    private int standoff = 0;
 
     /**
      * Region constructor

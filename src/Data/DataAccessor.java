@@ -885,4 +885,61 @@ public class DataAccessor {
         return ret;
     }
     
+    /**
+     * Clears ALL the records from the specified table
+     * 
+     * @param tablename table to clear.
+     * 
+     * @return true if successful. If false use getErrorMsg etc. to find out why not
+     */
+    public boolean clearTable (String tableName) {
+        boolean success = true;
+                String sql;
+        Connection conn = null;
+        
+        //At least start optimistic
+        errorMsg = "";
+        sqlState = "";
+        errNo = 0;
+        
+        sql = "DELETE FROM " + tableName;
+        
+        try {
+
+            conn = connect ();
+
+            if (conn != null) {
+                Statement stmt = conn.createStatement();
+
+                stmt.execute(sql);
+                
+            } 
+
+        } catch (SQLException e) {
+        
+        success = false;
+        errorMsg = e.getMessage();
+        sqlState = e.getSQLState();
+        errNo = e.getErrorCode();
+        Logger.getLogger(DataAccessor.class.getName()).log(Level.SEVERE, null, e);
+
+    }   catch (IOException ex) {
+            Logger.getLogger(DataAccessor.class.getName()).log(Level.SEVERE, null, ex);
+            errorMsg = ex.getMessage();
+            errNo = 1;
+            
+        }    finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                
+            }
+        }
+ 
+        return success;
+    }
+    
 }

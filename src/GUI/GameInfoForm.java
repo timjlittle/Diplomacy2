@@ -5,12 +5,32 @@
  */
 package GUI;
 
+import Data.Props;
+import Logic.Game;
+import Logic.Order;
+import Logic.Player;
+import Logic.Region;
+import Logic.Unit;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author timjl
  */
 public class GameInfoForm extends javax.swing.JFrame {
 
+    public enum INFO_SOURCE {ORDERS, LOG, ABOUT, STATE};
+    private INFO_SOURCE dataSource = INFO_SOURCE.ABOUT;
+    Game currentGame;
+    
     /**
      * Creates new form GameInfoForm
      */
@@ -28,16 +48,24 @@ public class GameInfoForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        infoAreaTextBox = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        infoAreaTextBox.setEditable(false);
+        infoAreaTextBox.setColumns(20);
+        infoAreaTextBox.setLineWrap(true);
+        infoAreaTextBox.setRows(5);
+        infoAreaTextBox.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(infoAreaTextBox);
 
         jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,6 +92,10 @@ public class GameInfoForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        showData (dataSource, currentGame);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -100,9 +132,161 @@ public class GameInfoForm extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Used by caller to determine which information should be displayed based
+     * on the Game object passed in
+     * 
+     * @param source what info to show
+     * @param currentGame 
+     */
+    public void showData (INFO_SOURCE source, Game currentGame) {
+        String vals = "";
+        
+        this.currentGame = currentGame;
+        
+        switch (source){
+            case ORDERS:
+                vals = readCurrentOrders();
+                this.setTitle("Current Orders");
+                break;
+                
+            case LOG:
+                vals = readLog ();
+                this.setTitle("Game Log");
+                break;
+                
+            case ABOUT :
+                vals = getAbout ();
+                this.setTitle("About");
+                break;
+                
+            case STATE:
+                vals = readCurrentState();
+                this.setTitle("State");
+                break;
+        }
+        
+        infoAreaTextBox.setText(vals);
+        dataSource = source;
+        
+        if (source != INFO_SOURCE.LOG){
+            infoAreaTextBox.setCaretPosition(0);
+        }
+    }
+    
+    /**
+     * Show the summary of the program such as creator and version number
+     * @return 
+     */
+    private String getAbout () {
+        String aboutData = "Diplomacy\nA personal project (not for resale) to allows players of Diplomacy to enter orders and have them resolved quickly and easily.\n\nWritten by Tim Little\n\nVersion:  ";
+        
+        try {
+            Props props = new Props();
+            aboutData += props.getVersionString();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(GameInfoForm.class.getName()).log(Level.SEVERE, null, ex);
+            aboutData +=" Error reading version";
+        }
+        
+        return aboutData;
+    }
+    
+    /**
+     * The game log contains the information about the order resolution etc.
+     * 
+     * @return 
+     */
+    private String readLog () {
+        String logData = "";
+        String loc = "props file";
+        
+        try {
+            String line = "";
+            Props props = new Props();
+            
+            loc = props.getLogFileLoc();
+            
+            File logFile = new File(loc);
+            
+            Scanner myReader = new Scanner(logFile);
+            
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                logData += data + "\n";
+            }
+            
+            myReader.close();
+            
+        }catch (IOException ex) {
+            Logger.getLogger(GameInfoForm.class.getName()).log(Level.SEVERE, null, ex);
+            logData = "Error reading file " + loc + "\nerr " + ex.getMessage();
+        }
+        
+        return logData;
+    }
+    
+    /**
+     * Creates a string summarising the position of each player.
+     * 
+     * @return 
+     */
+    private String readCurrentState() {
+        String curState = "";
+        
+        for (Map.Entry playerMap : currentGame.getAllPlayers().entrySet()){
+            Player curPlayer = (Player)playerMap.getValue();
+            
+            if (curPlayer.getPlayerId() > 0){
+
+                //Display the name underlined
+                curState += curPlayer.getPlayerName() + "\n";
+                for (int v = 0; v < curPlayer.getPlayerName().length(); v++){
+                    curState += "=";
+                }
+
+                //List the player's current units with location
+                curState += "\nUnits:\n";
+                Iterator units = curPlayer.getUnits().iterator();
+                while (units.hasNext()){
+                    Unit curUnit = (Unit)units.next();
+                    curState += "   " + curUnit.toString() + "\n";
+                }
+
+                //List the player's currently owned supply centers
+                curState += "\nOwned supply centers:\n";
+                Iterator supplyCenters = curPlayer.getSupplyCenters().iterator();
+                while (supplyCenters.hasNext()){
+                    Region curRegion = (Region)supplyCenters.next();
+                    curState += "   " + curRegion.toString() + "\n";
+                }
+                
+                curState += "\n\n";
+            }
+        }
+        return curState;
+    }
+    
+    /**
+     * Shows what the orders for the current turn are.
+     * @return 
+     */
+    private String readCurrentOrders () {
+        String orderDetails = "";
+        
+        for (Map.Entry m : currentGame.getAllOrders().entrySet()) {
+            Order o = (Order) m.getValue();
+            
+            orderDetails += o.toString() + "\n";
+        }
+        
+        return orderDetails;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea infoAreaTextBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
