@@ -10,11 +10,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,7 +31,7 @@ public class Game {
     private Map<Integer, Order> allOrders = new HashMap<>();
     private Props props;
     private LinkedList<Border> coastsList = new LinkedList<>();
-    private String resolveLog;
+    
 
     /**
      * Constructor. Reads the current game details from disk
@@ -42,9 +40,7 @@ public class Game {
      */
     public Game() throws DataAccessException {
 
-        resolveLog = "";
-
-        loadGame();
+         loadGame();
 
     }
 
@@ -356,6 +352,7 @@ public class Game {
         }
 
     }
+
 
     /**
      *
@@ -995,6 +992,8 @@ public class Game {
         return retreatList;
     }
 
+
+    
     /**
      * Calculates the next game phase. May Update both phase and turn
      *
@@ -1003,31 +1002,33 @@ public class Game {
      */
     public void nextPhase() throws DataAccessException, IOException {
 
-        //loadGame ();
-        if (getRetreatList().isEmpty()) {
-            if (props.getPhase() != Props.Phase.BUILD || !isBuildNeeded()) {
-
-                //No retreeats so go straight to the next turn
-                props.nextTurn();
-                if (props.getTurn() % 3 == 0) {
-                    changeSupplyPointOwnership();
-                    //winter so build
+        //If retreats are needed deal with them first
+        if (!getRetreatList().isEmpty()) {
+            props.setPhase(Props.Phase.RETREAT);
+        } else {
+            
+            props.nextTurn();
+            //Otherwise if it is winter 
+            if (props.getTurn() % 3 == 0) {
+                //recalculate the supply points
+                changeSupplyPointOwnership();
+                
+                //check for a winner
+                if (getWinner() != null) {
+                    //if builds are needed
                     if (isBuildNeeded()) {
                         props.setPhase(Props.Phase.BUILD);
                     } else {
-                        //Skip build phase and go straight to 
+                        //Move on to Spring Order phase
                         props.nextTurn();
                         props.setPhase(Props.Phase.ORDER);
                     }
-                } else {
-                    //Go straight to build
-                    props.setPhase(Props.Phase.ORDER);
-                }
-            }
-        } else {
-            props.setPhase(Props.Phase.RETREAT);
+                }  
+            } else {
+                props.setPhase(Props.Phase.ORDER);
+            } 
         }
-
+        
     }
 
     /**
@@ -1214,19 +1215,25 @@ public class Game {
         return buildNeeded;
     }
 
+    /**
+     * Find a player owning more than half the supply centers
+     * @return 
+     */
     public Player getWinner() {
-        Player ret = null;
+        Player winner = null;
 
         for (Map.Entry m : allPlayers.entrySet()) {
 
-            Player p = (Player) m.getValue();
+            Player curPlayer = (Player) m.getValue();
 
-            if (p.getSupplyCenters().size() >= 34) {
-                ret = p;
+            if (curPlayer.getSupplyCenters().size() >= 18) {
+                winner = curPlayer;
+                
+                break;
             }
         }
 
-        return ret;
+        return winner;
     }
 
 }
