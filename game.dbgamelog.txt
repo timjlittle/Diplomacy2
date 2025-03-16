@@ -305,3 +305,1268 @@
 2022/08/08 12:20:49: Order resolution completed
 2022/08/08 12:20:49: 
 2022/08/08 12:20:49: 0 units need to retreat
+2022/08/08 14:09:57: 
+2022/08/08 14:09:57: Resolving all orders for Fall 1902 create orders phase
+2022/08/08 14:09:57: ======================================================
+2022/08/08 14:09:58: Current Orders:
+2022/08/08 14:09:58: Counting support
+2022/08/08 14:53:15: 
+2022/08/08 14:53:15: Resolving all orders for Fall 1902 create orders phase
+2022/08/08 14:53:15: ======================================================
+2022/08/08 14:53:15: Current Orders:
+2022/08/08 14:53:15: Counting support
+2022/08/08 15:11:34: 
+2022/08/08 15:11:34: Resolving all orders for Fall 1902 create orders phase
+2022/08/08 15:11:34: ======================================================
+2022/08/08 15:11:34: Current Orders:
+2022/08/08 15:11:34: Counting support
+2022/08/08 15:11:34: checking cuts, Moscow to Sevastopol and Rumania to Rumania
+2022/08/08 15:11:34: Rumania to Rumania cut
+2022/08/08 15:11:34: checking cuts, A Moscow Move to Sevastopol and Rumania to Rumania
+2022/08/08 15:11:34: Rumania to Rumania cut
+2022/08/08 15:11:34: checking cuts, Sevastopol to Sevastopol and Rumania to Rumania
+2022/08/08 15:11:34: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/08 15:11:34: Sevastopol to Sevastopol cut
+2022/08/08 15:11:34: Rumania to Rumania cut (reset to HOLD
+2022/08/08 15:11:34: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/08 15:11:34: Tyrolia to Vienna cut
+2022/08/08 15:11:34: checking cuts, A Vienna Move to Trieste and Tyrolia to Vienna
+2022/08/08 15:11:34: Tyrolia to Vienna cut
+2022/08/08 15:11:34: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/08 15:11:34: Tyrolia to Vienna cut
+2022/08/08 15:11:34: Tyrolia to Vienna cut (reset to HOLD
+2022/08/08 15:11:34: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/08 15:11:34: Sevastopol to Sevastopol cut
+2022/08/08 15:11:34: Sevastopol to Sevastopol cut (reset to HOLD
+2022/08/08 15:11:34: Finised checking supports for cuts
+2022/08/08 15:11:34: Counting supports
+2022/08/08 15:11:34: Marseilles to Piedmont support added
+2022/08/08 15:11:34: Munich to Kiel support added
+2022/08/08 15:11:34: Vienna to Trieste support added
+2022/08/08 15:11:34: Vienna to Trieste support added
+2022/08/08 15:11:34: North Sea to Denmark support added
+2022/08/08 15:11:34: Picardy to Belgium support added
+2022/08/08 15:11:34: Moscow to Sevastopol support added
+2022/08/08 15:11:34: Finished counting support, setting support orders to HOLD
+2022/08/08 15:11:34: A Marseilles Move to Piedmont
+2022/08/08 15:11:35: A Ukraine Hold
+2022/08/08 15:11:35: A Munich Move to Kiel
+2022/08/08 15:11:35: F Adriatic Sea Move to Venice
+2022/08/08 15:11:35: A Holland Hold
+2022/08/08 15:11:35: A Piedmont Move to Marseilles
+2022/08/08 15:11:35: A Sevastopol Hold
+2022/08/08 15:11:35: F Gulf of Bothnia Move to Sweden
+2022/08/08 15:11:35: F Albania Hold
+2022/08/08 15:11:35: A Trieste Hold
+2022/08/08 15:11:36: A Vienna Move to Trieste
+2022/08/08 15:11:36: F North Sea Move to Denmark
+2022/08/08 15:11:36: F English Channel Hold
+2022/08/08 15:11:36: F Gulf of Lyon Hold
+2022/08/08 15:11:36: A Picardy Move to Belgium
+2022/08/08 15:11:36: A Tyrolia Move to Vienna
+2022/08/08 15:11:36: A Galicia Move to Rumania
+2022/08/08 15:11:36: A Constantinople Move to Bulgaria SC
+2022/08/08 15:11:36: F Aegean Sea Move to Greece
+2022/08/08 15:11:37: A Kiel Hold
+2022/08/08 15:11:37: A Moscow Move to Sevastopol
+2022/08/08 15:11:37: F Rumania Hold
+2022/08/08 15:11:37: A Berlin Hold
+2022/08/08 15:11:37: F Mid-Atlantic Ocean Move to Western Mediterranean
+2022/08/08 15:11:37: A Budapest Hold
+2022/08/08 15:11:37: A Serbia Hold
+2022/08/08 15:11:37: F Norwegian Sea Move to Barents Sea
+2022/08/08 15:11:37: F Baltic Sea Move to Denmark
+2022/08/08 15:11:37: A Norway Hold
+2022/08/08 15:11:38: F Skagerrak Hold
+2022/08/08 15:11:38: F Albania Hold succeeded
+2022/08/08 15:11:38: F Norwegian Sea Move to Barents Sea succeeded
+2022/08/08 15:11:38: A Picardy Move to Belgium succeeded
+2022/08/08 15:11:38: A Berlin Hold succeeded
+2022/08/08 15:11:39: A Budapest Hold succeeded
+2022/08/08 15:11:39: A Constantinople Move to Bulgaria SC succeeded
+2022/08/08 15:11:39: F North Sea Move to Denmark: Support = 1
+2022/08/08 15:11:39: F Baltic Sea Move to Denmark: Support = 0
+2022/08/08 15:11:40: F North Sea Move to Denmark succeeded
+2022/08/08 15:11:40: F Baltic Sea Move to Denmark failed, changed to HOLD
+2022/08/08 15:11:40: F Baltic Sea Hold succeeded
+2022/08/08 15:11:40: F English Channel Hold succeeded
+2022/08/08 15:11:40: F Aegean Sea Move to Greece succeeded
+2022/08/08 15:11:41: F Gulf of Lyon Hold succeeded
+2022/08/08 15:11:41: A Holland Hold succeeded
+2022/08/08 15:11:41: A Munich Move to Kiel: Support = 1
+2022/08/08 15:11:41: A Kiel Hold: Support = 0
+2022/08/08 15:11:42: A Munich Move to Kiel succeeded
+2022/08/08 15:11:42: A Kiel Hold failed, needs to retreat
+2022/08/08 15:11:42: A Piedmont Move to Marseilles succeeded
+2022/08/08 15:11:42: A Norway Hold succeeded
+2022/08/08 15:11:42: A Marseilles Move to Piedmont succeeded
+2022/08/08 15:11:43: A Galicia Move to Rumania: Support = 0
+2022/08/08 15:11:43: F Rumania Hold: Support = 0
+2022/08/08 15:11:43: F Rumania Hold succeeded
+2022/08/08 15:11:43: A Galicia Move to Rumania failed, changed to HOLD
+2022/08/08 15:11:43: A Galicia Hold succeeded
+2022/08/08 15:11:43: A Serbia Hold succeeded
+2022/08/08 15:11:44: A Moscow Move to Sevastopol: Support = 1
+2022/08/08 15:11:44: A Sevastopol Hold: Support = 0
+2022/08/08 15:11:44: A Moscow Move to Sevastopol succeeded
+2022/08/08 15:11:44: A Sevastopol Hold failed, needs to retreat
+2022/08/08 15:11:44: F Skagerrak Hold succeeded
+2022/08/08 15:11:45: F Gulf of Bothnia Move to Sweden succeeded
+2022/08/08 15:11:45: A Vienna Move to Trieste: Support = 2
+2022/08/08 15:11:45: A Trieste Hold: Support = 0
+2022/08/08 15:11:45: A Vienna Move to Trieste succeeded
+2022/08/08 15:11:46: A Trieste Hold failed, needs to retreat
+2022/08/08 15:11:46: A Ukraine Hold succeeded
+2022/08/08 15:11:46: F Adriatic Sea Move to Venice succeeded
+2022/08/08 15:11:46: A Tyrolia Move to Vienna succeeded
+2022/08/08 15:11:46: F Mid-Atlantic Ocean Move to Western Mediterranean succeeded
+2022/08/08 15:11:47: Order resolution completed
+2022/08/08 15:11:47: 
+2022/08/08 15:11:47: 3 units need to retreat
+2022/08/08 15:14:17: 
+2022/08/08 15:14:17: Resolving all orders for Fall 1902 retreat phase
+2022/08/08 15:14:17: ================================================
+2022/08/08 15:14:17: Current Orders:
+2022/08/08 15:14:17: Counting support
+2022/08/08 15:14:17: Finised checking supports for cuts
+2022/08/08 15:14:17: Counting supports
+2022/08/08 15:14:17: Finished counting support, setting support orders to HOLD
+2022/08/08 15:14:17: A Sevastopol Retreat to Armenia
+2022/08/08 15:14:17: A Trieste Retreat to Tyrolia
+2022/08/08 15:14:17: A Kiel Retreat to Ruhr
+2022/08/08 15:14:17: A Sevastopol Retreat to Armenia succeeded
+2022/08/08 15:14:17: A Kiel Retreat to Ruhr succeeded
+2022/08/08 15:14:18: A Trieste Retreat to Tyrolia succeeded
+2022/08/08 15:14:18: Order resolution completed
+2022/08/08 15:14:18: 
+2022/08/08 15:14:18: 0 units need to retreat
+2022/08/08 15:14:18: Checking for changes of ownership ...
+2022/08/08 15:14:18: Berlin changed from Russia to Germany
+2022/08/08 15:14:18: Serbia changed from Austria to Turkey
+2022/08/08 15:14:18: Holland changed from Nuetral to France
+2022/08/08 15:14:18: Marseilles changed from France to Italy
+2022/08/08 15:14:18: Sweden changed from Nuetral to Russia
+2022/08/08 15:14:18: Trieste changed from Italy to Austria
+2022/08/08 15:14:19: Denmark changed from Germany to England
+2022/08/08 15:14:19: Vienna changed from Austria to Italy
+2022/08/08 15:14:19: Cownership checking finished.
+2022/08/08 15:14:26: 
+2022/08/08 15:14:26: Resolving all orders for Winter 1903 retreat phase
+2022/08/08 15:14:26: ==================================================
+2022/08/08 15:14:30: Current Orders:
+2022/08/08 15:14:30: Counting support
+2022/08/08 15:14:30: Finised checking supports for cuts
+2022/08/08 15:14:30: Counting supports
+2022/08/08 15:14:30: Finished counting support, setting support orders to HOLD
+2022/08/08 15:14:30: A Piedmont Hold
+2022/08/08 15:14:30: A Ukraine Hold
+2022/08/08 15:14:30: A Kiel Hold
+2022/08/08 15:14:30: F Venice Hold
+2022/08/08 15:14:30: A Holland Hold
+2022/08/08 15:14:30: A Marseilles Hold
+2022/08/08 15:14:31: A Armenia Hold
+2022/08/08 15:14:31: F Sweden Hold
+2022/08/08 15:14:31: F Albania Hold
+2022/08/08 15:14:31: A Tyrolia Hold
+2022/08/08 15:14:31: A Trieste Hold
+2022/08/08 15:14:31: F Denmark Hold
+2022/08/08 15:14:31: F English Channel Hold
+2022/08/08 15:14:32: F Gulf of Lyon Hold
+2022/08/08 15:14:32: A Belgium Hold
+2022/08/08 15:14:32: A Vienna Hold
+2022/08/08 15:14:32: A Galicia Hold
+2022/08/08 15:14:32: A Bulgaria SC Hold
+2022/08/08 15:14:32: F Greece Hold
+2022/08/08 15:14:32: A Ruhr Hold
+2022/08/08 15:14:32: A Sevastopol Hold
+2022/08/08 15:14:33: F Rumania Hold
+2022/08/08 15:14:33: A Berlin Hold
+2022/08/08 15:14:33: F Western Mediterranean Hold
+2022/08/08 15:14:33: A Budapest Hold
+2022/08/08 15:14:33: A Serbia Hold
+2022/08/08 15:14:33: F Barents Sea Hold
+2022/08/08 15:14:33: F Baltic Sea Hold
+2022/08/08 15:14:33: A Norway Hold
+2022/08/08 15:14:33: F Skagerrak Hold
+2022/08/08 15:14:33: F Albania Hold succeeded
+2022/08/08 15:14:34: A Armenia Hold succeeded
+2022/08/08 15:14:34: F Baltic Sea Hold succeeded
+2022/08/08 15:14:34: F Barents Sea Hold succeeded
+2022/08/08 15:14:35: A Belgium Hold succeeded
+2022/08/08 15:14:35: A Berlin Hold succeeded
+2022/08/08 15:14:35: A Budapest Hold succeeded
+2022/08/08 15:14:36: A Bulgaria SC Hold succeeded
+2022/08/08 15:14:36: F Denmark Hold succeeded
+2022/08/08 15:14:36: F English Channel Hold succeeded
+2022/08/08 15:14:36: A Galicia Hold succeeded
+2022/08/08 15:14:37: F Greece Hold succeeded
+2022/08/08 15:14:37: F Gulf of Lyon Hold succeeded
+2022/08/08 15:14:37: A Holland Hold succeeded
+2022/08/08 15:14:38: A Kiel Hold succeeded
+2022/08/08 15:14:38: A Marseilles Hold succeeded
+2022/08/08 15:14:38: A Norway Hold succeeded
+2022/08/08 15:14:39: A Piedmont Hold succeeded
+2022/08/08 15:14:39: A Ruhr Hold succeeded
+2022/08/08 15:14:39: F Rumania Hold succeeded
+2022/08/08 15:14:39: A Serbia Hold succeeded
+2022/08/08 15:14:39: A Sevastopol Hold succeeded
+2022/08/08 15:14:40: F Skagerrak Hold succeeded
+2022/08/08 15:14:40: F Sweden Hold succeeded
+2022/08/08 15:14:40: A Trieste Hold succeeded
+2022/08/08 15:14:41: A Tyrolia Hold succeeded
+2022/08/08 15:14:41: A Ukraine Hold succeeded
+2022/08/08 15:14:41: F Venice Hold succeeded
+2022/08/08 15:14:42: A Vienna Hold succeeded
+2022/08/08 15:14:42: F Western Mediterranean Hold succeeded
+2022/08/08 15:14:42: Order resolution completed
+2022/08/08 15:14:42: 
+2022/08/08 15:14:42: 0 units need to retreat
+2022/08/08 15:30:02: 
+2022/08/08 15:30:02: Resolving all orders for Fall 1902 create orders phase
+2022/08/08 15:30:02: ======================================================
+2022/08/08 15:30:02: Current Orders:
+2022/08/08 15:30:02: Counting support
+2022/08/08 15:30:02: checking cuts, Moscow to Sevastopol and Rumania to Rumania
+2022/08/08 15:30:02: Rumania to Rumania cut
+2022/08/08 15:30:03: checking cuts, A Moscow Move to Sevastopol and Rumania to Rumania
+2022/08/08 15:30:03: Rumania to Rumania cut
+2022/08/08 15:30:03: checking cuts, Sevastopol to Sevastopol and Rumania to Rumania
+2022/08/08 15:30:03: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/08 15:30:03: Sevastopol to Sevastopol cut
+2022/08/08 15:30:03: Rumania to Rumania cut (reset to HOLD
+2022/08/08 15:30:03: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/08 15:30:03: Tyrolia to Vienna cut
+2022/08/08 15:30:03: checking cuts, A Vienna Move to Trieste and Tyrolia to Vienna
+2022/08/08 15:30:03: Tyrolia to Vienna cut
+2022/08/08 15:30:03: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/08 15:30:03: Tyrolia to Vienna cut
+2022/08/08 15:30:03: Tyrolia to Vienna cut (reset to HOLD
+2022/08/08 15:30:03: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/08 15:30:03: Sevastopol to Sevastopol cut
+2022/08/08 15:30:03: Sevastopol to Sevastopol cut (reset to HOLD
+2022/08/08 15:30:03: Finised checking supports for cuts
+2022/08/08 15:30:03: Counting supports
+2022/08/08 15:30:03: Marseilles to Piedmont support added
+2022/08/08 15:30:03: Munich to Kiel support added
+2022/08/08 15:30:03: Vienna to Trieste support added
+2022/08/08 15:30:03: Vienna to Trieste support added
+2022/08/08 15:30:03: North Sea to Denmark support added
+2022/08/08 15:30:03: Picardy to Belgium support added
+2022/08/08 15:30:03: Moscow to Sevastopol support added
+2022/08/08 15:30:03: Finished counting support, setting support orders to HOLD
+2022/08/08 15:30:03: A Marseilles Move to Piedmont
+2022/08/08 15:30:03: A Ukraine Hold
+2022/08/08 15:30:03: A Munich Move to Kiel
+2022/08/08 15:30:03: F Adriatic Sea Move to Venice
+2022/08/08 15:30:03: A Holland Hold
+2022/08/08 15:30:03: A Piedmont Move to Marseilles
+2022/08/08 15:30:03: A Sevastopol Hold
+2022/08/08 15:30:04: F Gulf of Bothnia Move to Sweden
+2022/08/08 15:30:04: F Albania Hold
+2022/08/08 15:30:04: A Trieste Hold
+2022/08/08 15:30:04: A Vienna Move to Trieste
+2022/08/08 15:30:04: F North Sea Move to Denmark
+2022/08/08 15:30:04: F English Channel Hold
+2022/08/08 15:30:04: F Gulf of Lyon Hold
+2022/08/08 15:30:04: A Picardy Move to Belgium
+2022/08/08 15:30:04: A Tyrolia Move to Vienna
+2022/08/08 15:30:04: A Galicia Move to Rumania
+2022/08/08 15:30:05: A Constantinople Move to Bulgaria SC
+2022/08/08 15:30:05: F Aegean Sea Move to Greece
+2022/08/08 15:30:05: A Kiel Hold
+2022/08/08 15:30:05: A Moscow Move to Sevastopol
+2022/08/08 15:30:05: F Rumania Hold
+2022/08/08 15:30:05: A Berlin Hold
+2022/08/08 15:30:05: F Mid-Atlantic Ocean Move to Western Mediterranean
+2022/08/08 15:30:05: A Budapest Hold
+2022/08/08 15:30:05: A Serbia Hold
+2022/08/08 15:30:06: F Norwegian Sea Move to Barents Sea
+2022/08/08 15:30:06: F Baltic Sea Move to Denmark
+2022/08/08 15:30:06: A Norway Hold
+2022/08/08 15:30:06: F Skagerrak Hold
+2022/08/08 15:30:06: F Albania Hold succeeded
+2022/08/08 15:30:06: F Norwegian Sea Move to Barents Sea succeeded
+2022/08/08 15:30:07: A Picardy Move to Belgium succeeded
+2022/08/08 15:30:07: A Berlin Hold succeeded
+2022/08/08 15:30:07: A Budapest Hold succeeded
+2022/08/08 15:30:07: A Constantinople Move to Bulgaria SC succeeded
+2022/08/08 15:30:08: F North Sea Move to Denmark: Support = 1
+2022/08/08 15:30:08: F Baltic Sea Move to Denmark: Support = 0
+2022/08/08 15:30:08: F North Sea Move to Denmark succeeded
+2022/08/08 15:30:08: F Baltic Sea Move to Denmark failed, changed to HOLD
+2022/08/08 15:30:08: F Baltic Sea Hold succeeded
+2022/08/08 15:30:09: F English Channel Hold succeeded
+2022/08/08 15:30:09: F Aegean Sea Move to Greece succeeded
+2022/08/08 15:30:09: F Gulf of Lyon Hold succeeded
+2022/08/08 15:30:10: A Holland Hold succeeded
+2022/08/08 15:30:10: A Munich Move to Kiel: Support = 1
+2022/08/08 15:30:10: A Kiel Hold: Support = 0
+2022/08/08 15:30:10: A Munich Move to Kiel succeeded
+2022/08/08 15:30:11: A Kiel Hold failed, needs to retreat
+2022/08/08 15:30:11: A Piedmont Move to Marseilles succeeded
+2022/08/08 15:30:11: A Norway Hold succeeded
+2022/08/08 15:30:11: A Marseilles Move to Piedmont succeeded
+2022/08/08 15:30:12: A Galicia Move to Rumania: Support = 0
+2022/08/08 15:30:12: F Rumania Hold: Support = 0
+2022/08/08 15:30:12: F Rumania Hold succeeded
+2022/08/08 15:30:12: A Galicia Move to Rumania failed, changed to HOLD
+2022/08/08 15:30:12: A Galicia Hold succeeded
+2022/08/08 15:30:12: A Serbia Hold succeeded
+2022/08/08 15:30:13: A Moscow Move to Sevastopol: Support = 1
+2022/08/08 15:30:13: A Sevastopol Hold: Support = 0
+2022/08/08 15:30:13: A Moscow Move to Sevastopol succeeded
+2022/08/08 15:30:13: A Sevastopol Hold failed, needs to retreat
+2022/08/08 15:30:13: F Skagerrak Hold succeeded
+2022/08/08 15:30:14: F Gulf of Bothnia Move to Sweden succeeded
+2022/08/08 15:30:14: A Vienna Move to Trieste: Support = 2
+2022/08/08 15:30:14: A Trieste Hold: Support = 0
+2022/08/08 15:30:15: A Vienna Move to Trieste succeeded
+2022/08/08 15:30:15: A Trieste Hold failed, needs to retreat
+2022/08/08 15:30:15: A Ukraine Hold succeeded
+2022/08/08 15:30:16: F Adriatic Sea Move to Venice succeeded
+2022/08/08 15:30:16: A Tyrolia Move to Vienna succeeded
+2022/08/08 15:30:16: F Mid-Atlantic Ocean Move to Western Mediterranean succeeded
+2022/08/08 15:30:16: Order resolution completed
+2022/08/08 15:30:16: 
+2022/08/08 15:43:09: 3 units need to retreat
+2022/08/08 15:57:35: 
+2022/08/08 15:57:35: Resolving all orders for Fall 1902 retreat phase
+2022/08/08 15:57:35: ================================================
+2022/08/08 15:57:35: Current Orders:
+2022/08/08 15:57:35: Counting support
+2022/08/08 15:57:35: Finised checking supports for cuts
+2022/08/08 15:57:35: Counting supports
+2022/08/08 15:57:35: Finished counting support, setting support orders to HOLD
+2022/08/08 15:57:36: A Sevastopol Retreat to Armenia
+2022/08/08 15:57:36: A Trieste Retreat to Tyrolia
+2022/08/08 15:57:36: A Kiel Retreat to Ruhr
+2022/08/08 15:57:36: A Sevastopol Retreat to Armenia succeeded
+2022/08/08 15:57:36: A Kiel Retreat to Ruhr succeeded
+2022/08/08 15:57:36: A Trieste Retreat to Tyrolia succeeded
+2022/08/08 15:57:37: Order resolution completed
+2022/08/08 15:57:37: 
+2022/08/08 15:57:37: 0 units need to retreat
+2022/08/08 15:57:44: Checking for changes of ownership ...
+2022/08/08 15:57:44: Berlin changed from Russia to Germany
+2022/08/08 15:57:44: Serbia changed from Austria to Turkey
+2022/08/08 15:57:44: Holland changed from Nuetral to France
+2022/08/08 15:57:44: Marseilles changed from France to Italy
+2022/08/08 15:57:44: Sweden changed from Nuetral to Russia
+2022/08/08 15:57:44: Trieste changed from Italy to Austria
+2022/08/08 15:57:44: Denmark changed from Germany to England
+2022/08/08 15:57:44: Vienna changed from Austria to Italy
+2022/08/08 15:57:44: Cownership checking finished.
+2022/08/09 15:08:04: 
+2022/08/09 15:08:04: Resolving all orders for Fall 1902 create orders phase
+2022/08/09 15:08:04: ======================================================
+2022/08/09 15:08:04: Current Orders:
+2022/08/09 15:08:04: Counting support
+2022/08/09 15:08:04: checking cuts, Moscow to Sevastopol and Rumania to Rumania
+2022/08/09 15:08:04: Rumania to Rumania cut
+2022/08/09 15:08:04: checking cuts, A Moscow Move to Sevastopol and Rumania to Rumania
+2022/08/09 15:08:04: Rumania to Rumania cut
+2022/08/09 15:08:04: checking cuts, Sevastopol to Sevastopol and Rumania to Rumania
+2022/08/09 15:08:04: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/09 15:08:04: Sevastopol to Sevastopol cut
+2022/08/09 15:08:04: Rumania to Rumania cut (reset to HOLD
+2022/08/09 15:08:04: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/09 15:08:04: Tyrolia to Vienna cut
+2022/08/09 15:08:04: checking cuts, A Vienna Move to Trieste and Tyrolia to Vienna
+2022/08/09 15:08:04: Tyrolia to Vienna cut
+2022/08/09 15:08:04: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/09 15:08:04: Tyrolia to Vienna cut
+2022/08/09 15:08:04: Tyrolia to Vienna cut (reset to HOLD
+2022/08/09 15:08:04: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/09 15:08:04: Sevastopol to Sevastopol cut
+2022/08/09 15:08:04: Sevastopol to Sevastopol cut (reset to HOLD
+2022/08/09 15:08:04: Finised checking supports for cuts
+2022/08/09 15:08:04: Counting supports
+2022/08/09 15:08:04: Marseilles to Piedmont support added
+2022/08/09 15:08:04: Munich to Kiel support added
+2022/08/09 15:08:04: Vienna to Trieste support added
+2022/08/09 15:08:04: Vienna to Trieste support added
+2022/08/09 15:08:04: North Sea to Denmark support added
+2022/08/09 15:08:04: Picardy to Belgium support added
+2022/08/09 15:08:04: Moscow to Sevastopol support added
+2022/08/09 15:08:04: Finished counting support, setting support orders to HOLD
+2022/08/09 15:08:04: A Marseilles Move to Piedmont
+2022/08/09 15:08:05: A Ukraine Hold
+2022/08/09 15:08:05: A Munich Move to Kiel
+2022/08/09 15:08:05: F Adriatic Sea Move to Venice
+2022/08/09 15:08:05: A Holland Hold
+2022/08/09 15:08:05: A Piedmont Move to Marseilles
+2022/08/09 15:08:05: A Sevastopol Hold
+2022/08/09 15:08:05: F Gulf of Bothnia Move to Sweden
+2022/08/09 15:08:05: F Albania Hold
+2022/08/09 15:08:06: A Trieste Hold
+2022/08/09 15:08:06: A Vienna Move to Trieste
+2022/08/09 15:08:06: F North Sea Move to Denmark
+2022/08/09 15:08:06: F English Channel Hold
+2022/08/09 15:08:06: F Gulf of Lyon Hold
+2022/08/09 15:08:06: A Picardy Move to Belgium
+2022/08/09 15:08:06: A Tyrolia Move to Vienna
+2022/08/09 15:08:06: A Galicia Move to Rumania
+2022/08/09 15:08:06: A Constantinople Move to Bulgaria SC
+2022/08/09 15:08:07: F Aegean Sea Move to Greece
+2022/08/09 15:08:07: A Kiel Hold
+2022/08/09 15:08:07: A Moscow Move to Sevastopol
+2022/08/09 15:08:07: F Rumania Hold
+2022/08/09 15:08:07: A Berlin Hold
+2022/08/09 15:08:07: F Mid-Atlantic Ocean Move to Western Mediterranean
+2022/08/09 15:08:07: A Budapest Hold
+2022/08/09 15:08:07: A Serbia Hold
+2022/08/09 15:08:07: F Norwegian Sea Move to Barents Sea
+2022/08/09 15:08:07: F Baltic Sea Move to Denmark
+2022/08/09 15:08:08: A Norway Hold
+2022/08/09 15:08:08: F Skagerrak Hold
+2022/08/09 15:08:08: F Albania Hold succeeded
+2022/08/09 15:08:08: F Norwegian Sea Move to Barents Sea succeeded
+2022/08/09 15:08:08: A Picardy Move to Belgium succeeded
+2022/08/09 15:08:09: A Berlin Hold succeeded
+2022/08/09 15:08:09: A Budapest Hold succeeded
+2022/08/09 15:08:09: A Constantinople Move to Bulgaria SC succeeded
+2022/08/09 15:08:10: F North Sea Move to Denmark: Support = 1
+2022/08/09 15:08:10: F Baltic Sea Move to Denmark: Support = 0
+2022/08/09 15:08:10: F North Sea Move to Denmark succeeded
+2022/08/09 15:08:10: F Baltic Sea Move to Denmark failed, changed to HOLD
+2022/08/09 15:08:10: F Baltic Sea Hold succeeded
+2022/08/09 15:08:10: F English Channel Hold succeeded
+2022/08/09 15:08:11: F Aegean Sea Move to Greece succeeded
+2022/08/09 15:08:11: F Gulf of Lyon Hold succeeded
+2022/08/09 15:08:11: A Holland Hold succeeded
+2022/08/09 15:08:11: A Munich Move to Kiel: Support = 1
+2022/08/09 15:08:11: A Kiel Hold: Support = 0
+2022/08/09 15:08:12: A Munich Move to Kiel succeeded
+2022/08/09 15:08:12: A Kiel Hold failed, needs to retreat
+2022/08/09 15:08:12: A Piedmont Move to Marseilles succeeded
+2022/08/09 15:08:13: A Norway Hold succeeded
+2022/08/09 15:08:13: A Marseilles Move to Piedmont succeeded
+2022/08/09 15:08:13: A Galicia Move to Rumania: Support = 0
+2022/08/09 15:08:13: F Rumania Hold: Support = 0
+2022/08/09 15:08:14: F Rumania Hold succeeded
+2022/08/09 15:08:14: A Galicia Move to Rumania failed, changed to HOLD
+2022/08/09 15:08:14: A Galicia Hold succeeded
+2022/08/09 15:08:14: A Serbia Hold succeeded
+2022/08/09 15:08:14: A Moscow Move to Sevastopol: Support = 1
+2022/08/09 15:08:14: A Sevastopol Hold: Support = 0
+2022/08/09 15:08:15: A Moscow Move to Sevastopol succeeded
+2022/08/09 15:08:15: A Sevastopol Hold failed, needs to retreat
+2022/08/09 15:08:15: F Skagerrak Hold succeeded
+2022/08/09 15:08:15: F Gulf of Bothnia Move to Sweden succeeded
+2022/08/09 15:08:16: A Vienna Move to Trieste: Support = 2
+2022/08/09 15:08:16: A Trieste Hold: Support = 0
+2022/08/09 15:08:16: A Vienna Move to Trieste succeeded
+2022/08/09 15:08:16: A Trieste Hold failed, needs to retreat
+2022/08/09 15:08:16: A Ukraine Hold succeeded
+2022/08/09 15:08:17: F Adriatic Sea Move to Venice succeeded
+2022/08/09 15:08:17: A Tyrolia Move to Vienna succeeded
+2022/08/09 15:08:17: F Mid-Atlantic Ocean Move to Western Mediterranean succeeded
+2022/08/09 15:08:18: Order resolution completed
+2022/08/09 15:08:18: 
+2022/08/09 15:08:27: 3 units need to retreat
+2022/08/09 15:09:10: 
+2022/08/09 15:09:10: Resolving all orders for Fall 1902 retreat phase
+2022/08/09 15:09:10: ================================================
+2022/08/09 15:09:10: Current Orders:
+2022/08/09 15:09:10: Counting support
+2022/08/09 15:09:10: Finised checking supports for cuts
+2022/08/09 15:09:10: Counting supports
+2022/08/09 15:09:10: Finished counting support, setting support orders to HOLD
+2022/08/09 15:09:10: A Sevastopol Retreat to Armenia
+2022/08/09 15:09:11: A Trieste Retreat to Tyrolia
+2022/08/09 15:09:11: A Kiel Retreat to Ruhr
+2022/08/09 15:09:11: A Sevastopol Retreat to Armenia succeeded
+2022/08/09 15:09:11: A Kiel Retreat to Ruhr succeeded
+2022/08/09 15:09:11: A Trieste Retreat to Tyrolia succeeded
+2022/08/09 15:09:12: Order resolution completed
+2022/08/09 15:09:12: 
+2022/08/09 15:09:21: 0 units need to retreat
+2022/08/09 15:09:42: Checking for changes of ownership ...
+2022/08/09 15:09:42: Berlin changed from Russia to Germany
+2022/08/09 15:09:42: Serbia changed from Austria to Turkey
+2022/08/09 15:09:42: Holland changed from Nuetral to France
+2022/08/09 15:09:42: Marseilles changed from France to Italy
+2022/08/09 15:09:42: Sweden changed from Nuetral to Russia
+2022/08/09 15:09:42: Trieste changed from Italy to Austria
+2022/08/09 15:09:43: Denmark changed from Germany to England
+2022/08/09 15:09:43: Vienna changed from Austria to Italy
+2022/08/09 15:09:43: Cownership checking finished.
+2022/08/09 15:10:45: 
+2022/08/09 15:10:45: Resolving all orders for Fall 1902 create orders phase
+2022/08/09 15:10:45: ======================================================
+2022/08/09 15:10:45: Current Orders:
+2022/08/09 15:10:45: Counting support
+2022/08/09 15:10:45: checking cuts, Moscow to Sevastopol and Rumania to Rumania
+2022/08/09 15:10:45: Rumania to Rumania cut
+2022/08/09 15:10:45: checking cuts, A Moscow Move to Sevastopol and Rumania to Rumania
+2022/08/09 15:10:45: Rumania to Rumania cut
+2022/08/09 15:10:45: checking cuts, Sevastopol to Sevastopol and Rumania to Rumania
+2022/08/09 15:10:45: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/09 15:10:45: Sevastopol to Sevastopol cut
+2022/08/09 15:10:45: Rumania to Rumania cut (reset to HOLD
+2022/08/09 15:10:45: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/09 15:10:45: Tyrolia to Vienna cut
+2022/08/09 15:10:45: checking cuts, A Vienna Move to Trieste and Tyrolia to Vienna
+2022/08/09 15:10:45: Tyrolia to Vienna cut
+2022/08/09 15:10:45: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/09 15:10:45: Tyrolia to Vienna cut
+2022/08/09 15:10:45: Tyrolia to Vienna cut (reset to HOLD
+2022/08/09 15:10:45: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/09 15:10:45: Sevastopol to Sevastopol cut
+2022/08/09 15:10:45: Sevastopol to Sevastopol cut (reset to HOLD
+2022/08/09 15:10:45: Finised checking supports for cuts
+2022/08/09 15:10:45: Counting supports
+2022/08/09 15:10:45: Marseilles to Piedmont support added
+2022/08/09 15:10:45: Munich to Kiel support added
+2022/08/09 15:10:45: Vienna to Trieste support added
+2022/08/09 15:10:45: Vienna to Trieste support added
+2022/08/09 15:10:45: North Sea to Denmark support added
+2022/08/09 15:10:45: Picardy to Belgium support added
+2022/08/09 15:10:45: Moscow to Sevastopol support added
+2022/08/09 15:10:45: Finished counting support, setting support orders to HOLD
+2022/08/09 15:10:45: A Marseilles Move to Piedmont
+2022/08/09 15:10:45: A Ukraine Hold
+2022/08/09 15:10:45: A Munich Move to Kiel
+2022/08/09 15:10:45: F Adriatic Sea Move to Venice
+2022/08/09 15:10:45: A Holland Hold
+2022/08/09 15:10:46: A Piedmont Move to Marseilles
+2022/08/09 15:10:46: A Sevastopol Hold
+2022/08/09 15:10:46: F Gulf of Bothnia Move to Sweden
+2022/08/09 15:10:46: F Albania Hold
+2022/08/09 15:10:46: A Trieste Hold
+2022/08/09 15:10:46: A Vienna Move to Trieste
+2022/08/09 15:10:46: F North Sea Move to Denmark
+2022/08/09 15:10:46: F English Channel Hold
+2022/08/09 15:10:46: F Gulf of Lyon Hold
+2022/08/09 15:10:47: A Picardy Move to Belgium
+2022/08/09 15:10:47: A Tyrolia Move to Vienna
+2022/08/09 15:10:47: A Galicia Move to Rumania
+2022/08/09 15:10:47: A Constantinople Move to Bulgaria SC
+2022/08/09 15:10:47: F Aegean Sea Move to Greece
+2022/08/09 15:10:47: A Kiel Hold
+2022/08/09 15:10:47: A Moscow Move to Sevastopol
+2022/08/09 15:10:47: F Rumania Hold
+2022/08/09 15:10:47: A Berlin Hold
+2022/08/09 15:10:48: F Mid-Atlantic Ocean Move to Western Mediterranean
+2022/08/09 15:10:48: A Budapest Hold
+2022/08/09 15:10:48: A Serbia Hold
+2022/08/09 15:10:48: F Norwegian Sea Move to Barents Sea
+2022/08/09 15:10:48: F Baltic Sea Move to Denmark
+2022/08/09 15:10:48: A Norway Hold
+2022/08/09 15:10:48: F Skagerrak Hold
+2022/08/09 15:10:48: F Albania Hold succeeded
+2022/08/09 15:10:48: F Norwegian Sea Move to Barents Sea succeeded
+2022/08/09 15:10:49: A Picardy Move to Belgium succeeded
+2022/08/09 15:10:49: A Berlin Hold succeeded
+2022/08/09 15:10:49: A Budapest Hold succeeded
+2022/08/09 15:10:50: A Constantinople Move to Bulgaria SC succeeded
+2022/08/09 15:10:50: F North Sea Move to Denmark: Support = 1
+2022/08/09 15:10:50: F Baltic Sea Move to Denmark: Support = 0
+2022/08/09 15:10:50: F North Sea Move to Denmark succeeded
+2022/08/09 15:10:50: F Baltic Sea Move to Denmark failed, changed to HOLD
+2022/08/09 15:10:50: F Baltic Sea Hold succeeded
+2022/08/09 15:10:51: F English Channel Hold succeeded
+2022/08/09 15:10:51: F Aegean Sea Move to Greece succeeded
+2022/08/09 15:10:51: F Gulf of Lyon Hold succeeded
+2022/08/09 15:10:52: A Holland Hold succeeded
+2022/08/09 15:10:52: A Munich Move to Kiel: Support = 1
+2022/08/09 15:10:52: A Kiel Hold: Support = 0
+2022/08/09 15:10:52: A Munich Move to Kiel succeeded
+2022/08/09 15:10:53: A Kiel Hold failed, needs to retreat
+2022/08/09 15:10:53: A Piedmont Move to Marseilles succeeded
+2022/08/09 15:10:53: A Norway Hold succeeded
+2022/08/09 15:10:53: A Marseilles Move to Piedmont succeeded
+2022/08/09 15:10:54: A Galicia Move to Rumania: Support = 0
+2022/08/09 15:10:54: F Rumania Hold: Support = 0
+2022/08/09 15:10:54: F Rumania Hold succeeded
+2022/08/09 15:10:54: A Galicia Move to Rumania failed, changed to HOLD
+2022/08/09 15:10:54: A Galicia Hold succeeded
+2022/08/09 15:10:54: A Serbia Hold succeeded
+2022/08/09 15:10:55: A Moscow Move to Sevastopol: Support = 1
+2022/08/09 15:10:55: A Sevastopol Hold: Support = 0
+2022/08/09 15:10:55: A Moscow Move to Sevastopol succeeded
+2022/08/09 15:10:55: A Sevastopol Hold failed, needs to retreat
+2022/08/09 15:10:55: F Skagerrak Hold succeeded
+2022/08/09 15:10:56: F Gulf of Bothnia Move to Sweden succeeded
+2022/08/09 15:10:56: A Vienna Move to Trieste: Support = 2
+2022/08/09 15:10:56: A Trieste Hold: Support = 0
+2022/08/09 15:10:56: A Vienna Move to Trieste succeeded
+2022/08/09 15:10:56: A Trieste Hold failed, needs to retreat
+2022/08/09 15:10:57: A Ukraine Hold succeeded
+2022/08/09 15:10:57: F Adriatic Sea Move to Venice succeeded
+2022/08/09 15:10:57: A Tyrolia Move to Vienna succeeded
+2022/08/09 15:10:57: F Mid-Atlantic Ocean Move to Western Mediterranean succeeded
+2022/08/09 15:10:58: Order resolution completed
+2022/08/09 15:10:58: 
+2022/08/09 15:11:02: 3 units need to retreat
+2022/08/09 15:11:04: 
+2022/08/09 15:11:04: Resolving all orders for Fall 1902 retreat phase
+2022/08/09 15:11:04: ================================================
+2022/08/09 15:11:04: Current Orders:
+2022/08/09 15:11:04: Counting support
+2022/08/09 15:11:04: Finised checking supports for cuts
+2022/08/09 15:11:04: Counting supports
+2022/08/09 15:11:04: Finished counting support, setting support orders to HOLD
+2022/08/09 15:11:04: A Sevastopol Retreat to Armenia
+2022/08/09 15:11:04: A Trieste Retreat to Tyrolia
+2022/08/09 15:11:04: A Kiel Retreat to Ruhr
+2022/08/09 15:11:04: A Sevastopol Retreat to Armenia succeeded
+2022/08/09 15:11:05: A Kiel Retreat to Ruhr succeeded
+2022/08/09 15:11:05: A Trieste Retreat to Tyrolia succeeded
+2022/08/09 15:11:05: Order resolution completed
+2022/08/09 15:11:05: 
+2022/08/09 15:11:15: 0 units need to retreat
+2022/08/09 15:11:33: Checking for changes of ownership ...
+2022/08/09 15:11:33: Berlin changed from Russia to Germany
+2022/08/09 15:11:33: Serbia changed from Austria to Turkey
+2022/08/09 15:11:34: Holland changed from Nuetral to France
+2022/08/09 15:11:34: Marseilles changed from France to Italy
+2022/08/09 15:11:34: Sweden changed from Nuetral to Russia
+2022/08/09 15:11:34: Trieste changed from Italy to Austria
+2022/08/09 15:11:34: Denmark changed from Germany to England
+2022/08/09 15:11:34: Vienna changed from Austria to Italy
+2022/08/09 15:11:34: Cownership checking finished.
+2022/08/09 15:11:40: Checking for changes of ownership ...
+2022/08/09 15:11:40: Cownership checking finished.
+2022/08/09 15:11:45: 0 units need to retreat
+2022/08/09 15:15:12: 
+2022/08/09 15:15:12: Resolving all orders for Spring 1903 create orders phase
+2022/08/09 15:15:12: ========================================================
+2022/08/09 15:15:12: Current Orders:
+2022/08/09 15:15:12: Counting support
+2022/08/09 15:15:12: Finised checking supports for cuts
+2022/08/09 15:15:12: Counting supports
+2022/08/09 15:15:12: Finished counting support, setting support orders to HOLD
+2022/08/09 15:15:12: Order resolution completed
+2022/08/09 15:15:12: 
+2022/08/09 15:15:16: 0 units need to retreat
+2022/08/09 15:16:03: 
+2022/08/09 15:16:03: Resolving all orders for Fall 1902 create orders phase
+2022/08/09 15:16:03: ======================================================
+2022/08/09 15:16:03: Current Orders:
+2022/08/09 15:16:03: Counting support
+2022/08/09 15:16:03: checking cuts, Moscow to Sevastopol and Rumania to Rumania
+2022/08/09 15:16:03: Rumania to Rumania cut
+2022/08/09 15:16:03: checking cuts, A Moscow Move to Sevastopol and Rumania to Rumania
+2022/08/09 15:16:03: Rumania to Rumania cut
+2022/08/09 15:16:03: checking cuts, Sevastopol to Sevastopol and Rumania to Rumania
+2022/08/09 15:16:03: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/09 15:16:03: Sevastopol to Sevastopol cut
+2022/08/09 15:16:03: Rumania to Rumania cut (reset to HOLD
+2022/08/09 15:16:03: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/09 15:16:03: Tyrolia to Vienna cut
+2022/08/09 15:16:03: checking cuts, A Vienna Move to Trieste and Tyrolia to Vienna
+2022/08/09 15:16:03: Tyrolia to Vienna cut
+2022/08/09 15:16:03: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/09 15:16:03: Tyrolia to Vienna cut
+2022/08/09 15:16:03: Tyrolia to Vienna cut (reset to HOLD
+2022/08/09 15:16:03: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/09 15:16:03: Sevastopol to Sevastopol cut
+2022/08/09 15:16:03: Sevastopol to Sevastopol cut (reset to HOLD
+2022/08/09 15:16:03: Finised checking supports for cuts
+2022/08/09 15:16:03: Counting supports
+2022/08/09 15:16:04: Marseilles to Piedmont support added
+2022/08/09 15:16:04: Munich to Kiel support added
+2022/08/09 15:16:04: Vienna to Trieste support added
+2022/08/09 15:16:04: Vienna to Trieste support added
+2022/08/09 15:16:04: North Sea to Denmark support added
+2022/08/09 15:16:04: Picardy to Belgium support added
+2022/08/09 15:16:04: Moscow to Sevastopol support added
+2022/08/09 15:16:04: Finished counting support, setting support orders to HOLD
+2022/08/09 15:16:04: A Marseilles Move to Piedmont
+2022/08/09 15:16:04: A Ukraine Hold
+2022/08/09 15:16:04: A Munich Move to Kiel
+2022/08/09 15:16:04: F Adriatic Sea Move to Venice
+2022/08/09 15:16:04: A Holland Hold
+2022/08/09 15:16:04: A Piedmont Move to Marseilles
+2022/08/09 15:16:04: A Sevastopol Hold
+2022/08/09 15:16:04: F Gulf of Bothnia Move to Sweden
+2022/08/09 15:16:04: F Albania Hold
+2022/08/09 15:16:05: A Trieste Hold
+2022/08/09 15:16:05: A Vienna Move to Trieste
+2022/08/09 15:16:05: F North Sea Move to Denmark
+2022/08/09 15:16:05: F English Channel Hold
+2022/08/09 15:16:05: F Gulf of Lyon Hold
+2022/08/09 15:16:05: A Picardy Move to Belgium
+2022/08/09 15:16:05: A Tyrolia Move to Vienna
+2022/08/09 15:16:05: A Galicia Move to Rumania
+2022/08/09 15:16:05: A Constantinople Move to Bulgaria SC
+2022/08/09 15:16:06: F Aegean Sea Move to Greece
+2022/08/09 15:16:06: A Kiel Hold
+2022/08/09 15:16:06: A Moscow Move to Sevastopol
+2022/08/09 15:16:06: F Rumania Hold
+2022/08/09 15:16:06: A Berlin Hold
+2022/08/09 15:16:06: F Mid-Atlantic Ocean Move to Western Mediterranean
+2022/08/09 15:16:06: A Budapest Hold
+2022/08/09 15:16:06: A Serbia Hold
+2022/08/09 15:16:06: F Norwegian Sea Move to Barents Sea
+2022/08/09 15:16:06: F Baltic Sea Move to Denmark
+2022/08/09 15:16:07: A Norway Hold
+2022/08/09 15:16:07: F Skagerrak Hold
+2022/08/09 15:16:07: F Albania Hold succeeded
+2022/08/09 15:16:07: F Norwegian Sea Move to Barents Sea succeeded
+2022/08/09 15:16:07: A Picardy Move to Belgium succeeded
+2022/08/09 15:16:07: A Berlin Hold succeeded
+2022/08/09 15:16:08: A Budapest Hold succeeded
+2022/08/09 15:16:08: A Constantinople Move to Bulgaria SC succeeded
+2022/08/09 15:16:08: F North Sea Move to Denmark: Support = 1
+2022/08/09 15:16:08: F Baltic Sea Move to Denmark: Support = 0
+2022/08/09 15:16:09: F North Sea Move to Denmark succeeded
+2022/08/09 15:16:09: F Baltic Sea Move to Denmark failed, changed to HOLD
+2022/08/09 15:16:09: F Baltic Sea Hold succeeded
+2022/08/09 15:16:09: F English Channel Hold succeeded
+2022/08/09 15:16:09: F Aegean Sea Move to Greece succeeded
+2022/08/09 15:16:10: F Gulf of Lyon Hold succeeded
+2022/08/09 15:16:10: A Holland Hold succeeded
+2022/08/09 15:16:10: A Munich Move to Kiel: Support = 1
+2022/08/09 15:16:10: A Kiel Hold: Support = 0
+2022/08/09 15:16:11: A Munich Move to Kiel succeeded
+2022/08/09 15:16:11: A Kiel Hold failed, needs to retreat
+2022/08/09 15:16:11: A Piedmont Move to Marseilles succeeded
+2022/08/09 15:16:11: A Norway Hold succeeded
+2022/08/09 15:16:12: A Marseilles Move to Piedmont succeeded
+2022/08/09 15:16:12: A Galicia Move to Rumania: Support = 0
+2022/08/09 15:16:12: F Rumania Hold: Support = 0
+2022/08/09 15:16:12: F Rumania Hold succeeded
+2022/08/09 15:16:12: A Galicia Move to Rumania failed, changed to HOLD
+2022/08/09 15:16:12: A Galicia Hold succeeded
+2022/08/09 15:16:13: A Serbia Hold succeeded
+2022/08/09 15:16:13: A Moscow Move to Sevastopol: Support = 1
+2022/08/09 15:16:13: A Sevastopol Hold: Support = 0
+2022/08/09 15:16:13: A Moscow Move to Sevastopol succeeded
+2022/08/09 15:16:13: A Sevastopol Hold failed, needs to retreat
+2022/08/09 15:16:13: F Skagerrak Hold succeeded
+2022/08/09 15:16:14: F Gulf of Bothnia Move to Sweden succeeded
+2022/08/09 15:16:14: A Vienna Move to Trieste: Support = 2
+2022/08/09 15:16:14: A Trieste Hold: Support = 0
+2022/08/09 15:16:14: A Vienna Move to Trieste succeeded
+2022/08/09 15:16:15: A Trieste Hold failed, needs to retreat
+2022/08/09 15:16:15: A Ukraine Hold succeeded
+2022/08/09 15:16:15: F Adriatic Sea Move to Venice succeeded
+2022/08/09 15:16:15: A Tyrolia Move to Vienna succeeded
+2022/08/09 15:16:16: F Mid-Atlantic Ocean Move to Western Mediterranean succeeded
+2022/08/09 15:16:16: Order resolution completed
+2022/08/09 15:16:16: 
+2022/08/09 15:16:19: 3 units need to retreat
+2022/08/09 15:16:59: 
+2022/08/09 15:16:59: Resolving all orders for Fall 1902 retreat phase
+2022/08/09 15:16:59: ================================================
+2022/08/09 15:16:59: Current Orders:
+2022/08/09 15:16:59: Counting support
+2022/08/09 15:16:59: Finised checking supports for cuts
+2022/08/09 15:16:59: Counting supports
+2022/08/09 15:16:59: Finished counting support, setting support orders to HOLD
+2022/08/09 15:17:00: A Sevastopol Retreat to Armenia
+2022/08/09 15:17:00: A Trieste Retreat to Tyrolia
+2022/08/09 15:17:00: A Kiel Retreat to Ruhr
+2022/08/09 15:17:00: A Sevastopol Retreat to Armenia succeeded
+2022/08/09 15:17:00: A Kiel Retreat to Ruhr succeeded
+2022/08/09 15:17:00: A Trieste Retreat to Tyrolia succeeded
+2022/08/09 15:17:01: Order resolution completed
+2022/08/09 15:17:01: 
+2022/08/09 15:17:06: 0 units need to retreat
+2022/08/09 15:17:14: Checking for changes of ownership ...
+2022/08/09 15:17:14: Berlin changed from Russia to Germany
+2022/08/09 15:17:14: Serbia changed from Austria to Turkey
+2022/08/09 15:17:14: Holland changed from Nuetral to France
+2022/08/09 15:17:14: Marseilles changed from France to Italy
+2022/08/09 15:17:15: Sweden changed from Nuetral to Russia
+2022/08/09 15:17:15: Trieste changed from Italy to Austria
+2022/08/09 15:17:15: Denmark changed from Germany to England
+2022/08/09 15:17:15: Vienna changed from Austria to Italy
+2022/08/09 15:17:15: Cownership checking finished.
+2022/08/09 15:20:49: 
+2022/08/09 15:20:49: Resolving all orders for Fall 1902 create orders phase
+2022/08/09 15:20:49: ======================================================
+2022/08/09 15:20:49: Current Orders:
+2022/08/09 15:20:49: Counting support
+2022/08/09 15:20:49: checking cuts, Moscow to Sevastopol and Rumania to Rumania
+2022/08/09 15:20:49: Rumania to Rumania cut
+2022/08/09 15:20:49: checking cuts, A Moscow Move to Sevastopol and Rumania to Rumania
+2022/08/09 15:20:49: Rumania to Rumania cut
+2022/08/09 15:20:49: checking cuts, Sevastopol to Sevastopol and Rumania to Rumania
+2022/08/09 15:20:49: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/09 15:20:49: Sevastopol to Sevastopol cut
+2022/08/09 15:20:49: Rumania to Rumania cut (reset to HOLD
+2022/08/09 15:20:49: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/09 15:20:49: Tyrolia to Vienna cut
+2022/08/09 15:20:49: checking cuts, A Vienna Move to Trieste and Tyrolia to Vienna
+2022/08/09 15:20:49: Tyrolia to Vienna cut
+2022/08/09 15:20:49: checking cuts, Vienna to Trieste and Tyrolia to Vienna
+2022/08/09 15:20:49: Tyrolia to Vienna cut
+2022/08/09 15:20:49: Tyrolia to Vienna cut (reset to HOLD
+2022/08/09 15:20:49: checking cuts, A Galicia Move to Rumania and Sevastopol to Sevastopol
+2022/08/09 15:20:49: Sevastopol to Sevastopol cut
+2022/08/09 15:20:49: Sevastopol to Sevastopol cut (reset to HOLD
+2022/08/09 15:20:49: Finised checking supports for cuts
+2022/08/09 15:20:49: Counting supports
+2022/08/09 15:20:49: Marseilles to Piedmont support added
+2022/08/09 15:20:49: Munich to Kiel support added
+2022/08/09 15:20:49: Vienna to Trieste support added
+2022/08/09 15:20:49: Vienna to Trieste support added
+2022/08/09 15:20:49: North Sea to Denmark support added
+2022/08/09 15:20:49: Picardy to Belgium support added
+2022/08/09 15:20:49: Moscow to Sevastopol support added
+2022/08/09 15:20:49: Finished counting support, setting support orders to HOLD
+2022/08/09 15:20:49: A Marseilles Move to Piedmont
+2022/08/09 15:20:49: A Ukraine Hold
+2022/08/09 15:20:49: A Munich Move to Kiel
+2022/08/09 15:20:49: F Adriatic Sea Move to Venice
+2022/08/09 15:20:50: A Holland Hold
+2022/08/09 15:20:50: A Piedmont Move to Marseilles
+2022/08/09 15:20:50: A Sevastopol Hold
+2022/08/09 15:20:50: F Gulf of Bothnia Move to Sweden
+2022/08/09 15:20:50: F Albania Hold
+2022/08/09 15:20:50: A Trieste Hold
+2022/08/09 15:20:50: A Vienna Move to Trieste
+2022/08/09 15:20:50: F North Sea Move to Denmark
+2022/08/09 15:20:50: F English Channel Hold
+2022/08/09 15:20:51: F Gulf of Lyon Hold
+2022/08/09 15:20:51: A Picardy Move to Belgium
+2022/08/09 15:20:51: A Tyrolia Move to Vienna
+2022/08/09 15:20:51: A Galicia Move to Rumania
+2022/08/09 15:20:51: A Constantinople Move to Bulgaria SC
+2022/08/09 15:20:51: F Aegean Sea Move to Greece
+2022/08/09 15:20:51: A Kiel Hold
+2022/08/09 15:20:51: A Moscow Move to Sevastopol
+2022/08/09 15:20:51: F Rumania Hold
+2022/08/09 15:20:52: A Berlin Hold
+2022/08/09 15:20:52: F Mid-Atlantic Ocean Move to Western Mediterranean
+2022/08/09 15:20:52: A Budapest Hold
+2022/08/09 15:20:52: A Serbia Hold
+2022/08/09 15:20:52: F Norwegian Sea Move to Barents Sea
+2022/08/09 15:20:52: F Baltic Sea Move to Denmark
+2022/08/09 15:20:52: A Norway Hold
+2022/08/09 15:20:52: F Skagerrak Hold
+2022/08/09 15:20:52: F Albania Hold succeeded
+2022/08/09 15:20:53: F Norwegian Sea Move to Barents Sea succeeded
+2022/08/09 15:20:53: A Picardy Move to Belgium succeeded
+2022/08/09 15:20:53: A Berlin Hold succeeded
+2022/08/09 15:20:53: A Budapest Hold succeeded
+2022/08/09 15:20:54: A Constantinople Move to Bulgaria SC succeeded
+2022/08/09 15:20:54: F North Sea Move to Denmark: Support = 1
+2022/08/09 15:20:54: F Baltic Sea Move to Denmark: Support = 0
+2022/08/09 15:20:54: F North Sea Move to Denmark succeeded
+2022/08/09 15:20:54: F Baltic Sea Move to Denmark failed, changed to HOLD
+2022/08/09 15:20:55: F Baltic Sea Hold succeeded
+2022/08/09 15:20:55: F English Channel Hold succeeded
+2022/08/09 15:20:55: F Aegean Sea Move to Greece succeeded
+2022/08/09 15:20:55: F Gulf of Lyon Hold succeeded
+2022/08/09 15:20:56: A Holland Hold succeeded
+2022/08/09 15:20:56: A Munich Move to Kiel: Support = 1
+2022/08/09 15:20:56: A Kiel Hold: Support = 0
+2022/08/09 15:20:56: A Munich Move to Kiel succeeded
+2022/08/09 15:20:57: A Kiel Hold failed, needs to retreat
+2022/08/09 15:20:57: A Piedmont Move to Marseilles succeeded
+2022/08/09 15:20:57: A Norway Hold succeeded
+2022/08/09 15:20:57: A Marseilles Move to Piedmont succeeded
+2022/08/09 15:20:58: A Galicia Move to Rumania: Support = 0
+2022/08/09 15:20:58: F Rumania Hold: Support = 0
+2022/08/09 15:20:58: F Rumania Hold succeeded
+2022/08/09 15:20:58: A Galicia Move to Rumania failed, changed to HOLD
+2022/08/09 15:20:58: A Galicia Hold succeeded
+2022/08/09 15:20:58: A Serbia Hold succeeded
+2022/08/09 15:20:59: A Moscow Move to Sevastopol: Support = 1
+2022/08/09 15:20:59: A Sevastopol Hold: Support = 0
+2022/08/09 15:20:59: A Moscow Move to Sevastopol succeeded
+2022/08/09 15:20:59: A Sevastopol Hold failed, needs to retreat
+2022/08/09 15:20:59: F Skagerrak Hold succeeded
+2022/08/09 15:21:00: F Gulf of Bothnia Move to Sweden succeeded
+2022/08/09 15:21:00: A Vienna Move to Trieste: Support = 2
+2022/08/09 15:21:00: A Trieste Hold: Support = 0
+2022/08/09 15:21:00: A Vienna Move to Trieste succeeded
+2022/08/09 15:21:01: A Trieste Hold failed, needs to retreat
+2022/08/09 15:21:01: A Ukraine Hold succeeded
+2022/08/09 15:21:01: F Adriatic Sea Move to Venice succeeded
+2022/08/09 15:21:01: A Tyrolia Move to Vienna succeeded
+2022/08/09 15:21:01: F Mid-Atlantic Ocean Move to Western Mediterranean succeeded
+2022/08/09 15:21:02: Order resolution completed
+2022/08/09 15:21:02: 
+2022/08/09 15:21:05: 3 units need to retreat
+2022/08/09 15:21:30: 
+2022/08/09 15:21:30: Resolving all orders for Fall 1902 retreat phase
+2022/08/09 15:21:30: ================================================
+2022/08/09 15:21:30: Current Orders:
+2022/08/09 15:21:30: Counting support
+2022/08/09 15:21:30: Finised checking supports for cuts
+2022/08/09 15:21:30: Counting supports
+2022/08/09 15:21:30: Finished counting support, setting support orders to HOLD
+2022/08/09 15:21:30: A Sevastopol Retreat to Armenia
+2022/08/09 15:21:30: A Trieste Retreat to Tyrolia
+2022/08/09 15:21:30: A Kiel Retreat to Ruhr
+2022/08/09 15:21:31: A Sevastopol Retreat to Armenia succeeded
+2022/08/09 15:21:31: A Kiel Retreat to Ruhr succeeded
+2022/08/09 15:21:31: A Trieste Retreat to Tyrolia succeeded
+2022/08/09 15:21:31: Order resolution completed
+2022/08/09 15:21:31: 
+2022/08/09 15:21:48: 0 units need to retreat
+2022/08/09 15:22:01: Checking for changes of ownership ...
+2022/08/09 15:22:01: Berlin changed from Russia to Germany
+2022/08/09 15:22:01: Serbia changed from Austria to Turkey
+2022/08/09 15:22:01: Holland changed from Nuetral to France
+2022/08/09 15:22:01: Marseilles changed from France to Italy
+2022/08/09 15:22:01: Sweden changed from Nuetral to Russia
+2022/08/09 15:22:01: Trieste changed from Italy to Austria
+2022/08/09 15:22:02: Denmark changed from Germany to England
+2022/08/09 15:22:02: Vienna changed from Austria to Italy
+2022/08/09 15:22:02: Cownership checking finished.
+2022/08/09 15:22:49: Checking for changes of ownership ...
+2022/08/09 15:22:49: Cownership checking finished.
+2022/08/09 15:24:38: F Albania deleted.
+2022/08/09 15:25:02: F London created.
+2022/08/09 15:25:19: A Rome created.
+2022/08/09 15:25:39: F Smyrna created.
+2022/08/09 15:25:50: 0 units need to retreat
+2022/08/10 11:48:30: 
+2022/08/10 11:48:30: Resolving all orders for Spring 1903 create orders phase
+2022/08/10 11:48:30: ========================================================
+2022/08/10 11:48:30: Current Orders:
+2022/08/10 11:48:30: Counting support
+2022/08/10 11:48:30: checking cuts, Tyrolia to Trieste and Budapest to Budapest
+2022/08/10 11:48:30: Budapest to Budapest cut
+2022/08/10 11:48:30: checking cuts, A Tyrolia Move to Trieste and Budapest to Budapest
+2022/08/10 11:48:30: Budapest to Budapest cut
+2022/08/10 11:48:30: checking cuts, Tyrolia to Trieste and Budapest to Budapest
+2022/08/10 11:48:30: Budapest to Budapest cut
+2022/08/10 11:48:30: checking cuts, Trieste to Trieste and Budapest to Budapest
+2022/08/10 11:48:30: Budapest to Budapest cut
+2022/08/10 11:48:30: Budapest to Budapest cut (reset to HOLD
+2022/08/10 11:48:30: checking cuts, A Armenia Move to Sevastopol and Ukraine to Rumania
+2022/08/10 11:48:30: Ukraine to Rumania cut
+2022/08/10 11:48:30: Ukraine to Rumania cut (reset to HOLD
+2022/08/10 11:48:30: Finised checking supports for cuts
+2022/08/10 11:48:31: Counting supports
+2022/08/10 11:48:31: Piedmont to Marseilles support added
+2022/08/10 11:48:31: Ukraine to Rumania support added
+2022/08/10 11:48:31: Tyrolia to Trieste support added
+2022/08/10 11:48:31: Tyrolia to Trieste support added
+2022/08/10 11:48:31: Belgium to Ruhr support added
+2022/08/10 11:48:31: Berlin to Munich support added
+2022/08/10 11:48:31: Norway to Sweden support added
+2022/08/10 11:48:31: Finished counting support, setting support orders to HOLD
+2022/08/10 11:48:31: A Piedmont Move to Marseilles
+2022/08/10 11:48:31: A Ukraine Move to Rumania
+2022/08/10 11:48:31: A Kiel Hold
+2022/08/10 11:48:31: F Venice Hold
+2022/08/10 11:48:31: A Holland Hold
+2022/08/10 11:48:31: A Marseilles Hold
+2022/08/10 11:48:31: A Armenia Move to Sevastopol
+2022/08/10 11:48:31: F Sweden Move to Gulf of Bothnia
+2022/08/10 11:48:31: A Tyrolia Move to Trieste
+2022/08/10 11:48:31: A Trieste Hold
+2022/08/10 11:48:31: F Denmark Move to Baltic Sea
+2022/08/10 11:48:32: F English Channel Move to Belgium
+2022/08/10 11:48:32: F Gulf of Lyon Hold
+2022/08/10 11:48:32: A Belgium Move to Ruhr
+2022/08/10 11:48:32: A Vienna Hold
+2022/08/10 11:48:32: A Galicia Hold
+2022/08/10 11:48:32: A Bulgaria SC Hold
+2022/08/10 11:48:32: F Greece Move to Ionian Sea
+2022/08/10 11:48:32: F London Move to North Sea
+2022/08/10 11:48:32: A Rome Move to Tuscany
+2022/08/10 11:48:32: F Smyrna Move to Aegean Sea
+2022/08/10 11:48:33: A Ruhr Move to Munich
+2022/08/10 11:48:33: A Sevastopol Hold
+2022/08/10 11:48:33: F Rumania Hold
+2022/08/10 11:48:33: A Berlin Move to Munich
+2022/08/10 11:48:33: F Western Mediterranean Move to Tyrrhenian Sea
+2022/08/10 11:48:33: A Budapest Hold
+2022/08/10 11:48:33: A Serbia Hold
+2022/08/10 11:48:33: F Barents Sea Move to St Petersburg NC
+2022/08/10 11:48:33: F Baltic Sea Move to Gulf of Bothnia
+2022/08/10 11:48:33: A Norway Move to Sweden
+2022/08/10 11:48:33: F Skagerrak Hold
+2022/08/10 11:48:33: F Smyrna Move to Aegean Sea succeeded
+2022/08/10 11:48:34: F Denmark Move to Baltic Sea pending ...
+2022/08/10 11:48:34: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:34: A Budapest Hold succeeded
+2022/08/10 11:48:34: F Denmark Move to Baltic Sea pending ...
+2022/08/10 11:48:34: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:34: A Bulgaria SC Hold succeeded
+2022/08/10 11:48:34: F Denmark Move to Baltic Sea pending ...
+2022/08/10 11:48:34: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:34: A Galicia Hold succeeded
+2022/08/10 11:48:35: F Denmark Move to Baltic Sea pending ...
+2022/08/10 11:48:35: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:35: F Sweden Move to Gulf of Bothnia: Support = 0
+2022/08/10 11:48:35: F Baltic Sea Move to Gulf of Bothnia: Support = 0
+2022/08/10 11:48:35: F Baltic Sea Move to Gulf of Bothnia failed, changed to HOLD
+2022/08/10 11:48:35: F Sweden Move to Gulf of Bothnia failed, changed to HOLD
+2022/08/10 11:48:35: F Denmark Move to Baltic Sea: Support = 0
+2022/08/10 11:48:35: F Baltic Sea Hold: Support = 0
+2022/08/10 11:48:35: F Baltic Sea Hold succeeded
+2022/08/10 11:48:35: F Denmark Move to Baltic Sea failed, changed to HOLD
+2022/08/10 11:48:36: F Denmark Hold succeeded
+2022/08/10 11:48:36: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:36: A Norway Move to Sweden: Support = 1
+2022/08/10 11:48:36: F Sweden Hold: Support = 0
+2022/08/10 11:48:36: A Norway Move to Sweden succeeded
+2022/08/10 11:48:37: F Sweden Hold failed, needs to retreat
+2022/08/10 11:48:37: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:37: F Gulf of Lyon Hold succeeded
+2022/08/10 11:48:37: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:37: A Holland Hold succeeded
+2022/08/10 11:48:38: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:38: F Greece Move to Ionian Sea succeeded
+2022/08/10 11:48:38: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:38: A Kiel Hold succeeded
+2022/08/10 11:48:38: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:38: A Piedmont Move to Marseilles: Support = 1
+2022/08/10 11:48:38: A Marseilles Hold: Support = 0
+2022/08/10 11:48:39: A Piedmont Move to Marseilles succeeded
+2022/08/10 11:48:39: A Marseilles Hold failed, needs to retreat
+2022/08/10 11:48:39: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:39: A Berlin Move to Munich: Support = 1
+2022/08/10 11:48:39: A Ruhr Move to Munich: Support = 0
+2022/08/10 11:48:39: A Berlin Move to Munich succeeded
+2022/08/10 11:48:39: A Ruhr Move to Munich failed, changed to HOLD
+2022/08/10 11:48:40: F English Channel Move to Belgium pending ...
+2022/08/10 11:48:40: A Belgium Move to Ruhr: Support = 1
+2022/08/10 11:48:40: A Ruhr Hold: Support = 0
+2022/08/10 11:48:40: A Belgium Move to Ruhr succeeded
+2022/08/10 11:48:40: A Ruhr Hold failed, needs to retreat
+2022/08/10 11:48:40: F English Channel Move to Belgium succeeded
+2022/08/10 11:48:41: F London Move to North Sea succeeded
+2022/08/10 11:48:41: A Ukraine Move to Rumania: Support = 1
+2022/08/10 11:48:41: F Rumania Hold: Support = 0
+2022/08/10 11:48:41: A Ukraine Move to Rumania succeeded
+2022/08/10 11:48:42: F Rumania Hold failed, needs to retreat
+2022/08/10 11:48:42: A Serbia Hold succeeded
+2022/08/10 11:48:42: A Armenia Move to Sevastopol: Support = 0
+2022/08/10 11:48:42: A Sevastopol Hold: Support = 0
+2022/08/10 11:48:43: A Sevastopol Hold succeeded
+2022/08/10 11:48:43: A Armenia Move to Sevastopol failed, changed to HOLD
+2022/08/10 11:48:43: A Armenia Hold succeeded
+2022/08/10 11:48:44: F Skagerrak Hold succeeded
+2022/08/10 11:48:44: F Barents Sea Move to St Petersburg NC succeeded
+2022/08/10 11:48:45: A Tyrolia Move to Trieste: Support = 2
+2022/08/10 11:48:45: A Trieste Hold: Support = 0
+2022/08/10 11:48:45: A Tyrolia Move to Trieste succeeded
+2022/08/10 11:48:46: A Trieste Hold failed, needs to retreat
+2022/08/10 11:48:47: A Rome Move to Tuscany succeeded
+2022/08/10 11:48:47: F Western Mediterranean Move to Tyrrhenian Sea succeeded
+2022/08/10 11:48:48: F Venice Hold succeeded
+2022/08/10 11:48:48: A Vienna Hold succeeded
+2022/08/10 11:48:49: Order resolution completed
+2022/08/10 11:48:49: 
+2022/08/10 11:48:49: 5 units need to retreat
+2022/08/10 11:52:15: 
+2022/08/10 11:52:15: Resolving all orders for Spring 1903 retreat phase
+2022/08/10 11:52:15: ==================================================
+2022/08/10 11:52:15: Current Orders:
+2022/08/10 11:52:15: Counting support
+2022/08/10 11:52:15: Finised checking supports for cuts
+2022/08/10 11:52:15: Counting supports
+2022/08/10 11:52:15: Finished counting support, setting support orders to HOLD
+2022/08/10 11:52:15: A Marseilles Retreat to Spain SC
+2022/08/10 11:52:15: F Sweden Retreat to Finland
+2022/08/10 11:52:15: A Trieste Retreat to Albania
+2022/08/10 11:52:15: A Ruhr Retreat to Burgundy
+2022/08/10 11:52:15: F Rumania Retreat to Black Sea
+2022/08/10 11:52:15: A Trieste Retreat to Albania succeeded
+2022/08/10 11:52:16: F Rumania Retreat to Black Sea succeeded
+2022/08/10 11:52:16: A Ruhr Retreat to Burgundy succeeded
+2022/08/10 11:52:16: F Sweden Retreat to Finland succeeded
+2022/08/10 11:52:16: A Marseilles Retreat to Spain SC succeeded
+2022/08/10 11:52:17: Order resolution completed
+2022/08/10 11:52:17: 
+2022/08/10 11:52:17: 0 units need to retreat
+2022/08/11 09:57:03: 
+2022/08/11 09:57:03: Resolving all orders for Spring 1903 create orders phase
+2022/08/11 09:57:03: ========================================================
+2022/08/11 09:57:03: Current Orders:
+2022/08/11 09:57:03: Counting support
+2022/08/11 09:58:37: checking cuts, Tyrolia to Trieste and Budapest to Budapest
+2022/08/11 09:58:40: Budapest to Budapest cut
+2022/08/11 09:58:40: checking cuts, A Tyrolia Move to Trieste and Budapest to Budapest
+2022/08/11 09:58:40: Budapest to Budapest cut
+2022/08/11 09:58:40: checking cuts, Tyrolia to Trieste and Budapest to Budapest
+2022/08/11 09:58:41: Budapest to Budapest cut
+2022/08/11 09:58:41: checking cuts, Trieste to Trieste and Budapest to Budapest
+2022/08/11 09:58:54: Budapest to Budapest cut
+2022/08/11 09:58:54: Budapest to Budapest cut (reset to HOLD
+2022/08/11 10:05:19: 
+2022/08/11 10:05:19: Resolving all orders for Spring 1903 create orders phase
+2022/08/11 10:05:19: ========================================================
+2022/08/11 10:05:19: Current Orders:
+2022/08/11 10:05:19: Counting support
+2022/08/11 10:05:19: checking cuts, Tyrolia to Trieste and Budapest to Budapest
+2022/08/11 10:05:19: Budapest to Budapest cut
+2022/08/11 10:05:19: checking cuts, A Tyrolia Move to Trieste and Budapest to Budapest
+2022/08/11 10:05:19: Budapest to Budapest cut
+2022/08/11 10:05:19: checking cuts, Tyrolia to Trieste and Budapest to Budapest
+2022/08/11 10:05:19: Budapest to Budapest cut
+2022/08/11 10:05:19: checking cuts, Trieste to Trieste and Budapest to Budapest
+2022/08/11 10:05:19: Budapest to Budapest cut
+2022/08/11 10:05:19: Budapest to Budapest cut (reset to HOLD
+2022/08/11 10:05:19: checking cuts, A Armenia Move to Sevastopol and Ukraine to Rumania
+2022/08/11 10:05:19: Ukraine to Rumania cut
+2022/08/11 10:05:19: Ukraine to Rumania cut (reset to HOLD
+2022/08/11 10:05:19: Finised checking supports for cuts
+2022/08/11 10:05:19: Counting supports
+2022/08/11 10:05:19: Piedmont to Marseilles support added
+2022/08/11 10:05:19: Ukraine to Rumania support added
+2022/08/11 10:05:19: Tyrolia to Trieste support added
+2022/08/11 10:05:19: Tyrolia to Trieste support added
+2022/08/11 10:05:19: Trieste to Trieste support added
+2022/08/11 10:05:19: Belgium to Ruhr support added
+2022/08/11 10:05:19: Rumania to Rumania support added
+2022/08/11 10:05:19: Rumania to Rumania support added
+2022/08/11 10:05:19: Berlin to Munich support added
+2022/08/11 10:05:19: Norway to Sweden support added
+2022/08/11 10:05:19: Finished counting support, setting support orders to HOLD
+2022/08/11 10:05:19: A Piedmont Move to Marseilles
+2022/08/11 10:05:20: A Ukraine Move to Rumania
+2022/08/11 10:05:20: A Kiel Hold
+2022/08/11 10:05:20: F Venice Hold
+2022/08/11 10:05:20: A Holland Hold
+2022/08/11 10:05:20: A Marseilles Hold
+2022/08/11 10:05:20: A Armenia Move to Sevastopol
+2022/08/11 10:05:20: F Sweden Move to Gulf of Bothnia
+2022/08/11 10:05:20: A Tyrolia Move to Trieste
+2022/08/11 10:05:20: A Trieste Hold
+2022/08/11 10:05:21: F Denmark Move to Baltic Sea
+2022/08/11 10:05:21: F English Channel Move to Belgium
+2022/08/11 10:05:21: F Gulf of Lyon Hold
+2022/08/11 10:05:21: A Belgium Move to Ruhr
+2022/08/11 10:05:21: A Vienna Hold
+2022/08/11 10:05:21: A Galicia Hold
+2022/08/11 10:05:21: A Bulgaria SC Hold
+2022/08/11 10:05:21: F Greece Move to Ionian Sea
+2022/08/11 10:05:21: F London Move to North Sea
+2022/08/11 10:05:22: A Rome Move to Tuscany
+2022/08/11 10:05:22: F Smyrna Move to Aegean Sea
+2022/08/11 10:05:22: A Ruhr Move to Munich
+2022/08/11 10:05:22: A Sevastopol Hold
+2022/08/11 10:05:22: F Rumania Hold
+2022/08/11 10:05:22: A Berlin Move to Munich
+2022/08/11 10:05:22: F Western Mediterranean Move to Tyrrhenian Sea
+2022/08/11 10:05:22: A Budapest Hold
+2022/08/11 10:05:22: A Serbia Hold
+2022/08/11 10:05:23: F Barents Sea Move to St Petersburg NC
+2022/08/11 10:05:23: F Baltic Sea Move to Gulf of Bothnia
+2022/08/11 10:05:23: A Norway Move to Sweden
+2022/08/11 10:05:23: F Skagerrak Hold
+2022/08/11 10:05:23: F Smyrna Move to Aegean Sea succeeded
+2022/08/11 10:05:23: F Denmark Move to Baltic Sea pending ...
+2022/08/11 10:05:23: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:23: A Budapest Hold succeeded
+2022/08/11 10:05:23: F Denmark Move to Baltic Sea pending ...
+2022/08/11 10:05:23: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:23: A Bulgaria SC Hold succeeded
+2022/08/11 10:05:24: F Denmark Move to Baltic Sea pending ...
+2022/08/11 10:05:24: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:24: A Galicia Hold succeeded
+2022/08/11 10:05:24: F Denmark Move to Baltic Sea pending ...
+2022/08/11 10:05:24: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:24: F Sweden Move to Gulf of Bothnia: Support = 0
+2022/08/11 10:05:24: F Baltic Sea Move to Gulf of Bothnia: Support = 0
+2022/08/11 10:05:24: F Baltic Sea Move to Gulf of Bothnia failed, changed to HOLD
+2022/08/11 10:05:24: F Sweden Move to Gulf of Bothnia failed, changed to HOLD
+2022/08/11 10:05:24: F Denmark Move to Baltic Sea: Support = 0
+2022/08/11 10:05:24: F Baltic Sea Hold: Support = 0
+2022/08/11 10:05:25: F Baltic Sea Hold succeeded
+2022/08/11 10:05:25: F Denmark Move to Baltic Sea failed, changed to HOLD
+2022/08/11 10:05:25: F Denmark Hold succeeded
+2022/08/11 10:05:25: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:25: A Norway Move to Sweden: Support = 1
+2022/08/11 10:05:25: F Sweden Hold: Support = 0
+2022/08/11 10:05:25: A Norway Move to Sweden succeeded
+2022/08/11 10:05:26: F Sweden Hold failed, needs to retreat
+2022/08/11 10:05:26: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:26: F Gulf of Lyon Hold succeeded
+2022/08/11 10:05:26: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:26: A Holland Hold succeeded
+2022/08/11 10:05:27: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:27: F Greece Move to Ionian Sea succeeded
+2022/08/11 10:05:27: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:27: A Kiel Hold succeeded
+2022/08/11 10:05:27: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:27: A Piedmont Move to Marseilles: Support = 1
+2022/08/11 10:05:27: A Marseilles Hold: Support = 0
+2022/08/11 10:05:28: A Piedmont Move to Marseilles succeeded
+2022/08/11 10:05:28: A Marseilles Hold failed, needs to retreat
+2022/08/11 10:05:28: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:28: A Berlin Move to Munich: Support = 1
+2022/08/11 10:05:28: A Ruhr Move to Munich: Support = 0
+2022/08/11 10:05:28: A Berlin Move to Munich succeeded
+2022/08/11 10:05:28: A Ruhr Move to Munich failed, changed to HOLD
+2022/08/11 10:05:28: F English Channel Move to Belgium pending ...
+2022/08/11 10:05:28: A Belgium Move to Ruhr: Support = 1
+2022/08/11 10:05:28: A Ruhr Hold: Support = 0
+2022/08/11 10:05:29: A Belgium Move to Ruhr succeeded
+2022/08/11 10:05:29: A Ruhr Hold failed, needs to retreat
+2022/08/11 10:05:29: F English Channel Move to Belgium succeeded
+2022/08/11 10:05:29: F London Move to North Sea succeeded
+2022/08/11 10:05:30: F Rumania Hold: Support = 2
+2022/08/11 10:05:30: A Ukraine Move to Rumania: Support = 1
+2022/08/11 10:05:30: F Rumania Hold succeeded
+2022/08/11 10:05:30: A Ukraine Move to Rumania failed, changed to HOLD
+2022/08/11 10:05:30: A Ukraine Hold succeeded
+2022/08/11 10:05:30: A Serbia Hold succeeded
+2022/08/11 10:05:31: A Armenia Move to Sevastopol: Support = 0
+2022/08/11 10:05:31: A Sevastopol Hold: Support = 0
+2022/08/11 10:05:31: A Sevastopol Hold succeeded
+2022/08/11 10:05:31: A Armenia Move to Sevastopol failed, changed to HOLD
+2022/08/11 10:05:31: A Armenia Hold succeeded
+2022/08/11 10:05:31: F Skagerrak Hold succeeded
+2022/08/11 10:05:32: F Barents Sea Move to St Petersburg NC succeeded
+2022/08/11 10:05:32: A Tyrolia Move to Trieste: Support = 2
+2022/08/11 10:05:32: A Trieste Hold: Support = 1
+2022/08/11 10:05:32: A Tyrolia Move to Trieste succeeded
+2022/08/11 10:05:33: A Trieste Hold failed, needs to retreat
+2022/08/11 10:05:33: A Rome Move to Tuscany succeeded
+2022/08/11 10:05:33: F Western Mediterranean Move to Tyrrhenian Sea succeeded
+2022/08/11 10:05:33: F Venice Hold succeeded
+2022/08/11 10:05:34: A Vienna Hold succeeded
+2022/08/11 10:05:34: Order resolution completed
+2022/08/11 10:05:34: 
+2022/08/11 10:05:34: 4 units need to retreat
+2022/08/11 10:08:01: 
+2022/08/11 10:08:01: Resolving all orders for Spring 1903 retreat phase
+2022/08/11 10:08:01: ==================================================
+2022/08/11 10:08:01: Current Orders:
+2022/08/11 10:08:01: Counting support
+2022/08/11 10:08:01: Finised checking supports for cuts
+2022/08/11 10:08:01: Counting supports
+2022/08/11 10:08:01: Finished counting support, setting support orders to HOLD
+2022/08/11 10:08:01: A Marseilles Retreat to Spain SC
+2022/08/11 10:08:01: F Sweden Retreat to Finland
+2022/08/11 10:08:01: A Trieste Retreat to Albania
+2022/08/11 10:08:01: A Ruhr Retreat to Burgundy
+2022/08/11 10:08:01: A Trieste Retreat to Albania succeeded
+2022/08/11 10:08:02: A Ruhr Retreat to Burgundy succeeded
+2022/08/11 10:08:02: F Sweden Retreat to Finland succeeded
+2022/08/11 10:08:02: A Marseilles Retreat to Spain SC succeeded
+2022/08/11 10:08:03: Order resolution completed
+2022/08/11 10:08:03: 
+2022/08/11 10:08:03: 0 units need to retreat
+2022/09/18 12:14:03: 
+2022/09/18 12:14:03: Resolving all orders for Fall 1903 create orders phase
+2022/09/18 12:14:03: ======================================================
+2022/09/18 12:14:03: Current Orders:
+2022/09/18 12:14:03: Counting support
+2022/09/18 12:14:03: Error: null
+2022/09/18 12:15:42: 
+2022/09/18 12:15:42: Resolving all orders for Fall 1903 create orders phase
+2022/09/18 12:15:42: ======================================================
+2022/09/18 12:15:42: Current Orders:
+2022/09/18 12:15:42: Counting support
+2022/09/18 12:15:42: Error: null
+2022/09/18 12:16:20: 
+2022/09/18 12:16:20: Resolving all orders for Fall 1903 create orders phase
+2022/09/18 12:16:20: ======================================================
+2022/09/18 12:16:20: Current Orders:
+2022/09/18 12:16:20: Counting support
+2022/09/18 12:26:58: 
+2022/09/18 12:26:58: Resolving all orders for Fall 1903 create orders phase
+2022/09/18 12:26:58: ======================================================
+2022/09/18 12:26:58: Current Orders:
+2022/09/18 12:26:58: Counting support
+2022/09/18 12:29:39: 
+2022/09/18 12:29:39: Resolving all orders for Fall 1903 create orders phase
+2022/09/18 12:29:39: ======================================================
+2022/09/18 12:29:39: Current Orders:
+2022/09/18 12:29:39: Counting support
+2022/09/18 12:30:07: Error in findOrdersTargettingRegion for ukr, order: A Spain SC Hold 1797
+2022/09/18 12:30:07: Error: null

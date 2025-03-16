@@ -278,12 +278,13 @@ public class DataAccessor {
      * Inserts a new record into a table
      * @param tableName Table to insert into
      * @param vals Record containing the fields to insert
-     * @param hasKey True if the table will generate a key value
+     * @param keyField name of a numeric keyfield to generate a new key for. 
+     *                 null if no numeric key field.
      * @return if haskey is true the value of the new key, otherwise -1
      */
     public int insertRecord (String tableName, 
                              Record vals, 
-                             boolean hasKey) {
+                             String keyField) {
         int key = -1;
         String sql;
         Connection conn = null;
@@ -299,6 +300,12 @@ public class DataAccessor {
         ArrayList<String> fieldList = vals.getAllFieldNames();
         boolean first = true;
         
+        if (keyField != null){
+            sql += keyField;
+            
+            first = false;
+        }
+        
         //Add the comma delimited list of field names
         for (String field : fieldList){
             if (first) {
@@ -313,6 +320,14 @@ public class DataAccessor {
         
         //Now add the comma separated values
         first = true;
+        
+        if (keyField != null){
+            key = getMaxValue (tableName, keyField) + 1;
+            
+            sql += key;
+            first = false;
+        }
+        
         for (String field : fieldList){
             int intVal;
             boolean boolVal;
@@ -370,16 +385,8 @@ public class DataAccessor {
                 stmt.execute(sql);
                 
                 //if there isn't a key indicate success by setting key to 0
-                if (!hasKey)
+                if (keyField == null)
                     key = 0;
-                else {
-                    //Otherwise select the key value
-                    sql = "select last_insert_rowid();";
-                    
-                    ResultSet rs    = stmt.executeQuery(sql);
-                    
-                    key = rs.getInt("last_insert_rowid()");
-                }
             } 
 
         } catch (SQLException e) {
@@ -894,7 +901,7 @@ public class DataAccessor {
      */
     public boolean clearTable (String tableName) {
         boolean success = true;
-                String sql;
+        String sql;
         Connection conn = null;
         
         //At least start optimistic
@@ -940,6 +947,58 @@ public class DataAccessor {
         }
  
         return success;
+    }
+    
+    public int getMaxValue (String tableName, String keyField) {
+        int max = 0;
+        
+        ResultSet rs = null;
+        String sql;
+        
+        sql = "SELECT max (" + keyField + ") as maxvalue FROM " + tableName;
+        
+                Connection conn = null;
+        try {
+
+            
+            conn = connect();
+
+            if (conn != null) {
+                Statement stmt = conn.createStatement();
+
+                rs = stmt.executeQuery(sql);
+                
+                if (rs.isBeforeFirst()){
+                    rs.next();
+                }
+                
+                max = rs.getInt("maxvalue");
+            }
+        } catch (SQLException e) {
+        
+        max = -1;
+        errorMsg = e.getMessage();
+        sqlState = e.getSQLState();
+        errNo = e.getErrorCode();
+        Logger.getLogger(DataAccessor.class.getName()).log(Level.SEVERE, null, e);
+        
+        } 
+        catch (IOException ex) {
+            Logger.getLogger(DataAccessor.class.getName()).log(Level.SEVERE, null, ex);
+            errorMsg = ex.getMessage();
+            errNo = 1;
+            
+        }    finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    
+        return max;
     }
     
 }

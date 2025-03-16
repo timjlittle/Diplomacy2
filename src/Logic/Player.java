@@ -81,21 +81,24 @@ public class Player {
     public ArrayList<Unit> getRetreatUnits () {
         ArrayList<Unit> retreatList = new ArrayList<>();
         
-        for (Unit u : units) {
+        for (Unit candidate : units) {
             //reset the order
-            if (u.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED) {
-                u.getCurrentOrder().setCommand(Order.OrderType.RETREAT);
-                u.getCurrentOrder().setOrigin(u.getPosition());
-                u.getCurrentOrder().setState(Order.ORDER_STATE.UNSEEN);
+            if (candidate.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED) {
+                candidate.getCurrentOrder().setCommand(Order.OrderType.RETREAT);
+                candidate.getCurrentOrder().setOrigin(candidate.getPosition());
+                candidate.getCurrentOrder().setState(Order.ORDER_STATE.UNSEEN);
                 //default to the first on the list of possible retreats
-                u.getCurrentOrder().setDest(u.getPossibleRetreats().get(0));
+                candidate.getCurrentOrder().setDest(candidate.getPossibleRetreats().get(0));
                 
-                retreatList.add(u);
+                retreatList.add(candidate);
             }
             
-            if (u.getCurrentOrder().getCommand() == Order.OrderType.RETREAT && 
-                    u.getCurrentOrder().getState() == Order.ORDER_STATE.UNSEEN){
-                retreatList.add(u);
+            if (candidate.getCurrentOrder().getCommand() == Order.OrderType.RETREAT && 
+                    candidate.getCurrentOrder().getState() == Order.ORDER_STATE.UNSEEN){
+                
+                if (!retreatList.contains(candidate)){
+                    retreatList.add(candidate);
+                }
             }
         }
         

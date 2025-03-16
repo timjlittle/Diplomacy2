@@ -9,6 +9,7 @@ package Logic;
 import Data.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.simple.JSONObject;
 
 /**
  * The instructions for an individual unitId.
@@ -28,8 +29,6 @@ public class Order implements Comparable<Order> {
     private int turn;
     private String destinationName;
     private String originName;
-    private String unitType;
-    private String unitLocationName;
     private Border dest = null;
     private Border origin = null;
     private int supportCount = 0;
@@ -148,7 +147,7 @@ public class Order implements Comparable<Order> {
         
         if (orderId == -1) {
             //If it is a new order insert into the table and get the new ID
-            orderId = db.insertRecord("command", fields, true);
+            orderId = db.insertRecord("command", fields, "orderId");
             
             if (orderId > 0) {
                 success = true;
@@ -234,6 +233,9 @@ public class Order implements Comparable<Order> {
         if (dest != null) {
             this.destinationId = dest.getBorderId();
             this.destinationName = dest.getBorderName();
+        } else {
+            this.destinationId = -1;
+            this.destinationName = "";
         }
     }
 
@@ -246,6 +248,9 @@ public class Order implements Comparable<Order> {
         if  (origin != null) {        
             this.originId = origin.getBorderId();
             this.originName = origin.getBorderName();
+        } else {
+            this.originId = -1;
+            this.originName = "";
         }
     }
 
@@ -506,7 +511,7 @@ public class Order implements Comparable<Order> {
     public String toString () {
         String ret;
         
-        ret = unit.getTypeCode() + " " + unit.getPosition().getBorderName() + " " + getCommandTypeAsString ();
+        ret = unit.getTypeCode() + " " + unit.getPosition().getBorderName() + " " + getCommandTypeAsString () + " ";
         
         switch (command) {
             case HOLD:
@@ -515,12 +520,12 @@ public class Order implements Comparable<Order> {
                 
             case MOVE:
             case RETREAT:
-                ret += " to " + destinationName;
+                ret += "to " + destinationName;
                 break;
                 
             case SUPPORT:
             case CONVOY:
-                ret = originName + " to " + destinationName;
+                ret += originName + " to " + destinationName;
                 break;               
         }
         
@@ -533,4 +538,17 @@ public class Order implements Comparable<Order> {
         this.setDest(unit.getPosition());
     }
     
+    public JSONObject getJSON () {
+        JSONObject json = new JSONObject();
+
+        json.put ("orderId",  orderId);
+        json.put ("command", command);
+        json.put ("destinationId", destinationId);
+        json.put ("originId", originId);
+        json.put ("beingConvoyed", beingConvoyed);
+        json.put ("unit", unit);
+        json.put ("turn", turn);
+        
+        return json;
+    }
 }

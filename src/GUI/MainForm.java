@@ -290,6 +290,10 @@ public class MainForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_actButtonActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void settingsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsMenuItemActionPerformed
         PropsEditorForm propsEditor = new PropsEditorForm (this, true);
         
@@ -298,6 +302,10 @@ public class MainForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_settingsMenuItemActionPerformed
 
+    /**
+     * Populate the lefthand tree.
+     * Depends on whether retreats, builds or move orders
+     */
     private void drawTree () {
         
         rootNode.removeAllChildren();

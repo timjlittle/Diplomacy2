@@ -275,10 +275,20 @@ public class GameInfoForm extends javax.swing.JFrame {
     private String readCurrentOrders () {
         String orderDetails = "";
         
-        for (Map.Entry m : currentGame.getAllOrders().entrySet()) {
-            Order o = (Order) m.getValue();
+        for (Map.Entry playerMap : currentGame.getAllPlayers().entrySet()){
+            Player curPlayer = (Player)playerMap.getValue();
             
-            orderDetails += o.toString() + "\n";
+            if (curPlayer.getPlayerId() > 0){
+                orderDetails += curPlayer.getPlayerName() + "(" + curPlayer.getUnits().size() + ") :\n";
+
+                for (int x =0; x< curPlayer.getUnits().size(); x++){
+                    Unit curUnit = curPlayer.getUnits().get(x);
+
+                    orderDetails += curUnit.getCurrentOrder().toString() + "\n";
+                }
+
+                orderDetails += "\n";
+            }
         }
         
         return orderDetails;

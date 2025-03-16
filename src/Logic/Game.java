@@ -6,6 +6,7 @@
 package Logic;
 
 import Data.*;
+import GUI.BuildForm;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  * Class that implements the main game. Holds the lists of the various
@@ -462,14 +464,25 @@ public class Game {
      */
     private LinkedList<Order> findOrdersTargettingRegion(String targetCode) {
         LinkedList<Order> ret = new LinkedList<>();
+        String debugStr = "";
+        
+        try {
         for (Map.Entry m : allOrders.entrySet()) {
             Order o = (Order) m.getValue();
 
+            debugStr = o.toString() + o.getOrderId();
             String regCode = o.getDest().getRegion().getRegionCode();
 
             if (regCode.compareTo(targetCode) == 0 && o.getState() != Order.ORDER_STATE.FAILED) {
                 ret.add(o);
             }
+        }
+        } catch (Exception e) {
+            GameLogger g = new GameLogger();
+            
+            g.logMessage("Error in findOrdersTargettingRegion for " + targetCode + ", order: " + debugStr);
+            
+            throw (e);
         }
 
         return ret;
@@ -504,6 +517,7 @@ public class Game {
      */
     private boolean checkForCuts(Order order) {
         boolean cut = false;
+        GameLogger g = new GameLogger();
 
         int unitId = order.getUnitId();
         Unit unit = allUnits.get(unitId);
@@ -515,10 +529,13 @@ public class Game {
             for (Order o : findOrdersTargettingRegion(unit.getPosition().getRegion().getRegionCode())) {
 
                 //Ignore the original order and any orders supporting/convoying this order
-                if (o.getOrderId() != order.getOrderId() && o.getState() != Order.ORDER_STATE.FAILED) {
+                if (o.getOrderId() != order.getOrderId() && o.getState() != Order.ORDER_STATE.FAILED  && !o.isCut()) {
                     //check that the cutting order hasn't been cut.
+                    g.logMessage("checking cuts, " + o.toString() + " and " + order.toString());
                     if (!checkForCuts(o)) {
                         cut = true;
+                        g.logMessage (order.toString() + " cut");
+                        order.setCut(true);
                         //order.setState(Order.ORDER_STATE.FAILED);
                     }
 
@@ -554,7 +571,7 @@ public class Game {
                 }
             }
 
-            if (order.getCommand() == Order.OrderType.MOVE) {
+            if (order.getCommand() == Order.OrderType.MOVE || order.getCommand() == Order.OrderType.HOLD) {
                 moveList.add(order);
             }
 
@@ -962,6 +979,7 @@ public class Game {
 
             if ((currentUnit.getCurrentOrder().getState() == Order.ORDER_STATE.FAILED)
                     || ((currentUnit.getCurrentOrder().getCommand() == Order.OrderType.RETREAT) && (currentUnit.getCurrentOrder().getState() != Order.ORDER_STATE.SUCCEEDED))) {
+                
                 LinkedList<Border> retreats = currentUnit.getPossibleRetreats();
 
                 if (retreats.isEmpty()) {
@@ -1014,7 +1032,7 @@ public class Game {
                 changeSupplyPointOwnership();
                 
                 //check for a winner
-                if (getWinner() != null) {
+                if (getWinner() == null) {
                     //if builds are needed
                     if (isBuildNeeded()) {
                         props.setPhase(Props.Phase.BUILD);
@@ -1236,4 +1254,28 @@ public class Game {
         return winner;
     }
 
+    public void resolveBuilds (Object[] buildUnits, BuildForm.BuildMode mode) throws DataAccessException{
+        for (int x = 0; x < buildUnits.length; x++){
+            Unit unit = (Unit)buildUnits[x];
+            GameLogger g = new GameLogger();
+            
+            if (mode == BuildForm.BuildMode.BUILD) {
+                unit.save();
+                
+                g.logMessage(unit + " created.");
+                
+            } else {
+                try {
+                    unit.delete();
+                    g.logMessage(unit + " deleted.");
+                    allUnits.remove(unit.getUnitId());
+                } catch (DataAccessException ex) {
+                    Logger.getLogger(BuildForm.class.getName()).log(Level.SEVERE, null, ex);
+                    g.logMessage("Error: " + ex.getMessage() + " : " + unit.toString());
+                    throw ex;
+                }
+            }
+        }
+    }
+    
 }

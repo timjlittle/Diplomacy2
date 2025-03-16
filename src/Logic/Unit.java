@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.simple.JSONObject;
 
 /**
  * Class that represents either an army or a fleet  on the board
@@ -25,9 +26,11 @@ public class Unit {
     private int ownerId;
     private boolean disbanded;
     private Order currentOrder = null;
+    private Border victorOrigin = null;
+    
     private int errNo;
     private String errMsg;
-    private Border victorOrigin = null;
+    
     
     
     public Unit(int unitId, UnitType unitType, Border position, int ownerId, boolean disbanded, Border defeatedBy) {
@@ -165,7 +168,7 @@ public class Unit {
         
         //If the key is -1 then we need to insert and get the keyfield
         if (unitId == -1) {
-            unitId = db.insertRecord("Unit", fields, true);
+            unitId = db.insertRecord("Unit", fields, "unitid");
             
             if (unitId >= 0) {
                 success = true;
@@ -240,17 +243,17 @@ public class Unit {
             
             Props props = new Props ();
             
-            for (Border b : possibles) {
-                if (!b.getRegion().isOccupied() &&
-                        b.getRegion().getRegionCode() != currentOrder.getRegionBeatenFrom() &&
-                        b.getRegion().getStandoff() != props.getTurn()) {
+            for (Border possibleDest : possibles) {
+                if (!possibleDest.getRegion().isOccupied() &&
+                        !possibleDest.getRegion().getRegionCode().equalsIgnoreCase(currentOrder.getRegionBeatenFrom()) &&
+                        possibleDest.getRegion().getStandoff() != props.getTurn()) {
                     
                     //Make sure that the unit can retreat
-                    if (b.getType() == Border.BorderType.COAST ||
-                            (b.getType() == Border.BorderType.LAND && unitType == Unit.UnitType.ARMY) ||
-                            b.getType() == Border.BorderType.SEA && unitType == UnitType.FLEET)
+                    if (possibleDest.getType() == Border.BorderType.COAST ||
+                            (possibleDest.getType() == Border.BorderType.LAND && unitType == Unit.UnitType.ARMY) ||
+                            possibleDest.getType() == Border.BorderType.SEA && unitType == UnitType.FLEET)
                         
-                        ret.add(b);
+                        ret.add(possibleDest);
                 }
             }
             
@@ -262,5 +265,21 @@ public class Unit {
         return ret;
     }
     
+    public JSONObject getJSON () {
+        JSONObject json = new JSONObject();
+        
+    json.put ("unitId", unitId);
+    json.put ("unitType", getTypeCode());
+    json.put ("position", position.getBorderId());
+    json.put ("ownerId", ownerId);
+    json.put ("disbanded", disbanded);
+    if (victorOrigin != null) {
+        json.put ("victorOrigin", victorOrigin.getBorderId());
+    } else {
+        json.put ("victorOrigin", null);
+    }
+        
+        return json;
+    }
     
 }

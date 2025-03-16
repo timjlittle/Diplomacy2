@@ -5,14 +5,13 @@
  */
 package GUI;
 
+
 import Data.DataAccessException;
-import Data.GameLogger;
 import Logic.*;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -25,8 +24,8 @@ public class BuildForm extends javax.swing.JDialog {
     Game gameDetails;
     Player player;
     int maxBuilds;
-    private enum Mode {BUILD, DISBAND, EVEN};
-    private Mode mode = Mode.EVEN;
+    public enum BuildMode {BUILD, DISBAND, EVEN};
+    private BuildMode mode = BuildMode.EVEN;
     
     DefaultListModel availableModel = new DefaultListModel();
     DefaultListModel ordersModel = new DefaultListModel();
@@ -188,7 +187,7 @@ public class BuildForm extends javax.swing.JDialog {
 
             availableModel.remove(availableListBox.getSelectedIndex());
             
-            if (mode == Mode.BUILD) {
+            if (mode == BuildMode.BUILD) {
                 Region r = (Region)o;
                 Border border;
                 Unit.UnitType unitType = Unit.UnitType.ARMY;
@@ -251,7 +250,7 @@ public class BuildForm extends javax.swing.JDialog {
         if (ordersListBox.getSelectedIndex() >= 0){
             Unit unit = (Unit)ordersModel.get(ordersListBox.getSelectedIndex());
             
-            if (mode == Mode.BUILD) {
+            if (mode == BuildMode.BUILD) {
                 
                 Region r = unit.getPosition().getRegion();
                 
@@ -272,27 +271,11 @@ public class BuildForm extends javax.swing.JDialog {
     }//GEN-LAST:event_deselctButtonActionPerformed
 
     private void commitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commitBtnActionPerformed
-        while (ordersModel.size() > 0){
-            Unit unit = (Unit)ordersModel.get(0);
-            GameLogger g = new GameLogger();
-            
-            if (mode == Mode.BUILD) {
-                unit.save();
-                
-                g.logMessage(unit + " created.");
-                
-            } else {
-                try {
-                    unit.delete();
-                    g.logMessage(unit + " deleted.");
-                } catch (DataAccessException ex) {
-                    Logger.getLogger(BuildForm.class.getName()).log(Level.SEVERE, null, ex);
-                    g.logMessage("Error: " + ex.getMessage());
-                    JOptionPane.showMessageDialog(this, "Error deleting " + unit + ": " + ex.getMessage());
-                }
-            }
-            
-            ordersModel.remove(0);
+        try {
+            gameDetails.resolveBuilds(ordersModel.toArray(), mode);
+        } catch (DataAccessException ex) {
+            Logger.getLogger(BuildForm.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error resolving order", "ERROR", JOptionPane.ERROR_MESSAGE);             
         }
     }//GEN-LAST:event_commitBtnActionPerformed
 
@@ -353,7 +336,7 @@ public class BuildForm extends javax.swing.JDialog {
         ordersModel.removeAllElements();
         
         if (maxBuilds > 0){
-            mode = Mode.BUILD;
+            mode = BuildMode.BUILD;
             titleLabel.setText ("Build order for " + player);
                     
 
@@ -368,7 +351,7 @@ public class BuildForm extends javax.swing.JDialog {
         }
         
         if (maxBuilds < 0){
-            mode = Mode.DISBAND;
+            mode = BuildMode.DISBAND;
                         
             jLabel1.setText("Available units");
             
