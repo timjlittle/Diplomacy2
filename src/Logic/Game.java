@@ -81,8 +81,9 @@ public class Game {
      */
     private void loadPlayers() throws DataAccessException {
         DataAccessor db = new DataAccessor();
-        Record requestedFields = new Record();
-        ArrayList<Record> returnedFields;
+        Data.DipRecord requestedFields;
+        requestedFields = new Data.DipRecord();
+        ArrayList<Data.DipRecord> returnedFields;
 
         requestedFields.addField("PlayerId", 0);
         requestedFields.addField("PlayerName", "");
@@ -91,23 +92,23 @@ public class Game {
         returnedFields = db.readAllRecords("Player", requestedFields, null);
 
         if (db.getErrNo() == 0) {
-            for (Record record : returnedFields) {
+            for (Data.DipRecord record : returnedFields) {
                 int playerId = record.getIntVal("PlayerId");
                 String playerName = record.getStringVal("PlayerName");
                 String colour = record.getStringVal("Colour");
 
                 Player p = new Player(playerName, playerId, colour);
 
-                Record homeRegionFields = new Record();
-                Record selectedCountry = new Record();
-                ArrayList<Record> homeRegions;
+                DipRecord homeRegionFields = new DipRecord();
+                DipRecord selectedCountry = new DipRecord();
+                ArrayList<DipRecord> homeRegions;
 
                 homeRegionFields.addField("RegionCode", "");
                 selectedCountry.addField("PlayerId", playerId);
 
                 homeRegions = db.readAllRecords("HomeRegions", homeRegionFields, selectedCountry);
 
-                for (Record regRec : homeRegions) {
+                for (DipRecord regRec : homeRegions) {
                     String reg = regRec.getStringVal("RegionCode");
                     p.addHomeRegionCode(reg);
                 }
@@ -129,8 +130,8 @@ public class Game {
      */
     private void loadRegions() throws DataAccessException {
         DataAccessor db = new DataAccessor();
-        Record requestedFields = new Record();
-        ArrayList<Record> returnedFields;
+        DipRecord requestedFields = new DipRecord();
+        ArrayList<DipRecord> returnedFields;
 
         requestedFields.addField("RegionCode", "");
         requestedFields.addField("RegionName", "");
@@ -142,7 +143,7 @@ public class Game {
         returnedFields = db.readAllRecords("Region", requestedFields, null);
 
         if (db.getErrNo() == 0) {
-            for (Record record : returnedFields) {
+            for (DipRecord record : returnedFields) {
                 String regionCode = record.getStringVal("RegionCode");
                 String regionName = record.getStringVal("RegionName");
                 boolean supplyCenter = record.getBoolVal("SupplyCenter");
@@ -180,9 +181,9 @@ public class Game {
      */
     private void loadBorders() throws DataAccessException {
         DataAccessor db = new DataAccessor();
-        Record requestedFields = new Record();
-        ArrayList<Record> returnedFields;
-        Record where = new Record();
+        DipRecord requestedFields = new DipRecord();
+        ArrayList<DipRecord> returnedFields;
+        DipRecord where = new DipRecord();
 
         requestedFields.addField("BorderId", -1);
         requestedFields.addField("RegionCode", "");
@@ -194,7 +195,7 @@ public class Game {
         returnedFields = db.readAllRecords("Border", requestedFields, null);
 
         if (db.getErrNo() == 0) {
-            for (Record record : returnedFields) {
+            for (DipRecord record : returnedFields) {
                 int borderId = record.getIntVal("BorderId");
                 String regionCode = record.getStringVal("RegionCode");
                 String type = record.getStringVal("Type");
@@ -227,7 +228,7 @@ public class Game {
 
                 returnedFields = db.readAllRecords("Adjacent", requestedFields, where);
 
-                for (Record record : returnedFields) {
+                for (DipRecord record : returnedFields) {
                     int borderId = record.getIntVal("Boarder2");
 
                     Border b2 = allBorders.get(borderId);
@@ -250,8 +251,8 @@ public class Game {
      */
     private void loadUnits() throws DataAccessException {
         DataAccessor db = new DataAccessor();
-        Record requestedFields = new Record();
-        ArrayList<Record> returnedFields;
+        DipRecord requestedFields = new DipRecord();
+        ArrayList<DipRecord> returnedFields;
 
         requestedFields.addField("UnitId", 0);
         requestedFields.addField("UnitType", "");
@@ -262,7 +263,7 @@ public class Game {
         returnedFields = db.readAllRecords("Unit", requestedFields, null);
 
         if (db.getErrNo() == 0) {
-            for (Record record : returnedFields) {
+            for (DipRecord record : returnedFields) {
                 int unitId = record.getIntVal("UnitId");
                 String unitType = record.getStringVal("UnitType");
                 int playerId = record.getIntVal("PlayerId");
@@ -306,9 +307,9 @@ public class Game {
      */
     private void loadCurrentOrders() {
         DataAccessor db = new DataAccessor();
-        Record requestedFields = new Record();
-        Record whereFields = new Record();
-        ArrayList<Record> returnedFields;
+        DipRecord requestedFields = new DipRecord();
+        DipRecord whereFields = new DipRecord();
+        ArrayList<DipRecord> returnedFields;
 
         requestedFields.addField("OrderId", 0);
         requestedFields.addField("Type", "");
@@ -324,7 +325,7 @@ public class Game {
         returnedFields = db.readAllRecords("Command", requestedFields, whereFields);
 
         if (db.getErrNo() == 0) {
-            for (Record record : returnedFields) {
+            for (DipRecord record : returnedFields) {
                 int orderId = record.getIntVal("OrderId");
                 String type = record.getStringVal("Type");
                 int originId = record.getIntVal("Origin");
@@ -1081,7 +1082,7 @@ public class Game {
 
     public void restartGame() throws DataAccessException {
         DataAccessor db = new DataAccessor();
-        Record fieldList = new Record();
+        DipRecord fieldList = new DipRecord();
 
         GameLogger logfile = new GameLogger();
         logfile.resetLog();
@@ -1135,10 +1136,10 @@ public class Game {
         fieldList.addField("StartPiece", "");
         fieldList.addField("StartBorder", 0);
 
-        ArrayList<Record> results = db.readAllRecords("HomeRegions", fieldList, null);
+        ArrayList<DipRecord> results = db.readAllRecords("HomeRegions", fieldList, null);
 
         //For each start position create a unit and a hold order
-        for (Record fields : results) {
+        for (DipRecord fields : results) {
             int playerId = fields.getIntVal("PlayerId");
             int borderId = fields.getIntVal("StartBorder");
             String typeString = fields.getStringVal("StartPiece");

@@ -9,7 +9,7 @@ package Logic;
 import Data.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
+//import org.json.simple.JSONObject;
 
 /**
  * The instructions for an individual unitId.
@@ -44,7 +44,7 @@ public class Order implements Comparable<Order> {
      * @throws Data.DataAccessException 
      */
     public Order (int orderId) throws DataAccessException  {
-        Record fields = new Record ();
+        DipRecord fields = new DipRecord ();
         DataAccessor db = new DataAccessor ();
         int ret;
         
@@ -133,7 +133,7 @@ public class Order implements Comparable<Order> {
     public boolean save () {
         boolean success = false;
         
-        Record fields = new Record ();
+        DipRecord fields = new DipRecord ();
         DataAccessor db = new DataAccessor ();
         
         fields.addField("Type", getCommandTypeAsString ());
@@ -474,7 +474,7 @@ public class Order implements Comparable<Order> {
         String borderName = "error";
         int ret;
         
-        Record fields = new Record ();
+        DipRecord fields = new DipRecord ();
         DataAccessor db = new DataAccessor ();
         
         fields.addField ("BorderName", "unknown");
@@ -538,17 +538,17 @@ public class Order implements Comparable<Order> {
         this.setDest(unit.getPosition());
     }
     
-    public JSONObject getJSON () {
-        JSONObject json = new JSONObject();
-
-        json.put ("orderId",  orderId);
-        json.put ("command", command);
-        json.put ("destinationId", destinationId);
-        json.put ("originId", originId);
-        json.put ("beingConvoyed", beingConvoyed);
-        json.put ("unit", unit);
-        json.put ("turn", turn);
-        
-        return json;
-    }
+//    public JSONObject getJSON () {
+//        JSONObject json = new JSONObject();
+//
+//        json.put ("orderId",  orderId);
+//        json.put ("command", command);
+//        json.put ("destinationId", destinationId);
+//        json.put ("originId", originId);
+//        json.put ("beingConvoyed", beingConvoyed);
+//        json.put ("unit", unit);
+//        json.put ("turn", turn);
+//        
+//        return json;
+//    }
 }

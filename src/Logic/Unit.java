@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONObject;
+//import org.json.simple.JSONObject;
 
 /**
  * Class that represents either an army or a fleet  on the board
@@ -151,7 +151,7 @@ public class Unit {
      */
     public boolean save () {
         boolean success = false;
-        Record fields = new Record();
+        DipRecord fields = new DipRecord();
         DataAccessor db = new DataAccessor();
                 
         fields.addField("UnitType", getTypeCode());
@@ -265,21 +265,21 @@ public class Unit {
         return ret;
     }
     
-    public JSONObject getJSON () {
-        JSONObject json = new JSONObject();
-        
-    json.put ("unitId", unitId);
-    json.put ("unitType", getTypeCode());
-    json.put ("position", position.getBorderId());
-    json.put ("ownerId", ownerId);
-    json.put ("disbanded", disbanded);
-    if (victorOrigin != null) {
-        json.put ("victorOrigin", victorOrigin.getBorderId());
-    } else {
-        json.put ("victorOrigin", null);
-    }
-        
-        return json;
-    }
+//    public JSONObject getJSON () {
+//        JSONObject json = new JSONObject();
+//        
+//    json.put ("unitId", unitId);
+//    json.put ("unitType", getTypeCode());
+//    json.put ("position", position.getBorderId());
+//    json.put ("ownerId", ownerId);
+//    json.put ("disbanded", disbanded);
+//    if (victorOrigin != null) {
+//        json.put ("victorOrigin", victorOrigin.getBorderId());
+//    } else {
+//        json.put ("victorOrigin", null);
+//    }
+//        
+//        return json;
+//    }
     
 }

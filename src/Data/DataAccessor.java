@@ -179,16 +179,16 @@ public class DataAccessor {
      * @param dataId unique identifier for the keyfield
      * @param tableName Name of the table
      * @param KeyName name of the keyfield
-     * @param vals pre-populated Record object with the fields and data types expected to be returned. After calling the values for these fields will be populated.
+     * @param vals pre-populated DipRecord object with the fields and data types expected to be returned. After calling the values for these fields will be populated.
      * @return error code (0 if successful)
      */
     public int readIndividualRecord (int dataId, 
                            String tableName, 
                            String KeyName, 
-                           Record vals) {
+                           DipRecord vals) {
         ResultSet rs = null;
         String sql;
-        Record retData = new Record();
+        DipRecord retData = new DipRecord();
         
         //At least start optimistic
         errorMsg = "";
@@ -277,13 +277,13 @@ public class DataAccessor {
     /**
      * Inserts a new record into a table
      * @param tableName Table to insert into
-     * @param vals Record containing the fields to insert
+     * @param vals DipRecord containing the fields to insert
      * @param keyField name of a numeric keyfield to generate a new key for. 
      *                 null if no numeric key field.
      * @return if haskey is true the value of the new key, otherwise -1
      */
     public int insertRecord (String tableName, 
-                             Record vals, 
+                             DipRecord vals, 
                              String keyField) {
         int key = -1;
         String sql;
@@ -425,7 +425,7 @@ public class DataAccessor {
     public boolean updateKeyRecord (int key, 
                                     String keyField, 
                                     String tableName, 
-                                    Record vals) {
+                                    DipRecord vals) {
         boolean success = true;
         String sql;
         Connection conn = null;
@@ -531,8 +531,8 @@ public class DataAccessor {
      * @return 
      */
     public boolean updateRecord ( String tableName, 
-                                  Record vals,
-                                  Record where) {
+                                  DipRecord vals,
+                                  DipRecord where) {
         boolean success = true;
         String sql;
         Connection conn = null;
@@ -748,11 +748,11 @@ public class DataAccessor {
      * @return an arraylist of values. Empty if no records found.
      * 
      */
-    public ArrayList <Record> readAllRecords ( String tableName, 
-                                        Record fieldsRequested, 
-                                        Record whereValue) {
+    public ArrayList <DipRecord> readAllRecords ( String tableName, 
+                                        DipRecord fieldsRequested, 
+                                        DipRecord whereValue) {
         
-        ArrayList<Record> ret = new ArrayList <>();
+        ArrayList<DipRecord> ret = new ArrayList <>();
         
         //Build the SQL select query
         String sql = "SELECT ";
@@ -834,7 +834,7 @@ public class DataAccessor {
                 }
                 
                 while (!rs.isAfterLast()) {
-                    Record vals = new Record();
+                    DipRecord vals = new DipRecord();
 
                     //Copy the values out of the recordset and into the supplied list
                     for (String field : fieldList) {

@@ -123,8 +123,8 @@ public class Region {
         
         //Save this to disk
         DataAccessor db = new DataAccessor ();
-        Record fields = new Record ();
-        Record where = new Record();
+        DipRecord fields = new DipRecord ();
+        DipRecord where = new DipRecord();
 
         //Only Owner and standoff turn turn can change
         fields.addField("CurOwner", ownerId);
